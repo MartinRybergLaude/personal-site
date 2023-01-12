@@ -59,6 +59,20 @@ const sortedPosts = posts
       <Icon name="arrow_right" />
     </a>
   </div>
+  <script>
+    //@ts-ignore
+    if (window.netlifyIdentity) {
+      //@ts-ignore
+      window.netlifyIdentity.on("init", (user) => {
+        if (!user) {
+          //@ts-ignore
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </Page>
 
 <style>
