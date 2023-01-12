@@ -1,0 +1,158 @@
+---
+import Page from "../layouts/Page.astro";
+import { Image } from "@astrojs/image/components";
+import { Icon } from "astro-icon";
+
+const posts = await Astro.glob("./posts/*.md");
+const sortedPosts = posts
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.pubDate).valueOf() -
+      new Date(a.frontmatter.pubDate).valueOf()
+  )
+  .slice(0, 3);
+---
+
+<Page title="Home">
+  <h1>Martin Ryberg Laude</h1>
+  <div class="cta full-width">
+    <div class="cta-content">
+      <p>
+        I design & develop websites, and you're currently visiting my personal
+        website. Here you'll find my blog, prior work, and some relevant
+        information. Enjoy!
+      </p>
+      <button class="btn">My work</button>
+    </div>
+    <Image
+      alt="martin on vacation"
+      src="/images/martin.jpg"
+      format="webp"
+      width={448}
+      aspectRatio={3.2 / 4}
+    />
+  </div>
+  <div class="posts">
+    <h2>Latest posts</h2>
+    <ul>
+      {
+        sortedPosts.map((post) => (
+          <li>
+            <a href={post.frontmatter.slug}>
+              <article class="post">
+                <h3>{post.frontmatter.title}</h3>
+                <time datetime={post.frontmatter.pubDate}>
+                  {new Date(post.frontmatter.pubDate).toLocaleString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </time>
+              </article>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a class="arrow-link" href="/blog">
+      See all posts
+      <Icon name="arrow_right" />
+    </a>
+  </div>
+</Page>
+
+<style>
+  h1 {
+    font-size: 58px;
+    margin-left: -4px;
+    display: inline-block;
+    word-spacing: 100vw;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  button {
+    margin-top: 32px;
+    width: 100%;
+  }
+
+  img {
+    border-radius: var(--radius);
+    width: 30%;
+    height: auto;
+    position: absolute;
+    top: 5%;
+    right: 32px;
+  }
+
+  .cta {
+    margin-top: 64px;
+    width: 100%;
+  }
+
+  .cta-content {
+    padding: var(--padding);
+  }
+
+  .cta-content p {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .posts {
+    margin-top: 64px;
+  }
+
+  .post {
+    margin-top: 32px;
+    cursor: pointer;
+    transition: transform 200ms ease;
+  }
+
+  .post:hover {
+    transform: translateX(-4px);
+  }
+
+  .post h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  .post time {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-3);
+  }
+
+  @media (min-width: 600px) {
+    h1 {
+      margin-left: -8px;
+      font-size: 112px;
+    }
+
+    .cta-content {
+      width: 50%;
+    }
+
+    .cta {
+      position: relative;
+    }
+
+    img {
+      width: 50%;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
+
+  @media (min-width: 920px) {
+    h1 {
+      word-spacing: initial;
+    }
+  }
+</style>
