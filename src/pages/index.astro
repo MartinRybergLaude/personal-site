@@ -38,7 +38,7 @@ const sortedPosts = posts
       {
         sortedPosts.map((post) => (
           <li>
-            <a href={`posts/${post.frontmatter.slug}`}>
+            <a href={`blog/${post.frontmatter.slug}`}>
               <article class="post">
                 <h3>{post.frontmatter.title}</h3>
                 <time datetime={post.frontmatter.pubDate}>
@@ -81,11 +81,16 @@ const sortedPosts = posts
 
   img {
     border-radius: var(--radius);
+    margin: 0;
     width: 30%;
     height: auto;
     position: absolute;
     top: 5%;
     right: 32px;
+  }
+
+  p {
+    margin: 0;
   }
 
   .cta {

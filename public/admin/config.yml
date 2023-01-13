@@ -19,6 +19,12 @@ collections:
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Description", name: "description", widget: string }
       - { label: "Publish Date", name: "pubDate", widget: "datetime" }
+      - {
+          label: "Update Date",
+          name: "updatedDate",
+          widget: "datetime",
+          required: false,
+        }
       - { label: "Author", name: "author", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown" }
       - {
