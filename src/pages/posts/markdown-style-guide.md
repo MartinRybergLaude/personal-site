@@ -3,7 +3,7 @@ layout: ../../layouts/BlogPost.astro
 title: An accessible & effective dark theme switch in React
 description: "Creating a proper dark theme switch requires more consideration
   than you might think. "
-pubDate: 2022-06-15T22:00:00.000Z
+pubDate: 2022-01-15T23:00:00.000Z
 heroImage: /placeholder-hero.jpg
 slug: accessible-dark-theme-switch-in-react
 author: Martin Ryberg Laude
