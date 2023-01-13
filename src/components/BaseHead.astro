@@ -1,9 +1,6 @@
 ---
 // Import global css files here so that they are included on
 // all pages through the use of the <BaseHead /> component.
-import "../styles/fonts.css";
-import "../styles/normalize.css";
-import "../styles/global.css";
 
 export interface Props {
   title: string;
@@ -43,6 +40,8 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<link rel="stylesheet" href="/styles/global.css" />
 
 <script
   is:inline

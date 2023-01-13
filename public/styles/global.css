@@ -1,3 +1,5 @@
+@import "fonts.css";
+@import "normalize.css";
 :root {
 	/* Typography */
 	--font-sans: "Satoshi", sans-serif;
