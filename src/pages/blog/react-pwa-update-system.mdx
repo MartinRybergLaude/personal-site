@@ -24,7 +24,7 @@ The goal is a system where an update is detected as soon as the user launches th
 
 So how does this look? 
 
-![PWA update dialog](//images.ctfassets.net/i5kwj2n2u0ae/14XLXNHngn4Sn4F6hGdQ6C/95854ffcbcee0261e4d46e13bc730c7e/Screenshot_20211224-180100.png)
+![PWA update dialog](/images/uploads/screenshot_pwa_update.jpg)
 *Simple and effective*
 
 Let's build it!
