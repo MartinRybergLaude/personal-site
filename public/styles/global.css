@@ -126,6 +126,7 @@ p {
   line-height: var(--lineHeight-relaxed);
   margin: 32px 0 0 0;
   padding: 0;
+  max-width: 600px;
 }
 
 a {
@@ -145,20 +146,33 @@ ul {
   font-size: 16px;
   padding-left: 16px;
 }
+ol {
+  margin: 24px 0 0 0;
+  font-size: 16px;
+  padding-left: 16px;
+}
+li {
+  font-weight: 500;
+  line-height: var(--lineHeight-relaxed);
+  color: var(--color-text-3);
+}
 img {
   max-height: 600px;
-  margin: 48px 0 32px 0;
+  margin: 32px 0 32px 0;
 }
 pre {
-  margin: 48px 0 32px 0;
+  margin: 32px 0 32px 0;
   padding: var(--padding);
   grid-column: full !important;
   border-radius: 16px;
 }
+pre + p {
+  margin: 0
+}
 pre + p em {
   display: block;
-  margin-top: -48px;
-  margin-bottom: 16px;
+  padding: 0;
+  margin-top: -24px;
 }
 code {
   font-size: 14px;
@@ -194,7 +208,8 @@ blockquote p {
   font-size: 24px;
 }
 .desc {
-  font-size: 18px;
+  color: var(--color-text-2);
+  font-weight: 600;
   line-height: var(--lineHeight-relaxed);
 }
 .dates-wrapper {
@@ -203,12 +218,12 @@ blockquote p {
   justify-content: flex-start;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 .updatedDate {
   display: inline-block;
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   padding: 8px 12px;
   background: rgba(var(--color-1-rgb), 0.1);
@@ -251,12 +266,13 @@ blockquote p {
   font-weight: 700;
   text-decoration: none;
   border: none;
+  text-align: center;
 }
 .btn:hover {
   opacity: 0.8;
 }
 .arrow-link {
-  margin-top: 4px;
+  margin-top: 16px;
   text-decoration: none;
   display: inline-block;
   font-size: 18px;
