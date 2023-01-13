@@ -26,7 +26,7 @@ These criteria were the result of consideration of all aspects I could think of 
 ## Result
 Given the criteria above, I developed a solution ticking all the boxes. This is hence what we will be making: 
 
-![Dark theme switch](//images.ctfassets.net/i5kwj2n2u0ae/10VvcAbj0Elg60sCrboRAa/3119045e50a7c981ffd0e2c697681a65/dark_theme.gif)
+![Dark theme switch](/images/uploads/dark_theme.gif)
 
 But of course, this visual doesn't answer any of the criteria. At least it shows it doesn't look horrible! It does follow the criteria strictly, but you'll have to take my word for it for now. Onto the implementation!
 
