@@ -3,7 +3,7 @@ import Page from "../layouts/Page.astro";
 import { Image } from "@astrojs/image/components";
 import { Icon } from "astro-icon";
 
-const posts = await Astro.glob("./posts/*.md");
+const posts = await Astro.glob("./blog/*.md");
 const sortedPosts = posts
   .sort(
     (a, b) =>
@@ -38,7 +38,7 @@ const sortedPosts = posts
       {
         sortedPosts.map((post) => (
           <li>
-            <a href={post.frontmatter.slug}>
+            <a href={`posts/${post.frontmatter.slug}`}>
               <article class="post">
                 <h3>{post.frontmatter.title}</h3>
                 <time datetime={post.frontmatter.pubDate}>
@@ -120,12 +120,6 @@ const sortedPosts = posts
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 8px;
-  }
-
-  .post time {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-text-3);
   }
 
   @media (min-width: 600px) {

@@ -2,7 +2,7 @@
 import Page from "../layouts/Page.astro";
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob("./posts/*.{md,mdx}")).sort(
+const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
   (a, b) =>
     new Date(b.frontmatter.pubDate).valueOf() -
     new Date(a.frontmatter.pubDate).valueOf()
@@ -11,4 +11,54 @@ const posts = (await Astro.glob("./posts/*.{md,mdx}")).sort(
 
 <Page title="Blog">
   <h1>Blog</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`blog/${post.frontmatter.slug}`}>
+            <article class="post">
+              <time datetime={post.frontmatter.pubDate}>
+                {new Date(post.frontmatter.pubDate).toLocaleString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </time>
+              <h2>{post.frontmatter.title}</h2>
+              <p>{post.frontmatter.description}</p>
+            </article>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </Page>
+
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  h2 {
+    margin: 4px 0 0 0;
+    font-size: 18px;
+  }
+
+  li {
+    margin-top: 32px;
+  }
+
+  a:hover h2 {
+    color: var(--color-1);
+  }
+
+  p {
+    margin-top: 8px;
+  }
+
+  @media (min-width: 600px) {
+    h2 {
+      font-size: 24px;
+    }
+  }
+</style>
