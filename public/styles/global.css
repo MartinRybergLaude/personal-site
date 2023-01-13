@@ -20,7 +20,7 @@
   --color-text-1: #000000;
   --color-text-2: #2e2e2b;
   --color-text-3: #5e5e5b;
-  --color-text-4: #5e5e5b;
+  --color-text-4: #80807a;
   --color-text-cloud: #0f3d36;
   --color-bg-light: #fffef9;
   --color-bg-dark: #ebe9e1;
@@ -32,7 +32,7 @@
 		--color-1-rgb: 79,205,184;
     --color-text-1: #ffffe3;
 		--color-text-2: #ffffe3;
-		--color-text-3: #7e7e6f;
+		--color-text-3: #a8a896;
 		--color-text-4: #7e7e6f;
 		--color-text-cloud: #c7f0ea;
 		--color-bg-light: #30302b;
@@ -137,7 +137,7 @@ a {
 time {
   font-size: 16px;
   font-weight: 600;
-  color: var(--color-text-3);
+  color: var(--color-text-4);
 }
 
 /* Blog */
