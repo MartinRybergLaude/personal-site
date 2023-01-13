@@ -15,7 +15,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
     {
       posts.map((post) => (
         <li>
-          <a href={`blog/${post.frontmatter.slug}`}>
+          <a href={`/blog/${post.frontmatter.slug}`}>
             <article class="post">
               <time datetime={post.frontmatter.pubDate}>
                 {new Date(post.frontmatter.pubDate).toLocaleString("en-US", {

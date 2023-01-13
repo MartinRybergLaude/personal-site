@@ -38,7 +38,7 @@ const sortedPosts = posts
       {
         sortedPosts.map((post) => (
           <li>
-            <a href={`blog/${post.frontmatter.slug}`}>
+            <a href={`/blog/${post.frontmatter.slug}`}>
               <article class="post">
                 <h3>{post.frontmatter.title}</h3>
                 <time datetime={post.frontmatter.pubDate}>
