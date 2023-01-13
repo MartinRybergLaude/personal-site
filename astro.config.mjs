@@ -19,4 +19,9 @@ export default defineConfig({
       serviceEntryPoint: "@astrojs/image/sharp",
     }),
   ],
+  markdown: {
+    shikiConfig: {
+      theme: "min-dark",
+    },
+  },
 });

@@ -187,7 +187,7 @@ blockquote {
   border-left: 4px solid var(--color-1);
   font-size: 16px;
   font-style: italic;
-  margin-bottom: 16px;
+  margin-top: 32px;
   background: rgba(var(--color-1-rgb), 0.1);
 }
 
@@ -204,7 +204,14 @@ blockquote p {
   margin: 0;
   color: var(--color-text-cloud);
 }
+.author {
+  margin-top: 48px;
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
 .post-title {
+  margin-top: 0;
   font-size: 24px;
 }
 .desc {
