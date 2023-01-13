@@ -3,7 +3,7 @@ import Page from "../layouts/Page.astro";
 import { Image } from "@astrojs/image/components";
 import { Icon } from "astro-icon";
 
-const posts = await Astro.glob("./blog/*.md");
+const posts = await Astro.glob("./blog/*.{md,mdx}");
 const sortedPosts = posts
   .sort(
     (a, b) =>
