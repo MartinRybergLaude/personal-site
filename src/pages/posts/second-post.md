@@ -1,17 +1,58 @@
 ---
-layout: "../../layouts/BlogPost.astro"
-title: "Second post"
-description: "Lorem ipsum dolor sit amet"
-pubDate: "2022-06-05"
-heroImage: "/placeholder-hero.jpg"
+layout: ../../layouts/BlogPost.astro
+title: Running a dockerized local backend on Apple Silicon
+description: Speed up your docker containers by up to 17x.
+pubDate: 2022-07-06T22:00:00.000Z
+heroImage: /placeholder-hero.jpg
+slug: dockerized-backend-on-apple-silicon
+author: Martin Ryberg Laude
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+## Background
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+As an owner of an M1 Macbook Air at the time of writing, I can vouch for the incredible speed and efficiency of Apple Silicon. In fact, it was the primary factor for switching over to mac at all in my case. Blazing fast, with a battery lasting longer than I could possibly need in my day. Sounds great and all, but Apple Silicon is different in another way as well — it runs on ARM. This instruction set is known from the mobile world, but is emerging as a viable alternative for laptops and even desktop workstations, evidently. This is a slow process though, because not only is the hardware different, but the software is different too. Any apps, programs, or packages need to be compiled to ARM, or run through emulation like Apple’s Rosetta.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+Ever since the first M1-equiped macs came out, this has been a work-in-progress for software developers across the globe, and today, most of this transition is complete. Almost all my mac apps run on ARM natively, and rosetta can be used for those apps that don’t, and it works just fine in most cases. But what about depencies of a project?
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+## The problem and the easy solution
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+If you’re creating a new project now, you’ll most likely be fine, both on the frontend and backend. Docker images are officially compiled for both instruction sets for most dependencies of recent, so go on, you can stop reading here. If you on the other hand work on older projects, you will run into issues. First thing you might do is try the good old `docker-compose build` and if it works — congratulations. If it doesn’t... A quick Google search will tell you to throw `export DOCKER_DEFAULT_PLATFORM=linux/amd64` into your .zshrc or equivalent file and call it a day. This tells docker to retrieve all images for amd64 only, the older instruction set, and run them all through QEMU (similar to Rosetta). It works, but at the cost of keeping the temperatures high and your project running slow as a turtle. In fact, it might run so slow you can't work at all, as in my case where each API call could take upwards of 40 minutes, which according to my standards is a catastrophe and quite unworkable.
+
+## A better solution
+
+So, we are not happy with the one-liner solution, this needs improvement. Since the core problem here is our project containing images where no arm64 (not amd64, note the difference) alternative exists, we are left with another option: Build our own images for arm64 and push to dockerhub, which needs to be done for each problematic dependency and each version upgrade of these. I’m not going to go into detail on how to do this, it varies by dependency, but I recommend doing this systematically. Keep two images compiled on your own in your dockerhub and use these for all projects, making sure to do it again for each upgrade, until the official image gains support.
+
+But this is not enough, far from it. If you’ve got autodeploy configured from your repository’s main branch, you might be fine, but in the event you build and push locally, you might just take down the entire production server trying to so. Remember — we configured your machine to build for arm64. Unless your server infrastructure consists of a bunch of Raspberry Pi’s, this is the wrong architecture for your server. Usually what you do here is either set up autodeploy (the safe option, highly recommended) or use a makefile to keep separate build commands for arm64 and amd64. An example of this would be to set a different build-target for arm64, and picking it using a .env in `docker-compose.yml` (did you know this file supports locally sourced environment variables, with default fallbacks?). It could look something like this:
+
+```yaml
+services:
+  app:
+    platform: linux/${BUILD_ARCH:-amd64}
+```
+*docker-compose.yml*
+
+```env
+BUILD_ARCH=arm64
+BUILD_TARGET=dev
+```
+*.env*
+
+```makefile
+.PHONY: build-app
+build-app:
+	docker build \
+		-t $(REGISTRY)/$(APP_IMAGE):dev \
+		--build-arg SOURCE_COMMIT=$(shell git rev-parse HEAD) \
+		--build-arg BUILD_TARGET=dev \
+```
+*Makefile*
+
+A simple `make build-app` should now build your project for arm64, and a `docker-compose up -d` should work beautifully. You can verify that everything is running natively by checking your docker dashboard, as any containers running through emulation will have a yellow warning sign — a warning about the slow speeds you'll likely encounter ^
+
+## Conclusion
+
+Having this up and running makes development on an M1-equipped Mac a breeze, and even though it might take some work, that's something we have to live with during the transition, especially on legacy projects. Count yourself lucky if this issue never arises!
+
+## References
+
+- Docker Docs. (2021). [Leverage multi-CPU architecture support](https://docs.docker.com/desktop/multi-arch/). (Accessed 2022-06-23).
