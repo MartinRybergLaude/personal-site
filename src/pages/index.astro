@@ -18,10 +18,10 @@ const sortedPosts = posts
   <div class="cta full-width">
     <div class="cta-content">
       <p>
-        I design & develop websites, and you're currently visiting my personal
-        website. Here you'll find my blog, prior work, and some relevant
-        information. Enjoy!
+        I develop websites & web apps with a focus on performance,
+        accessibility, and user experience.
       </p>
+      <a href="/contact" class="link">Interested?</a>
       <a href="/projects" class="btn">My work</a>
     </div>
     <Image
@@ -65,9 +65,10 @@ const sortedPosts = posts
   h1 {
     font-size: 58px;
     margin-left: -4px;
-    margin-bottom: 24px;
     display: inline-block;
     word-spacing: 100vw;
+    font-family: "Butler", serif;
+    font-weight: 300;
   }
 
   ul {
@@ -105,8 +106,16 @@ const sortedPosts = posts
 
   .cta-content p {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 2;
+  }
+
+  .link {
+    display: block;
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-1);
   }
 
   .posts {
@@ -124,6 +133,7 @@ const sortedPosts = posts
   }
 
   .post h3 {
+    font-weight: 600;
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 8px;
@@ -132,7 +142,7 @@ const sortedPosts = posts
   @media (min-width: 600px) {
     h1 {
       margin-left: -8px;
-      font-size: 112px;
+      font-size: 140px;
     }
 
     .cta-content {

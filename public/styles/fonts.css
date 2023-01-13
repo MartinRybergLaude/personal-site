@@ -21,3 +21,10 @@
   font-display: swap;
   font-style: monospace;
 }
+
+@font-face {
+  font-family: "Butler";
+  src: url(/fonts/Butler-UltraLight.woff2) format(woff2);
+  font-display: swap;
+  font-style: normal;
+}
