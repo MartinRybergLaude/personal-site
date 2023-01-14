@@ -3,6 +3,7 @@
 :root {
 	/* Typography */
 	--font-sans: "Satoshi", sans-serif;
+  --font-serif: "Butler", serif;
   --font-mono: "FiraCode", monospace;
 
   --lineHeight-none: 1;
