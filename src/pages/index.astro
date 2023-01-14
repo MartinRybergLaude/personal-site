@@ -1,7 +1,7 @@
 ---
 import Page from "../layouts/Page.astro";
-import { Image } from "@astrojs/image/components";
 import { Icon } from "astro-icon";
+import { Parallax } from "../components/Parallax";
 
 const posts = await Astro.glob("./blog/*.{md,mdx}");
 const sortedPosts = posts
@@ -24,13 +24,7 @@ const sortedPosts = posts
       <a href="/contact" class="link">Interested?</a>
       <a href="/projects" class="btn">My work</a>
     </div>
-    <Image
-      alt="martin on vacation"
-      src="/images/martin.jpg"
-      format="webp"
-      width={448}
-      aspectRatio={3.2 / 4}
-    />
+    <Parallax client:load />
   </div>
   <div class="posts">
     <h2>Latest posts</h2>
