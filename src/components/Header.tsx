@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { motion, AnimatePresence } from "framer-motion";
+import GithubIcon from "./GithubIcon";
 
 const buttonVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -175,6 +176,12 @@ export default function Header(props: Props) {
           ))}
         </ul>
       </nav>
+      <a
+        href="https://github.com/MartinRybergLaude"
+        className={styles.rightLink}
+      >
+        <GithubIcon />
+      </a>
     </header>
   );
 }

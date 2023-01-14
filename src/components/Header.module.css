@@ -57,6 +57,14 @@
   color: var(--color-text-1);
   background: none;
 }
+.rightLink {
+  width: 24px;
+  color: var(--color-text-1);
+}
+.rightLink svg {
+  width: 24px;
+  height: 24px;
+}
 .burgerMenu {
   z-index: 11;
   padding: 8px;
@@ -92,5 +100,13 @@
   }
   .burgerMenu {
     display: none;
+  }
+  .rightLink {
+    width: 32px;
+    color: var(--color-text-1);
+  }
+  .rightLink svg {
+    width: 32px;
+    height: 32px;
   }
 }
