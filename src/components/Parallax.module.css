@@ -1,10 +1,10 @@
 
 .parallax {
     margin: 0;
-    width: 30%;
+    width: 40%;
     height: auto;
     position: absolute;
-    top: 64px;
+    bottom: 120%;
     right: 32px;
     aspect-ratio: 3.2 / 4;
     overflow: hidden;
