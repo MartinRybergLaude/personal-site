@@ -41,7 +41,7 @@
   align-items: center;
 }
 .link {
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 8px 12px;
   text-decoration: none;
   color: var(--color-text-4);
