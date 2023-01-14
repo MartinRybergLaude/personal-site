@@ -102,11 +102,11 @@
     display: none;
   }
   .rightLink {
-    width: 32px;
-    color: var(--color-text-1);
+    width: 28px;
+    color: var(--color-text-3);
   }
   .rightLink svg {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
 }
