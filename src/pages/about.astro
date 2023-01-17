@@ -1,7 +1,54 @@
 ---
 import Page from "../layouts/Page.astro";
+import { Image } from "@astrojs/image/components";
 ---
 
-<Page>
+<Page title="About">
   <h1>About me</h1>
+  <p>
+    Greetings! I'm a Swedish <strong>frontend developer</strong> based in Stockholm.
+  </p>
+  <section>
+    <h2>Skills</h2>
+    <p>
+      I mostly work in Typescript and React, with frameworks such as Next.js to
+      cover advanced patterns when required. I also have experience with
+      Node.js, GraphQL, and a bit of Python.
+    </p>
+    <p>
+      I work well both solo and in a team, and prefer using team-oriented tools
+      and patterns for all my work. This includes version control, time tracking
+      and project boards.
+    </p>
+  </section>
+  <section>
+    <h2>Experience</h2>
+    <p>
+      I've worked as a web developer during summers dating back to 2018, and
+      have been working part-time as a Frontend Developer at <a
+        href="https://www.5monkeys.se">5 Monkeys Agency</a
+      >
+      since February 2022.
+    </p>
+    <p>
+      During this time I've come to work with a variety of different projects of
+      different scale. From small websites to large ecommerce stores, I've had
+      the opportunity to work with a wide range of technologies and patterns. On
+      the side I've additionally worked on a few personal projects, such as <a
+        href="https://solsken.app">Solsken</a
+      >.
+    </p>
+  </section>
+  <section>
+    <h2>Education</h2>
+    <p>
+      I'm currently pursuing an M.Sc.Eng in Media Technology at KTH Royal
+      Institute of Technology in Stockholm, on track to graduate 2025.
+    </p>
+    <p>
+      My education has so far given me a solid foundation in computer science,
+      mathematics, human-computer interaction and machine learning. I look
+      forward to the rest of my education with lots more to come!
+    </p>
+  </section>
 </Page>

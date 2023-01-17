@@ -288,12 +288,11 @@ blockquote p {
   opacity: 0.8;
 }
 .arrow-link {
-  margin-top: 16px;
   text-decoration: none;
   display: inline-block;
   font-size: 18px;
   font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
 }
 .arrow-link svg {

@@ -1,7 +1,21 @@
 ---
+import Icon from "astro-icon";
 import Page from "../layouts/Page.astro";
 ---
 
-<Page>
+<Page title="Contact">
   <h1>Contact me</h1>
+  <p>
+    I'm always available at
+    <a class="arrow-link" href="mailto:contact@mrlaude.com">
+      contact@mrlaude.com
+      <Icon name="chain" />
+    </a>
+  </p>
+  <p>Other platforms you can find me on:</p>
+  <ul>
+    <li><a class="arrow-link">Github<Icon name="chain" /></a></li>
+    <li><a class="arrow-link">Linkedin<Icon name="chain" /></a></li>
+  </ul>
+  <p>I look forward to hearing from you!</p>
 </Page>
