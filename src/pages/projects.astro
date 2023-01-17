@@ -13,13 +13,15 @@ import Page from "../layouts/Page.astro";
       <div>
         <h2>Solsken</h2>
         <p>Accessible and detailed weather globally.</p>
-        <a class="arrow-link" href="https://solsken.app" target="_blank"
-          >Live<Icon name="chain" /></a
-        >
-        <spam class="dot">•</spam>
-        <a class="arrow-link" href="/blog/solsken-app"
-          >Blog post<Icon name="chain" /></a
-        >
+        <div class="links">
+          <a class="arrow-link" href="https://solsken.app" target="_blank"
+            >Live<Icon name="chain" /></a
+          >
+          <spam class="dot">•</spam>
+          <a class="arrow-link" href="/blog/solsken-app"
+            >Blog post<Icon name="chain" /></a
+          >
+        </div>
       </div>
     </li>
   </ul>
@@ -49,13 +51,16 @@ import Page from "../layouts/Page.astro";
     margin: 0 8px;
     color: var(--color-text-4);
   }
+  .links {
+    margin-top: 8px;
+  }
 
   @media (min-width: 600px) {
     li {
       flex-direction: row;
       align-items: center;
     }
-    div {
+    div:not(.links) {
       margin-left: 32px;
     }
   }
