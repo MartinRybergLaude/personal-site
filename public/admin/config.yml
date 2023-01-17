@@ -10,7 +10,7 @@ collections:
     folder: "src/pages/blog" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     delete: true
-    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    slug: "{{fields.slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     sortable_fields: ["title", "pubDate", "updatedDate", "author"]
     extension: mdx
     format: frontmatter
