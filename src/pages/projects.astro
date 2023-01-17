@@ -1,7 +1,62 @@
 ---
+import { Image } from "@astrojs/image/components";
+import Icon from "astro-icon";
 import Page from "../layouts/Page.astro";
 ---
 
 <Page title="Projects">
   <h1>My projects</h1>
+  <p>Here are some of my solo projects.</p>
+  <ul>
+    <li>
+      <Image src="/images/solsken.png" width={128} height={128} alt="" />
+      <div>
+        <h2>Solsken</h2>
+        <p>Accessible and detailed weather globally.</p>
+        <a class="arrow-link" href="https://solsken.app" target="_blank"
+          >Live<Icon name="chain" /></a
+        >
+        <spam class="dot">•</spam>
+        <a class="arrow-link" href="/blog/solsken-app"
+          >Blog post<Icon name="chain" /></a
+        >
+      </div>
+    </li>
+  </ul>
 </Page>
+
+<style>
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+  li {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  div {
+    margin-left: 0;
+  }
+  div p {
+    margin-top: 16px;
+  }
+  h2 {
+    margin: 0;
+  }
+  .dot {
+    margin: 0 8px;
+    color: var(--color-text-4);
+  }
+
+  @media (min-width: 600px) {
+    li {
+      flex-direction: row;
+      align-items: center;
+    }
+    div {
+      margin-left: 32px;
+    }
+  }
+</style>
