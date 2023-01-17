@@ -1,0 +1,85 @@
+---
+title: How native-feeling can a web app become?
+slug: solsken-app
+description: Building an accessible weather app as a progressive web app
+pubDate: 2023-01-17T11:43:59.140Z
+updatedDate: ""
+author: Martin Ryberg Laude
+layout: ../../layouts/BlogPost.astro
+---
+## Available technology
+It's well known by now that web technology can be leveraged to build desktop apps with decent results. Many well-known apps like Spotify, Slack and Linkedin are built this way, with complaints usually limited to excessive RAM usage and sometimes battery drain. Even this is being [addressed however](https://tauri.app), with new strides being made every passing day. 
+
+But what about the mobile world?
+
+There have been developments for mobile web apps as well. There's a couple requirements a web page can fulfill to be classified as a [Progressive Web App](https://web.dev/progressive-web-apps/), among others a service worker providing offline capabilities and a manifest for declaring app-like behavior. Some systems like Android respects this technology, allowing apps fulfilling these requirements to be installed as apps on mobile devices. In fact, using tools like [PWA Builder](https://www.pwabuilder.com), Progressive Web Apps can be packaged and distributed on the Play Store among native apps, providing near first-class support.
+
+On iOS, the situation is more complicated. Safari on iOS [does support PWAs to some degree](https://caniuse.com/?search=PWA) through the "add to homescreen" button in Safari, but the App Store does not allow web apps at all, as Apple views them as direct competition to native apps, citing quality (and most likely IAP revenue). The question is if the quality argument applies even when developer's have gone to great lengths to ensure app-like performance and behavior. 
+
+## The checklist
+The app has a few hard requirements I came up with to provide a good experience as a PWA:
+
+* Smooth performance
+* Offline capabilities
+* Installable on phones
+* UI tailored for the device type
+
+To provide said performance and behavior, it's important to choose a toolset that allows for it. In my case I wanted reactivity to ease development, but with service worker support and enough performance to facilitate a good experience. Something like this:
+
+* Full Single Page App
+* Reactivity
+* Service worker support
+* Enough performance
+* Familiarity (DX)
+
+What I found checked these boxes was [Vite](https://vitejs.dev). An SPA by default, with React support, great DX and an [official PWA plugin](https://vite-pwa-org.netlify.app) making the whole service worker part a breeze. To go along I picked out the usual set of libraries to provide further support, like [SWR](https://swr.vercel.app) for data fetching & caching, [React Router](https://reactrouter.com/en/main) for SPA routing and my favorite animation library [Framer Motion](https://www.framer.com/motion/) for advanced fluid animations. Contrary to popular belief Js-backed animations can be quite performant, as long as you only touch hardware accelerated properties and don't go too crazy. 
+
+## Development
+Connecting with the SMHI API (Swedish Meteorological and Hydrological Institute) and displaying their data was trivial, as was connecting with MET Norway's API. Basically, I built a common weather data format for my app and then translation functions to convert every API's different response into my format, which is then displayed. Since some data providers provide more info than others I had to find common ground and use my own calculations for feels-like temperature (which should have a different name, it's the actual effect on your body, not just a feeling), as well as unit conversions. Functionality like location retrieval and searching was similarly nothing too complicated.
+
+But then came animations. 
+
+I opted for using the gorgeous [Meteocons](https://bas.dev/work/meteocons) by Bas Milius which are both both colorful and animated weather icons. SVG animation's seemed like the best option to run with here with built in support in most browsers by now. Unfortunately I came to find out that SVG animation performance was absolutely dreaful, with hiccups and random animation restarts all over the place. Clearly this wouldn't work. Bas also provided lottiefiles in the repo however, and while it was annoying to need yet another library, performance was **much improved**. I could now play the animations without random restarts or stutters. However, especially on mobile devices, long lists of hours with icons resulted in general page lag, notably when scrolling.
+
+To remedy this, I opted for a performance pattern where I only render the icons that actually exist within the viewport, with some margin top and bottom. The icons render and starts the animations only when scrolled into view, leaving the browser to run far fewer animations. It turns out Framer Motion provides a hook for this use-case, making the implementation as simple as this:
+
+```tsx
+import { useInView } from "framer-motion";
+
+interface HourProps {
+  scrollRef?: RefObject<Element>;
+}
+
+function Hour({ scrollRef }: HourProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const isVisible = useInView(rootRef, { root: scrollRef });
+
+  return (
+    <div ref={rootRef}>
+      {isVisible && (
+        // Cool animations here
+      )}
+    </div>
+  )
+}
+```
+
+And voilà, performance improved again.
+
+Another performance hiccup I noticed was blur effects, which I heavily used throughout the interface to conform with my design language for the app. To my surprise, the blur effects had excellent performance in Safari both on iOS and Mac, while other browsers, especially Firefox, struggled hard. With no way to improve performance I did the dreaded browser check to enable or and disable most of the effects.
+
+With performance out of the way, it's equally important for the app's design, both functionally and aesthetically, to provide an app-like feel to convince anyone. Most web apps struggle on this point, and it can require lots of work. In my case I went for a scandinavian design with a responsive aspect of feeling more like an app in mobile form and more like a desktop site on desktop form, to cover both cases well. A pitfall many apps fall into is having a desktop variant that is basically just an upscaled mobile app. Desktop and mobile use are entirely different experiences with entirely different use cases and input methods and shouldn't be treated as more or less the same. Some thought needs to be put into it.
+
+## Results
+Let's revisit the checklist.
+
+* Smooth performance 🟨
+* Offline capabilities ✅ (it's a weather app, it needs internet, but the html, js, css and all assets are completely cached)
+* Installable on phones ✅
+* UI tailored for the device type ✅
+
+I believe the result to be just _okay_ in all honesty. Tweaking performance and building a familiar and sleek UI only takes you so far still, and the web has ways to go to get close to native apps in most regards. On desktop it's as smooth sailing as expected but mobile phones, especially in lower end segments, still suffer from occasional hiccups and the inherent clunkiness of the web. However, the results _were_ good enough for me to switch over to this app as primary weather app, especially due to how accessible it is, always there on [solsken.app](https://solsken.app). Additionally on iPhone it runs very well, mostly due to powerful SOCs I imagine. Interesting experiment nonetheless, and my fellow Swedish folk can now rejoice in an alternative to SMHI's more than outdated app at least! 
+
+
+
+
