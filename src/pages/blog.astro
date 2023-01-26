@@ -1,11 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
-  (a, b) =>
-    new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf()
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
@@ -15,17 +14,17 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
     {
       posts.map((post) => (
         <li>
-          <a href={`/blog/${post.frontmatter.slug}`}>
+          <a href={`/blog/${post.slug}`}>
             <article class="post">
-              <time datetime={post.frontmatter.pubDate}>
-                {new Date(post.frontmatter.pubDate).toLocaleString("en-US", {
+              <time datetime={post.data.pubDate.toISOString()}>
+                {new Date(post.data.pubDate).toLocaleString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric",
                 })}
               </time>
-              <h2>{post.frontmatter.title}</h2>
-              <p>{post.frontmatter.description}</p>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
             </article>
           </a>
         </li>
