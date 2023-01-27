@@ -77,6 +77,13 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
+"gamesquad-app.mdx": {
+  id: "gamesquad-app.mdx",
+  slug: "gamesquad-app",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+},
 "react-pwa-update-system.mdx": {
   id: "react-pwa-update-system.mdx",
   slug: "react-pwa-update-system",
