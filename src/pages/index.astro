@@ -52,12 +52,42 @@ const sortedPosts = posts
   </section>
   <section class="fw projects">
     <h2>Featured projects</h2>
-    <ul class="side-scroll">
-      <li class="project">
-        <img src="/images/solsken.webp" height={128} width={128} alt="" />
-        <h3>Solsken</h3>
+    <ul class="horizontal-scroll">
+      <li class="project-bg bg-1">
+        <a class="project" href="https://github.com/MartinRybergLaude/Solsken">
+          <img src="/images/solsken.webp" height={80} width={80} alt="" />
+          <h3>Solsken</h3>
+        </a>
+      </li>
+      <li class="project-bg bg-2">
+        <a
+          class="project"
+          href="https://github.com/MartinRybergLaude/GameSquad"
+        >
+          <img src="/images/gamesquad.webp" height={80} width={80} alt="" />
+          <h3>GameSquad</h3>
+        </a>
+      </li>
+      <li class="project-bg bg-3">
+        <a class="project" href="https://github.com/MartinRybergLaude/Avodoro">
+          <img src="/images/avodoro.webp" height={80} width={80} alt="" />
+          <h3>Avodoro</h3>
+        </a>
+      </li>
+      <li class="project-bg bg-4">
+        <a
+          class="project"
+          href="https://github.com/MartinRybergLaude/QuantumSnakeConsole"
+        >
+          <img src="/images/quantum.webp" height={80} width={80} alt="" />
+          <h3>Quantum Snake</h3>
+        </a>
       </li>
     </ul>
+    <a class="arrow-link bottom-link" href="/projects">
+      See all projects
+      <Icon name="arrow_right" />
+    </a>
   </section>
 </Page>
 
@@ -135,29 +165,72 @@ const sortedPosts = posts
   .projects {
     margin-top: 64px;
   }
-  .projects h2 {
+  .projects h2,
+  .projects .arrow-link {
     margin: var(--padding);
   }
   .horizontal-scroll {
     overflow-x: auto;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    gap: 16px;
+  }
+  .project-bg {
+    border-radius: var(--radius);
+    width: 180px;
+    height: 200px;
+    padding: 4px;
+    flex: 0 0 auto;
+    transition: all 200ms ease;
+  }
+  .bg-1 {
+    background: linear-gradient(300deg, #ff8228, #ffd386);
+  }
+  .bg-2 {
+    background: linear-gradient(300deg, #ee6148, #fa5d73);
+  }
+  .bg-3 {
+    background: linear-gradient(300deg, #3dba7c, #f9e9b1);
+  }
+  .bg-4 {
+    background: linear-gradient(300deg, #000, #6d6d6d);
   }
   .project {
-    width: 200px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
     padding: 16px;
     background: var(--color-bg-light);
-    border-radius: var(--radius);
+    border-radius: calc(var(--radius) - 4px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
   }
+  .project-bg:hover {
+    opacity: 0.8;
+  }
   .project img {
     padding: 0;
     margin: 16px 0 0 0;
+  }
+  .project h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .tags li {
+    font-size: 14px;
+    background-color: var(--color-1);
+    color: black;
+    padding: 0 6px;
+    border-radius: 4px;
   }
   @media (min-width: 600px) {
     h1 {
@@ -178,6 +251,17 @@ const sortedPosts = posts
       top: 50%;
       right: 0;
       transform: translateY(-50%);
+    }
+    .horizontal-scroll {
+      gap: 32px;
+      justify-content: space-between;
+    }
+    .project-bg {
+      width: 200px;
+      height: 260px;
+    }
+    .project h3 {
+      margin-bottom: 16px;
     }
   }
 
