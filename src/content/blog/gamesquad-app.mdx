@@ -7,7 +7,7 @@ updatedDate: ""
 author: Martin Ryberg Laude
 layout: ../../layouts/BlogPost.astro
 ---
-![GameSquad on desktop](/images/uploads/gamesquad_screenshot_desktop.webp)
+<img alt="GameSquad on desktop" src="/images/uploads/gamesquad_screenshot_desktop.webp" class="fw"/>
 
 Every once in a while, an uncomfortably tight deadline appears. In this case, as part of a course titled Interactive Programming and the Dynamic Web, almost sounding like the title of a Harry Potter entry. The rules were simple. About two weeks of development at around 30% speed to deliver a project containing authentication, live data updates across users, persistence across sessions, error and loading state handling, and an enforced MVP project structure. The only novel part for me would be the live data updates, as standard REST and GraphQL queries had been my way to go to provide solutions so far, but this would require a timeframe so short my regular stack of mostly hand-crafted components and interface pieces would not suffice anymore. Additionally, I had teammates to give a solid footing, which includes making collaboration as pain-free as possible.
 
@@ -32,7 +32,7 @@ We did intend to utilize [Tanstack Router](https://tanstack.com/router/v1) as we
 An interesting hurdle we ran into that is worth mentioning was that the game database we used offered genre data on each game queried, as integers. To get information about what each integer represented, you had to query another endpoint, but only one ID at a time. This meant that in the simple scenario of offering a game search function with displayed genres of each result, you’d need so many requests your quota would be used up in a minute. This was interesting to us because the integer mappings was stable and not very plentiful, so they might as well have offered a simple JSON object of key value pairs for client side parsing of genre IDs. Since they did not, we wrote a quick python script that called the endpoint with every integer from 0-999 and formatted it all into just that, a JSON object. Turns out there were only 40 or so genres, so client side conversion was no problem at all, no API requests required. I suppose there is the possibilities that these are changed eventually, so ideally you’d run this script periodically, SSG fashion I imagine. Anything’s better than hundreds of API requests per search result though!
 
 ## Conclusion
-<div>
+<div class="fw">
 <img alt="Gamesquad on mobile" src="/images/uploads/gamesquad_screenshot_mobile.webp"/>
 <img alt="Gamesquad on mobile" src="/images/uploads/gamesquad_screenshot_mobile2.webp"/>
 </div>

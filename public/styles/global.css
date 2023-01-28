@@ -159,7 +159,7 @@ img {
 img + p em {
   display: block;
   padding: 0;
-  margin-top: -24px;
+  margin-top: -42px;
 }
 img + em {
   display: block;
@@ -267,10 +267,10 @@ blockquote p {
 .wrapper > * {
   grid-column: wrapper;
 }
-.wrapper > .full-width {
+.wrapper > .fw {
   grid-column: full;
 }
-.full-width-margin {
+.fw-margin {
   margin-inline: var(--padding);
 }
 .btn {

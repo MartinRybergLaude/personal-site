@@ -12,7 +12,7 @@ const sortedPosts = posts
 
 <Page title="Home">
   <h1>Martin Ryberg Laude</h1>
-  <div class="cta full-width">
+  <section class="cta fw">
     <div class="cta-content">
       <p>
         I develop websites & web apps with a focus on performance,
@@ -22,8 +22,8 @@ const sortedPosts = posts
       <a href="/projects" class="btn">My work</a>
     </div>
     <Parallax client:load />
-  </div>
-  <div class="posts">
+  </section>
+  <section class="posts">
     <h2>Latest posts</h2>
     <ul>
       {
@@ -49,7 +49,16 @@ const sortedPosts = posts
       See all posts
       <Icon name="arrow_right" />
     </a>
-  </div>
+  </section>
+  <section class="fw projects">
+    <h2>Featured projects</h2>
+    <ul class="side-scroll">
+      <li class="project">
+        <img src="/images/solsken.webp" height={128} width={128} alt="" />
+        <h3>Solsken</h3>
+      </li>
+    </ul>
+  </section>
 </Page>
 
 <style>
@@ -63,18 +72,15 @@ const sortedPosts = posts
     animation: fadein 600ms;
     position: relative;
   }
-
   ul {
     list-style: none;
     padding: 0;
   }
-
   .btn {
     margin-top: 32px;
     width: 100%;
   }
-
-  img {
+  .cta img {
     border-radius: var(--radius);
     margin: 0;
     width: 30%;
@@ -83,27 +89,22 @@ const sortedPosts = posts
     top: 5%;
     right: 32px;
   }
-
   p {
     margin: 0;
   }
-
   .cta {
     position: relative;
     margin-top: 200px;
     width: 100%;
   }
-
   .cta-content {
     padding: var(--padding);
   }
-
   .cta-content p {
     font-size: 18px;
     font-weight: 400;
     line-height: 2;
   }
-
   .link {
     display: block;
     margin-top: 16px;
@@ -111,51 +112,68 @@ const sortedPosts = posts
     font-weight: 600;
     color: var(--color-text-1);
   }
-
   .posts {
     margin-top: 80px;
   }
-
   .post {
     margin-top: 32px;
     cursor: pointer;
     transition: transform 200ms ease;
   }
-
   .post:hover {
     transform: translateX(-4px);
   }
-
   .post h3 {
     font-weight: 600;
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 8px;
   }
-
   .bottom-link {
     margin-top: 16px;
   }
-
+  .projects {
+    margin-top: 64px;
+  }
+  .projects h2 {
+    margin: var(--padding);
+  }
+  .horizontal-scroll {
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .project {
+    width: 200px;
+    height: 300px;
+    padding: 16px;
+    background: var(--color-bg-light);
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+  .project img {
+    padding: 0;
+    margin: 16px 0 0 0;
+  }
   @media (min-width: 600px) {
     h1 {
       margin-left: -8px;
       font-size: 140px;
     }
-
     .cta-content {
       width: 50%;
     }
-
     .cta-content p {
       font-size: 19px;
     }
-
     .cta {
       margin-top: 64px;
     }
-
-    img {
+    .cta img {
       width: 50%;
       top: 50%;
       right: 0;
