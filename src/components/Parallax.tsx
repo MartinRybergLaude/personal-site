@@ -36,7 +36,9 @@ export function Parallax() {
         animate={controlsFg}
         className={styles.fg}
         alt=""
-        src="images/fg.webp"
+        src="images/bgfg/fg_466.webp"
+        srcSet="images/bgfg/fg_200w.webp 200w, images/bgfg/fg_466w.webp 466w, images/bgfg/fg_932w.webp 932w"
+        sizes="(max-width: 400px) 200px, (max-width: 600px) 466px, 932px"
         onLoad={() => setFgLoaded(true)}
       />
       <motion.div
@@ -45,7 +47,13 @@ export function Parallax() {
         animate={controlsBg}
         initial={{ opacity: 0 }}
       >
-        <img alt="" src="images/bg.webp" onLoad={() => setBgLoaded(true)} />
+        <img
+          alt=""
+          src="images/bgfg/bg_466w.webp"
+          srcSet="images/bgfg/bg_200w.webp 200w, images/bgfg/bg_466w.webp 466w, images/bgfg/bg_932w.webp 932w"
+          sizes="(max-width: 400px) 200px, (max-width: 600px) 466px, 932px"
+          onLoad={() => setBgLoaded(true)}
+        />
       </motion.div>
     </div>
   );

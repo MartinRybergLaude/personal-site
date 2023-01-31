@@ -22,7 +22,7 @@
   --color-text-1: #000000;
   --color-text-2: #2e2e2b;
   --color-text-3: #5e5e5b;
-  --color-text-4: #80807a;
+  --color-text-4: #6E6E68;
   --color-text-cloud: #0f3d36;
   --color-bg-light: #fffef9;
   --color-bg-dark: #ebe9e1;
@@ -137,7 +137,7 @@ a {
 time {
   font-size: 16px;
   font-weight: 500;
-  color: var(--color-text-3);
+  color: var(--color-text-4);
 }
 
 /* Blog */
