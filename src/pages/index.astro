@@ -93,8 +93,7 @@ const sortedPosts = posts
 
 <style>
   h1 {
-    font-size: 58px;
-    margin-left: -4px;
+    font-size: 64px;
     display: inline-block;
     word-spacing: 100vw;
     font-family: var(--font-serif);
@@ -128,7 +127,7 @@ const sortedPosts = posts
     width: 100%;
   }
   .cta-content {
-    padding: var(--padding);
+    padding: var(--page-padding);
   }
   .cta-content p {
     font-size: 18px;
@@ -167,7 +166,7 @@ const sortedPosts = posts
   }
   .projects h2,
   .projects .arrow-link {
-    margin: var(--padding);
+    margin: var(--padding) 0;
   }
   .horizontal-scroll {
     overflow-x: auto;
@@ -256,6 +255,10 @@ const sortedPosts = posts
     }
     .posts {
       margin-top: 80px;
+    }
+    .projects h2,
+    .projects .arrow-link {
+      margin: var(--padding);
     }
     .horizontal-scroll {
       margin-inline: 16px;

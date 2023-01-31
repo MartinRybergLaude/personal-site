@@ -1,8 +1,8 @@
 .header {
-  padding: 0 32px;
+  padding: 0 16px;
   background: var(--color-bg);
   width: 100%;
-  height: 72px;
+  height: 56px;
   display: flex;
   justify-content: space-between;
   align-items: center;

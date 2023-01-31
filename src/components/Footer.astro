@@ -10,9 +10,9 @@ const today = new Date();
 <style>
   footer {
     margin-top: 64px;
-    margin-inline: 48px;
+    margin-inline: 16px;
     border-top: 2px solid var(--color-bg-dark);
-    padding: 64px;
+    padding: 64px 0;
     text-align: center;
   }
   p {
@@ -25,5 +25,11 @@ const today = new Date();
 
   .italics {
     font-style: italic;
+  }
+
+  @media (min-width: 600px) {
+    footer {
+      margin-inline: 48px;
+    }
   }
 </style>
