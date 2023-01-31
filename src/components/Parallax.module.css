@@ -1,11 +1,11 @@
 
 .parallax {
     margin: 0;
-    width: 40%;
+    width: 50%;
     height: auto;
     position: absolute;
     bottom: 120%;
-    right: 32px;
+    right: 0;
     aspect-ratio: 3.2 / 4;
     overflow: hidden;
     border-radius: var(--radius);
@@ -39,7 +39,6 @@
     .parallax {
         width: 50%;
         top: 50%;
-        right: 0;
         transform: translateY(-50%);
     }
 }
