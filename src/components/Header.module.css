@@ -53,7 +53,7 @@
 .link:hover {
   background: var(--color-bg-dark);
 }
-.linkActive {
+[aria-current="page"] {
   color: var(--color-text-1);
   background: none;
 }

@@ -152,7 +152,10 @@ export default function Header(props: Props) {
                   key={link.href}
                 >
                   <a
-                    className={`${styles.link} ${getActiveString(link.title)}`}
+                    className={styles.link}
+                    aria-current={
+                      link.title === props.activeTag ? "page" : false
+                    }
                     href={`/${link.href}`}
                     onClick={() => setOpenBurger(false)}
                   >
@@ -167,7 +170,8 @@ export default function Header(props: Props) {
           {links.map((link) => (
             <li key={link.href}>
               <a
-                className={`${styles.link} ${getActiveString(link.title)}`}
+                className={styles.link}
+                aria-current={link.title === props.activeTag ? "page" : false}
                 href={`/${link.href}`}
               >
                 {link.title}
