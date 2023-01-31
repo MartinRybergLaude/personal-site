@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://github.com/MartinRybergLaude/Personal-site/blob/main/public/images/site_screenshot.webp?raw=true" height="600" alt="">
+   <img src="https://github.com/MartinRybergLaude/personal-site/blob/main/public/images/site_screenshot.webp?raw=true" height="600" alt="">
 </p>
 <h1 align="center">
   My personal site
@@ -24,7 +24,7 @@
 
     ```shell
     # Clone the repo to a local directory
-    git clone git@github.com:MartinRybergLaude/Personal-site.git
+    git clone git@github.com:MartinRybergLaude/personal-site.git
     ```
 
 2.  **Install**
@@ -32,7 +32,7 @@
     Open cmd, terminal or powershell in the cloned direcory and install
 
     ```shell
-    cd Personal-site
+    cd personal-site
     pnpm i
     ```
 
