@@ -183,6 +183,7 @@ export default function Header(props: Props) {
       <a
         href="https://github.com/MartinRybergLaude"
         className={styles.rightLink}
+        aria-label="My Github profile"
       >
         <GithubIcon />
       </a>
