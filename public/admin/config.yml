@@ -3,6 +3,7 @@ backend:
   repo: MartinRybergLaude/personal-site
   branch: main
   base_url: https://mrlaude.com
+  site_domain: personal-site-4td.pages.dev
   auth_endpoint: /api/auth
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
