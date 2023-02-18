@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: martinryberglaude/personal-site
+  repo: MartinRybergLaude/personal-site
   branch: main
   base_url: https://mrlaude.com
   auth_endpoint: /api/auth
