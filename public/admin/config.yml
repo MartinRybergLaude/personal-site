@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: martinryberglaude/personal-site
   branch: main
+  base_url: https://mrlaude.com
+  auth_endpoint: /api/auth
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
