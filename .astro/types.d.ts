@@ -70,6 +70,13 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
+"deep-linking-in-tauri-oauth.mdx": {
+  id: "deep-linking-in-tauri-oauth.mdx",
+  slug: "deep-linking-in-tauri-oauth",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+},
 "dockerized-backend-on-apple-silicon.mdx": {
   id: "dockerized-backend-on-apple-silicon.mdx",
   slug: "dockerized-backend-on-apple-silicon",
