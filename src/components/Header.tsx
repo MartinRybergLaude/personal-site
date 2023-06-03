@@ -36,11 +36,8 @@ const links = [
   { title: "Contact", href: "contact" },
 ];
 
-interface Props {
-  activeTag: string;
-}
-
-export default function Header(props: Props) {
+export default function Header(props: { activeTag: string }) {
+  const [activeTag, setActiveTag] = useState(props.activeTag); // ["home", "blog", "projects", "about", "contact"]
   const [openBurger, setOpenBurger] = useState(false);
   const isBrowser = typeof window !== "undefined";
 
@@ -83,9 +80,17 @@ export default function Header(props: Props) {
     }
   }, [openBurger]);
 
-  function getActiveString(title: string) {
-    return title === props.activeTag ? styles.linkActive : "";
-  }
+  useEffect(() => {
+    const handleRouteChange = () => {
+      let path = window.location.pathname.split("/")[1];
+      path = path === "" ? "Home" : path;
+      setActiveTag(path.charAt(0).toUpperCase() + path.slice(1));
+    };
+    document.addEventListener("swup:pageView", handleRouteChange);
+    return () => {
+      document.removeEventListener("swup:pageView", handleRouteChange);
+    };
+  });
 
   return (
     <header className={styles.header}>
@@ -153,9 +158,7 @@ export default function Header(props: Props) {
                 >
                   <a
                     className={styles.link}
-                    aria-current={
-                      link.title === props.activeTag ? "page" : false
-                    }
+                    aria-current={link.title === activeTag ? "page" : false}
                     href={`/${link.href}`}
                     onClick={() => setOpenBurger(false)}
                   >
@@ -171,7 +174,7 @@ export default function Header(props: Props) {
             <li key={link.href}>
               <a
                 className={styles.link}
-                aria-current={link.title === props.activeTag ? "page" : false}
+                aria-current={link.title === activeTag ? "page" : false}
                 href={`/${link.href}`}
               >
                 {link.title}
