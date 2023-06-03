@@ -70,6 +70,13 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
+"astro-page-transitions.mdx": {
+  id: "astro-page-transitions.mdx",
+  slug: "astro-page-transitions",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+},
 "deep-linking-in-tauri-oauth.mdx": {
   id: "deep-linking-in-tauri-oauth.mdx",
   slug: "deep-linking-in-tauri-oauth",

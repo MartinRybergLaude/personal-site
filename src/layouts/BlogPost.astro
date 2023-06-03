@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 ---
 
-<Page title="Blog">
+<Page navTitle="Blog" title={title} description={description}>
   <address class="author">
     By <a rel="author" href="/about">{author}</a>
   </address>
