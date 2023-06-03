@@ -7,6 +7,8 @@ updatedDate: 2023-06-03T14:07:07.649Z
 author: Martin Ryberg Laude
 layout: ../../layouts/BlogPost.astro
 ---
+<img alt="thumbnail" src="/images/uploads/astro-prefetch.webp" class="fw"/>
+
 [Astro](https://astro.build/) excels at building multi-page apps, where each navigation triggers a full page reload, fetching the new statically generated page and displaying it. This is how the web used to work originally until fancier approaches like single-page apps came along, but at the cost of metrics like bundle size which impacts performance negatively. It could be worth it, for instance if the app is heavily interaction based, like a music player or calendar app. For content-focused sites like blogs however, you'd want to prioritize faster initial loads and probably static site generation or server side generation.
 
 However, while multi-page apps definitely score higher in page metrics and load the first page faster, they feel terribly slow to use. Each link press is, no matter how fast your internet is, followed by a noticeable delay where the next page is fetched and javascript reloaded. I found that this site felt especially sluggish, and to solve it I would have to cross into the hybrid realm between SPA and MPA.
