@@ -272,6 +272,7 @@ blockquote p {
 }
 .wrapper:focus {
   outline: none;
+  -webkit-appearance: none;
 }
 .fw-margin {
   margin-inline: var(--padding);
