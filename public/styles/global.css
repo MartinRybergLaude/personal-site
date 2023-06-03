@@ -270,6 +270,9 @@ blockquote p {
 .wrapper > .fw {
   grid-column: full;
 }
+.wrapper:focus {
+  outline: none;
+}
 .fw-margin {
   margin-inline: var(--padding);
 }
