@@ -1,0 +1,66 @@
+---
+title: My developer toolbox 2023
+slug: my-developer-toolbox-2023
+description: The apps, extensions and plugins I use to be a better developer.
+pubDate: 2023-06-30T12:56:39.375Z
+updatedDate: ""
+author: Martin Ryberg Laude
+layout: ../../layouts/BlogPost.astro
+---
+Digital tools can help get things done faster, and for that they’re valuable enough. There is a multitude of factors surrounding each tools usefulness though, and sometimes a tool can be useful but let down by poor implementations. Here I’m sharing the tools I currently employ in my work, with short explanations as for why, and justifications against alternatives.
+
+## Orbstack
+
+![orbstack](screenshot_orbstack.webp)
+
+[Orbstack](https://orbstack.dev/) is the latest addition to my toolbox, which finally allowed me to drop the mess that is Docker Desktop. It’s an alternative and drop-in replacement to the aforementioned piece of software, native to MacOS and with impressive performance gains in the bag. It starts quickly, it starts my containers quickly, and has significantly reduced the ram-usage of my docker containers.
+
+## Kitty
+
+![Kitty terminal screenshot](screenshot_kitty.webp)
+
+[Kitty](https://sw.kovidgoyal.net/kitty/) is a high-performance GPU-accelerated cross platform terminal app that has the perfect set of features for my needs. It’s fast, it has tabs, and it’s customizable enough in the config. I see some people use web-based terminals running electron and other js-monstrosities and shake my head. At least try to reduce inflating resource needs!
+
+## Zsh
+
+Can’t talk about the terminal without mentioning my zsh config. I use [znap](https://github.com/marlonrichert/zsh-snap) to manage my plugins, among which include [zsh-autocomplete](https://github.com/marlonrichert/zsh-autocomplete), [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting.git). I also boast a ton of custom docker and git-related aliases to pump those commands out faster. Don't forget about the `bindkey -v` at the very end of my .zshrc, for those sweet vim-motions. There are fancy new alternatives like fig, but giving up my terminal data to a closed source third party app doesn't sit well with me, and it doesn't offer much value over my current config from what I've seen.
+
+## Arc Browser
+
+![arc browser screenshot](screenshot_arc.webp)
+
+[Arc](https://arc.net/) is an interesting one, and I see its usage expanding wildly among coworkers as well as other industry folk. It’s a different take on a browser absolutely stacked with features to increse QoL for users and especially developers, I’ve found. Boosts allow me to customize pages with css and other tools, the command bar allows me to quickly fly around the app and webpages, the spaces allow me to organize my work, especially when using profiles. It’s not even close to as efficient as safari however, so for those long days of lighter tasks, you might still want to use a webkit browser.
+
+## Raycast
+
+[Raycast](https://www.raycast.com/) is a replacement for spotlight search, that is highly extensible and incredibly useful. I use it for searching, maths, window management, system monitoring, password manager vaults, killing processes, picking colors, copying the current path, opening the current folder in vscode… You name it. Oh, and my favorite command, confetti! Safe to say it’s an integral part of my workflow nowadays.
+
+## Visual Studio Code
+
+![vscode screenshot](screenshot_vscode.webp)
+
+Duuh, but which extensions? Here are some interesting ones I love:
+
+- Vim - vim motions in vscode
+- Console Ninja - console logs print directly on the same line
+- Github Copilot Chat - great rubber duck
+- Gitlens - fastest blame in the west
+
+And yes, light mode. Fight me.
+
+## Craft
+
+![Craft docs screenshot](screenshot_craft.webp)
+
+[Craft](https://www.craft.do/) is a document writing app, but that's a very shallow description of the plentiful of features it offers. Native, gorgeous Mac and iOS apps, all the document tools I could possibly need including markdown writing & export, shared spaces, daily notes... In fact, I write these blog posts in craft. The closest alternative in terms of features would be notion, but another slow electron app isn't my thing, and even though notion offers far more extensive database management, that's not quite what I need.
+
+## Timemator
+
+![timemator screenshot](screenshot_timemator.webp)
+
+[Timemator](https://timemator.com/) is a piece of time tracking software that works just the way I want. Easy menubar access, a calendar-app looking app to adjust things, projects, salary, automatic tracking and a popup asking if I'm still working after leaving the laptop for a while which if correct rolls back the timer to when I started being afk. It’s also a native SwiftUI app with iCloud sync on mac, iPad and iPhone. Checks all the boxes this way.
+
+## Conclusion
+
+That’s pretty much everything dev-related. Naturally I use more apps for all kinds of tasks, but these are the ones that relate to my work the most. I hope you’ve found a new tool that can help you among these!
+
