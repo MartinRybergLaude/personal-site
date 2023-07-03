@@ -1,7 +1,7 @@
 import rss from "@astrojs/rss";
 import sanitizeHtml from "sanitize-html";
 import MarkdownIt from "markdown-it";
-import { fetchApi } from "../lib/api";
+import { fetchApi } from "../lib/strapi";
 
 const parser = new MarkdownIt();
 
