@@ -1,11 +1,19 @@
 ---
 import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
+import fetchApi from "../lib/strapi";
+import type Post from "../interfaces/post";
 
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const posts = await fetchApi<Post[]>({
+  endpoint: "devposts",
+  wrappedByKey: "data",
+});
+posts.sort((a, b) => {
+  return (
+    new Date(b.attributes.pubDate).getTime() -
+    new Date(a.attributes.pubDate).getTime()
+  );
+});
 ---
 
 <Page navTitle="Blog">
@@ -14,17 +22,17 @@ const posts = (await getCollection("blog")).sort(
     {
       posts.map((post) => (
         <li>
-          <a href={`/blog/${post.slug}`}>
+          <a href={`/blog/${post.attributes.slug}`}>
             <article class="post">
-              <time datetime={post.data.pubDate.toISOString()}>
-                {new Date(post.data.pubDate).toLocaleString("en-US", {
+              <time datetime={new Date(post.attributes.pubDate).toISOString()}>
+                {new Date(post.attributes.pubDate).toLocaleString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric",
                 })}
               </time>
-              <h2>{post.data.title}</h2>
-              <p>{post.data.description}</p>
+              <h2>{post.attributes.title}</h2>
+              <p>{post.attributes.description}</p>
             </article>
           </a>
         </li>

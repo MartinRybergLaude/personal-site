@@ -1,5 +1,7 @@
 @import "fonts.css";
 @import "normalize.css";
+@import "atom-one-light.css" screen;
+@import "atom-one-dark.css" screen and (prefers-color-scheme: dark);
 :root {
 	/* Typography */
 	--font-sans: "Satoshi", sans-serif;

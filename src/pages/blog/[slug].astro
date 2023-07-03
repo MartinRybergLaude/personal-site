@@ -1,16 +1,21 @@
 ---
-import { getCollection } from "astro:content";
-// 1. Generate a new path for every collection entry
+import fetchApi from "../../lib/strapi";
+import type Post from "../../interfaces/post";
+import BlogPost from "../../layouts/BlogPost.astro";
+
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
+  const posts = await fetchApi<Post[]>({
+    endpoint: "devposts",
+    wrappedByKey: "data",
+  });
+  return posts.map((entry) => ({
+    params: { slug: entry.attributes.slug },
+    props: entry,
   }));
 }
-// 2. When its time to render, you can get the entry directly from the prop
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+
+type Props = Post;
+const post = Astro.props;
 ---
 
-<Content />
+<BlogPost post={post} />

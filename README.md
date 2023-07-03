@@ -5,7 +5,7 @@
   My personal site
 </h1>
 <p align="center">
-  A blog, some relevant info about me and some of my projects. Built with Astro and Netlify CMS.
+  A blog, some relevant info about me and some of my projects. Built with Astro and used with a Strapi CMS backend.
 </p>
 <p align="center">
     <a href="https://mrlaude.com">Live</a>

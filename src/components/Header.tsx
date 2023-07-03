@@ -41,25 +41,9 @@ export default function Header(props: { activeTag: string }) {
   const [openBurger, setOpenBurger] = useState(false);
   const isBrowser = typeof window !== "undefined";
 
-  function loadNetlifyIdentity() {
-    //@ts-ignore
-    if (window.netlifyIdentity) {
-      //@ts-ignore
-      window.netlifyIdentity.on("init", (user) => {
-        if (!user) {
-          //@ts-ignore
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  }
-
   // Close burger menu if window is resized
   useEffect(() => {
     if (isBrowser) {
-      loadNetlifyIdentity();
       window.addEventListener("resize", registerResize);
       return () => {
         window.removeEventListener("resize", registerResize);
