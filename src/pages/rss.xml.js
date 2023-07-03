@@ -1,21 +1,31 @@
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
 import sanitizeHtml from "sanitize-html";
 import MarkdownIt from "markdown-it";
+import { fetchApi } from "../lib/api";
+
 const parser = new MarkdownIt();
 
 export async function get(context) {
-  const blog = await getCollection("blog");
+  const posts = await fetchApi({
+    endpoint: "devposts",
+    wrappedByKey: "data",
+  });
+  posts.sort((a, b) => {
+      return (
+        new Date(b.attributes.pubDate).getTime() -
+        new Date(a.attributes.pubDate).getTime()
+      );
+    })
   return rss({
     title: "Martin R. Laude's Blog",
     description: "Blog covering my journey in web development",
     site: context.site,
     items: blog.map((post) => ({
-      title: post.data.title,
-      pubDate: post.data.pubDate,
-      description: post.data.description,
-      link: `/blog/${post.slug}/`,
-      content: sanitizeHtml(parser.render(post.body)),
+      title: post.attributes.title,
+      pubDate: post.attributes.pubDate,
+      description: post.attributes.description,
+      link: `/blog/${post.attributes.slug}/`,
+      content: sanitizeHtml(parser.render(post.attributes.content)),
     })),
   });
 }
