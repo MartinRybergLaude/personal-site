@@ -38,6 +38,7 @@ const links = [
 
 export default function Header(props: { activeTag: string }) {
   const [activeTag, setActiveTag] = useState(props.activeTag); // ["home", "blog", "projects", "about", "contact"]
+  const wide = activeTag === "Home" ? true : false;
   const [openBurger, setOpenBurger] = useState(false);
   const isBrowser = typeof window !== "undefined";
 
@@ -123,7 +124,8 @@ export default function Header(props: { activeTag: string }) {
           )}
         </AnimatePresence>
       </button>
-      <nav>
+      {wide && <div className={styles.line} />}
+      <nav className={wide ? styles.wideNav : styles.nav}>
         <AnimatePresence initial={false}>
           {openBurger && (
             <motion.ul
@@ -167,13 +169,7 @@ export default function Header(props: { activeTag: string }) {
           ))}
         </ul>
       </nav>
-      <a
-        href="https://github.com/MartinRybergLaude"
-        className={styles.rightLink}
-        aria-label="My Github profile"
-      >
-        <GithubIcon />
-      </a>
+      {wide && <div className={styles.line} />}
     </header>
   );
 }

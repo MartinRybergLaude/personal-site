@@ -3,12 +3,13 @@ import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
 import fetchApi from "../lib/strapi";
 import type Post from "../interfaces/post";
+import Wideness from "../components/Wideness";
 
 const posts = await fetchApi<Post[]>({
   endpoint: "devposts",
   wrappedByKey: "data",
 });
-posts.sort((a, b) => {
+posts?.sort((a, b) => {
   return (
     new Date(b.attributes.pubDate).getTime() -
     new Date(a.attributes.pubDate).getTime()
@@ -17,10 +18,11 @@ posts.sort((a, b) => {
 ---
 
 <Page navTitle="Blog">
+  <Wideness client:load />
   <h1>Blog</h1>
   <ul>
     {
-      posts.map((post) => (
+      posts?.map((post) => (
         <li>
           <a href={`/blog/${post.attributes.slug}`}>
             <article class="post">

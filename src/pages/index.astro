@@ -4,22 +4,24 @@ import { Icon } from "astro-icon";
 import { Parallax } from "../components/Parallax";
 import fetchApi from "../lib/strapi";
 import type Post from "../interfaces/post";
+import Wideness from "../components/Wideness";
 
 const posts = await fetchApi<Post[]>({
   endpoint: "devposts",
   wrappedByKey: "data",
 });
 posts
-  .sort((a, b) => {
+  ?.sort((a, b) => {
     return (
       new Date(b.attributes.pubDate).getTime() -
       new Date(a.attributes.pubDate).getTime()
     );
   })
-  .splice(3);
+  ?.splice(3);
 ---
 
 <Page navTitle="Home">
+  <Wideness client:load wide />
   <h1>Martin Ryberg Laude</h1>
   <section class="cta fw">
     <div class="cta-content">
@@ -36,7 +38,7 @@ posts
     <h2>Latest posts</h2>
     <ul>
       {
-        posts.map((post) => (
+        posts?.map((post) => (
           <li>
             <a href={`/blog/${post.attributes.slug}`}>
               <article class="post">

@@ -259,6 +259,9 @@ blockquote p {
 }
 .page {
   margin: 0 auto;
+  max-width: 600px;
+}
+.wide {
   max-width: 964px;
 }
 .wrapper {
