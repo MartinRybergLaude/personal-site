@@ -30,7 +30,8 @@ const transition = {
 
 const links = [
   { title: "Home", href: "" },
-  { title: "Blog", href: "blog" },
+  { title: "Dev", href: "dev" },
+  { title: "Life", href: "life" },
   { title: "Projects", href: "projects" },
   { title: "About", href: "about" },
   { title: "Contact", href: "contact" },

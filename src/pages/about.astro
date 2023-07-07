@@ -1,8 +1,10 @@
 ---
+import Wideness from "../components/Wideness";
 import Page from "../layouts/Page.astro";
 ---
 
 <Page navTitle="About">
+  <Wideness client:load />
   <h1>About me</h1>
   <p>Greetings! I'm a Swedish frontend developer based in Stockholm.</p>
   <section>

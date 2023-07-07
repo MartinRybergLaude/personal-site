@@ -1,9 +1,11 @@
 ---
 import Icon from "astro-icon";
 import Page from "../layouts/Page.astro";
+import Wideness from "../components/Wideness";
 ---
 
 <Page navTitle="Projects">
+  <Wideness client:load />
   <h1>My projects</h1>
   <p>Here are some of my projects with related information.</p>
   <ul>
