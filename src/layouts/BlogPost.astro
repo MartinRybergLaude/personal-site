@@ -5,6 +5,7 @@ import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
 import sanitizeHtml from "sanitize-html";
+import Wideness from "../components/Wideness";
 
 export interface Props {
   post: Post;
@@ -29,6 +30,7 @@ sanitizeHtml(html);
 ---
 
 <Page navTitle="Blog" title={title} description={description}>
+  <Wideness client:load />
   <address class="author">
     By <a rel="author" href="/about">{author}</a>
   </address>

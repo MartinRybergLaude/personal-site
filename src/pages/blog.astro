@@ -19,12 +19,12 @@ posts?.sort((a, b) => {
 
 <Page navTitle="Dev">
   <Wideness client:load />
-  <h1>Dev blog</h1>
+  <h1>Blog</h1>
   <ul>
     {
       posts?.map((post) => (
         <li>
-          <a href={`/dev/${post.attributes.slug}`}>
+          <a href={`/blog/${post.attributes.slug}`}>
             <article class="post">
               <time datetime={new Date(post.attributes.pubDate).toISOString()}>
                 {new Date(post.attributes.pubDate).toLocaleString("en-US", {
