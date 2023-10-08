@@ -65,244 +65,295 @@ posts
   </section>
   <section class="fw projects">
     <h2>Featured projects</h2>
-    <ul class="horizontal-scroll">
-      <li class="project-bg bg-1">
-        <a class="project" href="https://github.com/MartinRybergLaude/Solsken">
-          <img src="/images/solsken.svg" height={80} width={80} alt="" />
-          <h3>Solsken</h3>
-        </a>
-      </li>
-      <li class="project-bg bg-2">
+    <div class="projects-list">
+      <a
+        class="project project-wide project-tall"
+        href="https://github.com/MartinRybergLaude/Solsken"
+      >
+        <div>
+          <h3>solsken</h3>
+          <p>
+            A weather app primarily for the nordics with the goal of presenting
+            all the information weather providers possess in a gorgeous and
+            useful way.
+          </p>
+        </div>
+        <img
+          class="solsken-img"
+          src="/images/solsken-iphone14pro.webp"
+          alt=""
+        />
+      </a>
+      <div class="double-cards">
         <a
           class="project"
-          href="https://github.com/MartinRybergLaude/GameSquad"
+          href="https://github.com/MartinRybergLaude/quantum-snake-console"
         >
-          <img src="/images/gamesquad.svg" height={80} width={80} alt="" />
-          <h3>GameSquad</h3>
+          <h3>quantum-snake</h3>
+          <p>
+            Outrun theme, enemy A* powered snake, all running in the console.
+          </p>
+          <img class="avodoro-img" src="/images/quantum.svg" alt="" />
         </a>
-      </li>
-      <li class="project-bg bg-3">
-        <a class="project" href="https://github.com/MartinRybergLaude/Avodoro">
-          <img src="/images/avodoro.svg" height={80} width={80} alt="" />
-          <h3>Avodoro</h3>
-        </a>
-      </li>
-      <li class="project-bg bg-4">
         <a
           class="project"
-          href="https://github.com/MartinRybergLaude/QuantumSnakeConsole"
+          href="https://github.com/MartinRybergLaude/avodoro-timer"
         >
-          <img src="/images/quantum.svg" height={80} width={80} alt="" />
-          <h3>Quantum Snake</h3>
+          <div>
+            <h3>avodoro</h3>
+            <p>Lightweight offline-ready pomodoro timer.</p>
+          </div>
+          <img class="avodoro-img" src="/images/avodoro.svg" alt="" />
         </a>
-      </li>
-    </ul>
-    <a class="arrow-link bottom-link" href="/projects">
-      See all projects
-      <Icon name="arrow_right" />
-    </a>
+      </div>
+      <a
+        class="project project-wide"
+        href="https://github.com/MartinRybergLaude/QuantumSnakeConsole"
+      >
+        <div>
+          <h3>game-squad</h3>
+          <p>Squad up and vote for what games to play.</p>
+        </div>
+        <img class="gamesquad-img" src="/images/gamesquad-mockup.webp" alt="" />
+      </a>
+      <a class="arrow-link bottom-link" href="/projects">
+        See all projects
+        <Icon name="arrow_right" />
+      </a>
+    </div>
   </section>
-</Page>
 
-<style>
-  h1 {
-    font-size: 64px;
-    display: inline-block;
-    word-spacing: 100vw;
-    font-family: var(--font-serif);
-    font-weight: 300;
-    animation: fadein 600ms;
-    position: relative;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  .btn {
-    margin-top: 32px;
-    width: 100%;
-  }
-  .cta img {
-    border-radius: var(--radius);
-    margin: 0;
-    width: 30%;
-    height: auto;
-    position: absolute;
-    top: 5%;
-    right: 32px;
-  }
-  p {
-    margin: 0;
-  }
-  .cta {
-    position: relative;
-    margin-top: 200px;
-    width: 100%;
-  }
-  .cta-content {
-    padding: var(--page-padding);
-  }
-  .cta-content p {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 2;
-  }
-  .link {
-    display: block;
-    margin-top: 16px;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-text-1);
-  }
-  .posts {
-    margin-top: 16px;
-  }
-  .post {
-    margin-top: 32px;
-    cursor: pointer;
-    transition: transform 200ms ease;
-  }
-  .post:hover {
-    transform: translateX(-4px);
-  }
-  .post h3 {
-    font-weight: 600;
-    font-size: 18px;
-    margin-top: 0;
-    margin-bottom: 8px;
-  }
-  .bottom-link {
-    margin-top: 16px;
-  }
-  .projects {
-    margin-top: 64px;
-  }
-  .projects h2,
-  .projects .arrow-link {
-    margin: var(--padding) 0;
-  }
-  .horizontal-scroll {
-    overflow-x: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 16px;
-    padding-bottom: 16px;
-  }
-  .project-bg {
-    border-radius: var(--radius);
-    width: 144px;
-    height: 200px;
-    padding: 4px;
-    flex: 0 0 auto;
-    transition: all 200ms ease;
-  }
-  .bg-1 {
-    background: linear-gradient(300deg, #ff8228, #ffd386);
-  }
-  .bg-2 {
-    background: linear-gradient(300deg, #ee6148, #fa5d73);
-  }
-  .bg-3 {
-    background: linear-gradient(300deg, #3dba7c, #f9e9b1);
-  }
-  .bg-4 {
-    background: linear-gradient(300deg, #000, #6d6d6d);
-  }
-  .project {
-    width: 100%;
-    height: 100%;
-    padding: 16px;
-    background: var(--color-bg-light);
-    border-radius: calc(var(--radius) - 4px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-  }
-  .project-bg:hover {
-    opacity: 0.8;
-  }
-  .project img {
-    padding: 0;
-    margin: 16px 0 0 0;
-  }
-  .project h3 {
-    font-weight: 600;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 8px;
-  }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px;
-  }
-  .tags li {
-    font-size: 14px;
-    background-color: var(--color-1);
-    color: black;
-    padding: 0 6px;
-    border-radius: 4px;
-  }
-  @media (min-width: 600px) {
+  <style>
     h1 {
-      margin-left: -8px;
-      font-size: 140px;
+      font-size: 64px;
+      display: inline-block;
+      word-spacing: 100vw;
+      font-family: var(--font-serif);
+      font-weight: 300;
+      animation: fadein 600ms;
+      position: relative;
     }
-    .cta-content {
-      width: 50%;
+    ul {
+      list-style: none;
+      padding: 0;
     }
-    .cta-content p {
-      font-size: 19px;
-    }
-    .cta {
-      margin-top: 64px;
+    .btn {
+      margin-top: 32px;
+      width: 100%;
     }
     .cta img {
-      width: 50%;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
+      border-radius: var(--radius);
+      margin: 0;
+      width: 30%;
+      height: auto;
+      position: absolute;
+      top: 5%;
+      right: 32px;
+    }
+    p {
+      margin: 0;
+    }
+    .cta {
+      position: relative;
+      margin-top: 200px;
+      width: 100%;
+    }
+    .cta-content {
+      padding: var(--page-padding);
+    }
+    .cta-content p {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 2;
+    }
+    .link {
+      display: block;
+      margin-top: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-text-1);
     }
     .posts {
-      margin-top: 80px;
+      margin-top: 16px;
+    }
+    .post {
+      margin-top: 32px;
+      cursor: pointer;
+      transition: transform 200ms ease;
+    }
+    .post:hover {
+      transform: translateX(-4px);
+    }
+    .post h3 {
+      font-weight: 600;
+      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .bottom-link {
+      margin-top: 16px;
+    }
+    .projects {
+      margin-top: 64px;
     }
     .projects h2,
     .projects .arrow-link {
-      margin: var(--padding);
+      margin: var(--padding) 0;
     }
-    .horizontal-scroll {
-      margin-inline: 16px;
+    .projects-list {
+      display: flex;
+      flex-flow: column nowrap;
       gap: 32px;
-      justify-content: space-between;
     }
-    .project-bg {
-      width: 200px;
-      height: 260px;
+    .double-cards {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 32px;
+    }
+    .project {
+      width: 100%;
+      height: 300px;
+      padding: 32px;
+      background: var(--color-bg-light);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-flow: column nowrap;
+    }
+    .project-tall {
+      height: 400px;
+    }
+    .project > div {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    .project img {
+      padding: 0;
+      margin: 16px 0 0 0;
     }
     .project h3 {
-      margin-bottom: 16px;
-      font-size: 20px;
+      font-weight: 600;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 8px;
     }
-  }
+    .solsken-img {
+      position: absolute;
+      top: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .gamesquad-img {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .avodoro-img {
+      position: absolute;
+      height: 120px;
+      top: 40%;
+      left: 88px;
+      transform: translateX(-50%);
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px;
+    }
+    .tags li {
+      font-size: 14px;
+      background-color: var(--color-1);
+      color: black;
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+    @media (min-width: 600px) {
+      h1 {
+        margin-left: -8px;
+        font-size: 140px;
+      }
+      .cta-content {
+        width: 50%;
+      }
+      .cta-content p {
+        font-size: 19px;
+      }
+      .cta {
+        margin-top: 64px;
+      }
+      .cta img {
+        width: 50%;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+      }
+      .posts {
+        margin-top: 80px;
+      }
+      .double-cards {
+        flex-flow: row nowrap;
+      }
+      .project {
+        padding: 64px;
+        height: 400px;
+      }
+      .project-wide {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .solsken-img {
+        top: 32px;
+        left: 75%;
+      }
+      .gamesquad-img {
+        top: 32%;
+      }
+      .avodoro-img {
+        top: 50%;
+        left: 120px;
+      }
+      .projects h2,
+      .projects .arrow-link {
+        margin: var(--padding);
+      }
+      .horizontal-scroll {
+        margin-inline: 16px;
+        gap: 32px;
+        justify-content: space-between;
+      }
+      .project-bg {
+        width: 200px;
+        height: 260px;
+      }
+      .project h3 {
+        margin-bottom: 16px;
+        font-size: 20px;
+      }
+    }
 
-  @media (min-width: 920px) {
-    h1 {
-      word-spacing: initial;
+    @media (min-width: 920px) {
+      h1 {
+        word-spacing: initial;
+      }
     }
-  }
 
-  @keyframes fadein {
-    from {
-      opacity: 0;
-      top: 32px;
+    @keyframes fadein {
+      from {
+        opacity: 0;
+        top: 32px;
+      }
+      to {
+        opacity: 1;
+        top: 0;
+      }
     }
-    to {
-      opacity: 1;
-      top: 0;
-    }
-  }
-</style>
+  </style>
+</Page>
