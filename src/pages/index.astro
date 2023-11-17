@@ -72,6 +72,7 @@ posts
       >
         <div>
           <h3>solsken</h3>
+          <h4>Weather done right.</h4>
           <p>
             A weather app primarily for the nordics with the goal of presenting
             all the information weather providers possess in a gorgeous and
@@ -86,33 +87,33 @@ posts
       </a>
       <div class="double-cards">
         <a
-          class="project"
+          class="project project-center"
           href="https://github.com/MartinRybergLaude/quantum-snake-console"
         >
-          <h3>quantum-snake</h3>
-          <p>
-            Outrun theme, enemy A* powered snake, all running in the console.
-          </p>
+          <div>
+            <h3>quantum-snake</h3>
+            <h4>Beat the algorithm.</h4>
+          </div>
           <img class="avodoro-img" src="/images/quantum.svg" alt="" />
         </a>
         <a
-          class="project"
+          class="project project-center"
           href="https://github.com/MartinRybergLaude/avodoro-timer"
         >
           <div>
             <h3>avodoro</h3>
-            <p>Lightweight offline-ready pomodoro timer.</p>
+            <h4>Pomodoro. Avocados. Avodoro.</h4>
           </div>
           <img class="avodoro-img" src="/images/avodoro.svg" alt="" />
         </a>
       </div>
       <a
-        class="project project-wide"
+        class="project project-center"
         href="https://github.com/MartinRybergLaude/QuantumSnakeConsole"
       >
         <div>
           <h3>game-squad</h3>
-          <p>Squad up and vote for what games to play.</p>
+          <h4>Squad up and vote.</h4>
         </div>
         <img class="gamesquad-img" src="/images/gamesquad-mockup.webp" alt="" />
       </a>
@@ -212,7 +213,7 @@ posts
     }
     .project {
       width: 100%;
-      height: 300px;
+      height: 340px;
       padding: 32px;
       background: var(--color-bg-light);
       border-radius: var(--radius);
@@ -223,6 +224,11 @@ posts
       align-items: flex-start;
       flex-flow: column nowrap;
     }
+    .project-center {
+      align-items: center;
+      text-align: center;
+    }
+
     .project-tall {
       height: 400px;
     }
@@ -232,6 +238,10 @@ posts
       justify-content: flex-start;
       align-items: flex-start;
     }
+    .project-center > div {
+      align-items: center;
+    }
+
     .project img {
       padding: 0;
       margin: 16px 0 0 0;
@@ -239,13 +249,26 @@ posts
     .project h3 {
       font-weight: 600;
       font-size: 18px;
-      text-align: center;
+      text-align: left;
       margin-top: 0;
       margin-bottom: 8px;
     }
+    .project h4 {
+      font-weight: 500;
+      font-size: 32px;
+      text-align: left;
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+    .project-center h3 {
+      text-align: center;
+    }
+    .project-center h4 {
+      text-align: center;
+    }
     .solsken-img {
       position: absolute;
-      top: 200px;
+      top: 280px;
       left: 50%;
       transform: translateX(-50%);
     }
@@ -258,8 +281,8 @@ posts
     .avodoro-img {
       position: absolute;
       height: 120px;
-      top: 40%;
-      left: 88px;
+      top: 50%;
+      left: 50%;
       transform: translateX(-50%);
     }
     .tags {
@@ -274,6 +297,17 @@ posts
       color: black;
       padding: 0 6px;
       border-radius: 4px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .project {
+        background: var(--color-bg) !important;
+        border: 2px solid var(--color-bg-light);
+      }
+    }
+    @media (min-width: 440px) {
+      .solsken-img {
+        top: 200px;
+      }
     }
     @media (min-width: 600px) {
       h1 {
@@ -318,7 +352,6 @@ posts
       }
       .avodoro-img {
         top: 50%;
-        left: 120px;
       }
       .projects h2,
       .projects .arrow-link {

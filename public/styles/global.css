@@ -19,12 +19,13 @@
   --radius: 16px;
 
 	/* Colors */
-	--color-1: #1a7465;
+	--color-1: #ea580c;
   --color-1-rgb: 26, 116, 101;
   --color-text-1: #000000;
   --color-text-2: #2e2e2b;
   --color-text-3: #5e5e5b;
   --color-text-4: #6E6E68;
+  --color-body: #303030;
   --color-text-cloud: #0f3d36;
   --color-bg-light: #fffef9;
   --color-bg-dark: #ebe9e1;
@@ -32,12 +33,13 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-1: #4fccb7;
+    --color-1: #fdba74;
 		--color-1-rgb: 79,205,184;
     --color-text-1: #ffffe3;
 		--color-text-2: #ffffe3;
 		--color-text-3: #a8a896;
 		--color-text-4: #7e7e6f;
+    --color-body: #d1cbc0;
 		--color-text-cloud: #c7f0ea;
 		--color-bg-light: #252626;
 		--color-bg-dark: #292825;
@@ -92,19 +94,19 @@ h1 {
 
 h2 {
   font-weight: 700;
-  font-size: 32px;
-}
-
-h3 {
   font-size: 24px;
 }
 
-h4 {
+h3 {
   font-size: 18px;
 }
 
-h5 {
+h4 {
   font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
 }
 
 h6 {
@@ -131,9 +133,20 @@ p {
   max-width: 600px;
 }
 
+article p {
+  color: var(--color-body);
+  line-height: 1.75;
+  font-weight: 400;
+  font-size: 16px;
+}
+
 a {
   color: var(--color-1);
   text-decoration: none;
+}
+
+article a {
+  text-decoration: underline;
 }
 
 time {
@@ -152,7 +165,11 @@ ol {
 li {
   font-weight: 400;
   line-height: var(--lineHeight-relaxed);
-  color: var(--color-text-3);
+  color: var(--color-body);
+}
+article li {
+  font-weight: 350;
+  font-size: 16px;
 }
 img {
   max-width: 100%;
@@ -316,13 +333,13 @@ blockquote p {
     --radius: 32px;
   }
   .post-title {
-    font-size: 48px;
+    font-size: 32px;
   }
   code {
-    font-size: 16px;
+    font-size: 14px;
   }
   p {
-    font-size: 19px;
+    font-size: 16px;
   }
   time {
     font-size: 16px;
@@ -333,7 +350,7 @@ blockquote p {
   ul,
   ol {
     margin: 32px 0 0 0;
-    font-size: 19px;
+    font-size: 16px;
     padding-left: 16px;
   }
 }
