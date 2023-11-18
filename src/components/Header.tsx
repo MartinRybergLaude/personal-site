@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { motion, AnimatePresence } from "framer-motion";
-import GithubIcon from "./GithubIcon";
+import classnames from "classnames";
 
 const buttonVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -78,7 +78,7 @@ export default function Header(props: { activeTag: string }) {
   });
 
   return (
-    <header className={styles.header}>
+    <header className={classnames(styles.header, wide && styles.headerWide)}>
       <button
         aria-label="burger menu"
         className={styles.burgerMenu}
@@ -124,7 +124,7 @@ export default function Header(props: { activeTag: string }) {
           )}
         </AnimatePresence>
       </button>
-      {wide && <div className={styles.line} />}
+      <div className={styles.line} />
       <nav className={wide ? styles.wideNav : styles.nav}>
         <AnimatePresence initial={false}>
           {openBurger && (
@@ -169,7 +169,7 @@ export default function Header(props: { activeTag: string }) {
           ))}
         </ul>
       </nav>
-      {wide && <div className={styles.line} />}
+      <div className={styles.line} />
     </header>
   );
 }

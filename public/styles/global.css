@@ -24,12 +24,12 @@
   --color-text-1: #000000;
   --color-text-2: #2e2e2b;
   --color-text-3: #5e5e5b;
-  --color-text-4: #6E6E68;
   --color-body: #303030;
   --color-text-cloud: #0f3d36;
   --color-bg-light: #fffef9;
   --color-bg-dark: #ebe9e1;
   --color-bg: #f5f4f0;
+  --color-bg-rgb: 245 244 240; 
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -38,12 +38,12 @@
     --color-text-1: #ffffe3;
 		--color-text-2: #ffffe3;
 		--color-text-3: #a8a896;
-		--color-text-4: #7e7e6f;
     --color-body: #d1cbc0;
 		--color-text-cloud: #c7f0ea;
 		--color-bg-light: #252626;
 		--color-bg-dark: #292825;
 		--color-bg: #10100e;
+    --color-bg-rgb: 16 16 14;
 	}
 }
 
@@ -124,20 +124,12 @@ h6 > a {
 }
 
 p {
-  color: var(--color-text-3);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: var(--lineHeight-relaxed);
-  margin: 32px 0 0 0;
-  padding: 0;
-  max-width: 600px;
-}
-
-article p {
   color: var(--color-body);
+  font-size: 16px;
   line-height: 1.75;
   font-weight: 400;
-  font-size: 16px;
+  margin: 16px 0 0 0;
+  padding: 0;
 }
 
 a {
@@ -152,13 +144,13 @@ article a {
 time {
   font-size: 16px;
   font-weight: 500;
-  color: var(--color-text-4);
+  color: var(--color-text-3);
 }
 
 /* Blog */
 ul,
 ol {
-  margin: 24px 0 0 0;
+  margin: 12px 0 0 0;
   font-size: 16px;
   padding-left: 16px;
 }
@@ -166,10 +158,6 @@ li {
   font-weight: 400;
   line-height: var(--lineHeight-relaxed);
   color: var(--color-body);
-}
-article li {
-  font-weight: 350;
-  font-size: 16px;
 }
 img {
   max-width: 100%;
@@ -207,7 +195,7 @@ blockquote {
   grid-column: full !important;
   width: 100%;
   margin: 0;
-  color: var(--color-text-4);
+  color: var(--color-text-3);
   border-left: 4px solid var(--color-1);
   font-size: 16px;
   margin-top: 32px;
@@ -272,13 +260,14 @@ blockquote p {
 }
 .page {
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 800px;
 }
 .wide {
   max-width: 964px;
 }
 .wrapper {
   margin: 0 16px;
+  padding-top: 32px;
   display: grid;
       grid-template-columns: [full-start] var(--page-padding) [wrapper-start] minmax(32px, 932px) [wrapper-end] var(--page-padding) [full-end];
 }
@@ -339,18 +328,18 @@ blockquote p {
     font-size: 14px;
   }
   p {
-    font-size: 16px;
+    font-size: 18px;
+  }
+  li {
+    font-size: 18px;
   }
   time {
     font-size: 16px;
   }
-  ul {
-    
-  }
   ul,
   ol {
-    margin: 32px 0 0 0;
-    font-size: 16px;
+    margin: 24px 0 32px 0;
+    font-size: 18px;
     padding-left: 16px;
   }
 }
