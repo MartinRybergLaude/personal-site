@@ -9,7 +9,7 @@ import styles from "./Parallax.module.css";
 
 export function Parallax() {
   const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 250]);
   const [bgLoaded, setBgLoaded] = useState(false);
   const [fgLoaded, setFgLoaded] = useState(false);
 

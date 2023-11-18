@@ -18,7 +18,7 @@
   top: 0;
   left: 0;
   z-index: 99;
-  filter: grayscale(100%) sepia(40%);
+  filter: sepia(20%);
 }
 
 .bg {
