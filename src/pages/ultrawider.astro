@@ -1,0 +1,88 @@
+---
+import Icon from "astro-icon";
+import Page from "../layouts/Page.astro";
+import Wideness from "../components/Wideness";
+---
+
+<Page navTitle="Ultrawider">
+  <Wideness client:load />
+  <div class="center">
+    <img
+      class="icon"
+      src="/images/ultrawider/icon-256.png"
+      alt="ultrawider mac icon"
+    />
+    <h1>Get rid of the black bars</h1>
+    <img
+      src="/images/ultrawider/mockup1.png"
+      alt="ultrawider turned off screenshot"
+    />
+    <img
+      src="/images/ultrawider/mockup2.png"
+      alt="ultrawider turned on screenshot"
+    />
+    <p>
+      Ultrawider is a Safari extension that makes Youtube better for ultrawide
+      displays.
+    </p>
+    <button> Download Ultrawider</button>
+    <div class="break"></div>
+    <h2>Simply press the widen button when watching a 21:9 video.</h2>
+    <img src="/images/ultrawider/mockup3.png" alt="widen button" />
+    <Icon name="arrow_drawn" class="arrow" />
+  </div>
+</Page>
+
+<style>
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .icon {
+    margin-top: 80px;
+    width: 80px;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 48px;
+    margin-top: 0;
+  }
+  h2 {
+    text-align: center;
+  }
+  p {
+    max-width: 400px;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+  }
+  button {
+    margin-top: 32px;
+    border-radius: 100px;
+    background-color: #e3712f;
+    border: none;
+    color: white;
+    padding: 14px 20px 16px 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  button:hover {
+    opacity: 0.8;
+  }
+  .break {
+    margin: 32px 0;
+    height: 2px;
+    width: 100%;
+    background-color: var(--color-bg-dark);
+  }
+  .arrow {
+    transform: rotate(120deg) scaleX(-1);
+    width: 180px;
+    transform: ;
+  }
+</style>
