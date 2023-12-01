@@ -32,6 +32,28 @@ import Wideness from "../components/Wideness";
       </div>
     </li>
     <li>
+      <img
+        src="/images/ultrawider/icon-256.png"
+        width={128}
+        height={128}
+        alt=""
+        class="mac-icon"
+      />
+      <div>
+        <h2>Ultrawider</h2>
+        <p>Get rid of the black bars.</p>
+        <div class="links">
+          <a class="arrow-link" href="/ultrawider" target="_blank"
+            >Download<Icon name="chain" /></a
+          >
+          <span class="dot">•</span>
+          <a class="arrow-link" href="/ultrawider" target="_blank"
+            >Product page<Icon name="chain" /></a
+          >
+        </div>
+      </div>
+    </li>
+    <li>
       <img src="/images/gamesquad.svg" width={128} height={128} alt="" />
       <div>
         <h2>GameSquad</h2>
@@ -102,8 +124,8 @@ import Wideness from "../components/Wideness";
     flex-direction: column;
   }
   li img {
-    height: 80px;
-    width: 80px;
+    height: 48px;
+    width: 48px;
     margin-bottom: 16px;
     margin-top: 64px;
   }
@@ -132,14 +154,18 @@ import Wideness from "../components/Wideness";
     font-size: 16px;
   }
 
+  .mac-icon {
+    transform: scale(1.25);
+  }
+
   @media (min-width: 600px) {
     li {
       flex-direction: row;
       align-items: center;
     }
     li img {
-      height: 128px;
-      width: 128px;
+      height: 80px;
+      width: 80px;
       margin: 32px 0 32px 0;
     }
     div:not(.links) {
