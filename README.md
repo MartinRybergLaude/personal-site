@@ -1,6 +1,7 @@
 <p align="center">
-   <img src="https://github.com/MartinRybergLaude/personal-site/blob/main/public/images/site_screenshot.webp?raw=true" height="600" alt="">
+   <img src="https://github.com/MartinRybergLaude/personal-site/assets/32536904/2a8ecb9e-b565-42ea-983d-603e4a1cc507" width="800" alt="">
 </p>
+
 <h1 align="center">
   My personal site
 </h1>
