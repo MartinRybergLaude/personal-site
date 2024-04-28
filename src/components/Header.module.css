@@ -38,13 +38,15 @@
 
 .header ul {
   list-style-type: none;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 48px;
   align-items: center;
   margin: 0;
   padding: 0;
 }
 .mobileUl {
   display: flex;
+  flex-direction: column;
   z-index: 10;
   background-color: var(--color-bg);
   height: 100vh;
@@ -52,8 +54,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  flex-direction: column;
-  justify-content: space-evenly;
 }
 .desktopUl {
   max-width: 600px;
