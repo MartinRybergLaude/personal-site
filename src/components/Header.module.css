@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 48px;
   z-index: 10;
   position: fixed;
   background: rgb(var(--color-bg-rgb) / 0.2);
@@ -68,7 +68,7 @@
   padding: 8px 12px;
   text-decoration: none;
   color: var(--color-text-3);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
   transition: none;
 }

@@ -267,7 +267,7 @@ blockquote p {
 }
 .wrapper {
   margin: 0 16px;
-  padding-top: 32px;
+  padding-top: 48px;
   display: grid;
       grid-template-columns: [full-start] var(--page-padding) [wrapper-start] minmax(32px, 932px) [wrapper-end] var(--page-padding) [full-end];
 }
