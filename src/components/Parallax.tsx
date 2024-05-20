@@ -36,7 +36,7 @@ export function Parallax() {
         animate={controlsFg}
         className={styles.fg}
         alt=""
-        src="images/bgfg/fg_466.webp"
+        src="images/bgfg/fg_466w.webp"
         srcSet="images/bgfg/fg_200w.webp 200w, images/bgfg/fg_466w.webp 466w, images/bgfg/fg_932w.webp 932w"
         sizes="(max-width: 400px) 200px, (max-width: 600px) 466px, 932px"
         onLoad={() => setFgLoaded(true)}
