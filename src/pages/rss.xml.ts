@@ -4,11 +4,8 @@ import fetchApi from "../lib/strapi";
 import { Marked } from "marked";
 import type Post from "../interfaces/post";
 
-
-export async function get(context: any) {
-  const marked = new Marked(
-    { mangle: false }
-  );
+export async function GET(context: any) {
+  const marked = new Marked();
   const posts = await fetchApi<Post[]>({
     endpoint: "devposts",
     wrappedByKey: "data",
@@ -18,7 +15,7 @@ export async function get(context: any) {
       new Date(b.attributes.pubDate).getTime() -
       new Date(a.attributes.pubDate).getTime()
     );
-  })
+  });
   return rss({
     title: "Martin R. Laude's Blog",
     description: "Blog covering my journey in web development",
