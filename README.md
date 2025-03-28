@@ -1,69 +1,68 @@
-<p align="center">
-   <img src="https://github.com/MartinRybergLaude/personal-site/assets/32536904/2a8ecb9e-b565-42ea-983d-603e4a1cc507" width="800" alt="">
-</p>
+# Astro Starter Kit: Blog
 
-<h1 align="center">
-  My personal site
-</h1>
-<p align="center">
-  A blog, some relevant info about me and some of my projects. Built with Astro and used with a Strapi CMS backend.
-</p>
-<p align="center">
-    <a href="https://mrlaude.com">Live</a>
-</p>
+```sh
+bun create astro@latest -- --template blog
+```
 
-## ✅ Prerequisites
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
 
-- Node.js
-- pnpm
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-## 🚀 Quick start
+![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
 
-1.  **Clone this repo**
+Features:
 
-    Use git to clone this repo, or download it.
+- ✅ Minimal styling (make it your own!)
+- ✅ 100/100 Lighthouse performance
+- ✅ SEO-friendly with canonical URLs and OpenGraph data
+- ✅ Sitemap support
+- ✅ RSS Feed support
+- ✅ Markdown & MDX support
 
-    ```shell
-    # Clone the repo to a local directory
-    git clone git@github.com:MartinRybergLaude/personal-site.git
-    ```
+## 🚀 Project Structure
 
-2.  **Install**
+Inside of your Astro project, you'll see the following folders and files:
 
-    Open cmd, terminal or powershell in the cloned direcory and install
+```text
+├── public/
+├── src/
+│   ├── components/
+│   ├── content/
+│   ├── layouts/
+│   └── pages/
+├── astro.config.mjs
+├── README.md
+├── package.json
+└── tsconfig.json
+```
 
-    ```shell
-    cd personal-site
-    pnpm i
-    ```
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-3.  **Start the app**
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-    Start the app on `http://localhost:5173`
+The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
 
-    ```shell
-    pnpm dev
-    ```
+Any static assets, like images, can be placed in the `public/` directory.
 
-## 🧐 Technologies
+## 🧞 Commands
 
-- Typescript
-- React
-- Astro
-- Netlify CMS
+All commands are run from the root of the project, from a terminal:
 
-## 📁 Directory structure
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `bun install`             | Installs dependencies                            |
+| `bun dev`             | Starts local dev server at `localhost:4321`      |
+| `bun build`           | Build your production site to `./dist/`          |
+| `bun preview`         | Preview your build locally, before deploying     |
+| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `bun astro -- --help` | Get help using the Astro CLI                     |
 
-- Package by feature as far as possible
+## 👀 Want to learn more?
 
-## 📑 Code conventions
+Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
-- Functional components
-- Props & state interface above components
-- Async/await preferred
+## Credit
 
-## 📑 Git conventions
-
-- Commit messages are written in <a href="https://en.wikipedia.org/wiki/Imperative_mood">imperative mood</a>
-- Commit messages follow the [conventonal commits](https://www.conventionalcommits.org/en/v1.0.0/) structure
-- Micro-commits are preferred
+This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).

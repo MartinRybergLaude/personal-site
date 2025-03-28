@@ -1,43 +1,26 @@
 {
-  "name": "personal-site",
+  "name": "",
   "type": "module",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.0.1",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^3.0.0",
-    "@astrojs/react": "^3.3.4",
-    "@astrojs/rss": "^4.0.6",
-    "@astrojs/sitemap": "^3.1.4",
-    "@types/react": "^18.3.2",
-    "@types/react-dom": "^18.3.0",
-    "astro": "^4.8.6",
-    "astro-icon": "^1.1.0",
-    "classnames": "^2.5.1",
-    "framer-motion": "^11.2.4",
-    "highlight.js": "^11.9.0",
-    "marked": "^12.0.0",
-    "marked-highlight": "^2.1.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sanitize-html": "^2.13.0",
-    "sharp": "^0.33.4",
-    "typescript": "^5.4.5"
+    "@astrojs/mdx": "^4.2.2",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.3.0",
+    "@tailwindcss/vite": "^4.0.17",
+    "astro": "^5.5.5",
+    "phosphor-astro": "^2.1.0",
+    "tailwindcss": "^4.0.17"
   },
   "devDependencies": {
-    "@swup/a11y-plugin": "^3.0.0",
-    "@swup/head-plugin": "^1.3.0",
-    "@swup/preload-plugin": "^2.3.0",
-    "@swup/progress-plugin": "^2.0.0",
-    "@swup/scroll-plugin": "^2.0.3",
-    "@swup/slide-theme": "^1.0.5",
-    "swup": "^3.1.1"
+    "@tailwindcss/typography": "^0.5.16",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.11"
   }
 }

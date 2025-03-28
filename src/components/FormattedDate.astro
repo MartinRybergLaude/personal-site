@@ -1,0 +1,23 @@
+---
+type Props = {
+  date: Date;
+  format?: Intl.DateTimeFormatOptions;
+};
+
+const { date, format } = Astro.props;
+
+const defaultFormat: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+};
+
+const formattedDate = new Intl.DateTimeFormat(
+  undefined,
+  format || defaultFormat,
+).format(new Date(date));
+---
+
+<time datetime={date.toISOString()} class="text-sm text-black">
+  {formattedDate}
+</time>

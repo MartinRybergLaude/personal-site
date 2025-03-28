@@ -1,0 +1,39 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import { render } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title}>
+  <div class="py-12">
+    {
+      post.data.heroImage && (
+        <Image
+          src={post.data.heroImage}
+          alt={post.data.title}
+          class="w-full object-cover object-bottom"
+        />
+      )
+    }
+    <article class="prose-sm sm:prose-lg pt-12">
+      <div class="flex items-start justify-between">
+        <h1>{post.data.title}</h1>
+        <FormattedDate date={post.data.pubDate} />
+      </div>
+      <Content />
+    </article>
+  </div>
+</Layout>

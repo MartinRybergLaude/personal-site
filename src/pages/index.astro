@@ -1,394 +1,75 @@
 ---
-import Page from "../layouts/Page.astro";
-import { Icon } from "astro-icon/components";
-import { Parallax } from "../components/Parallax";
-import fetchApi from "../lib/strapi";
-import type Post from "../interfaces/post";
-import Wideness from "../components/Wideness";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import GithubLogo from "phosphor-astro/GithubLogo.astro";
+import LinkedinLogo from "phosphor-astro/LinkedinLogo.astro";
+import FormattedDate from "src/components/FormattedDate.astro";
 
-const posts = await fetchApi<Post[]>({
-  endpoint: "devposts",
-  wrappedByKey: "data",
-});
-posts
-  ?.sort((a, b) => {
-    return (
-      new Date(b.attributes.pubDate).getTime() -
-      new Date(a.attributes.pubDate).getTime()
-    );
-  })
-  ?.splice(3);
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
-<Page navTitle="Home">
-  <Wideness client:load wide />
-  <h1>Martin Ryberg Laude</h1>
-  <section class="cta fw">
-    <div class="cta-content">
-      <p>
-        I develop websites & web apps with a focus on performance,
-        accessibility, and user experience.
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <div class="flex flex-col gap-y-20 py-20">
+    <!-- Hero section -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <h1 class="text-5xl font-light tracking-tight">Martin Ryberg Laude</h1>
+      <p class="mx-auto max-w-2xl text-lg text-neutral-900">
+        Swedish guy passionate about software, design, and anything inbetween.
       </p>
-      <a href="/contact" class="link">Interested?</a>
-      <a href="/projects" class="btn">My work</a>
-    </div>
-    <Parallax client:load />
-  </section>
-  <section class="posts">
-    <h2>Latest posts</h2>
-    <ul>
-      {
-        posts?.map((post) => (
-          <li>
-            <a href={`/blog/${post.attributes.slug}`}>
-              <article class="post">
-                <h3>{post.attributes.title}</h3>
-                <time
-                  datetime={new Date(post.attributes.pubDate).toISOString()}
-                >
-                  {new Date(post.attributes.pubDate).toLocaleString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </time>
-              </article>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <a class="arrow-link bottom-link" href="/blog">
-      See all posts
-      <Icon name="arrow_right" />
-    </a>
-  </section>
-  <section class="fw projects">
-    <h2>Featured projects</h2>
-    <div class="projects-list">
-      <a
-        class="project project-wide project-tall"
-        href="https://github.com/MartinRybergLaude/Solsken"
-      >
-        <div>
-          <h3>solsken</h3>
-          <h4>Weather done right.</h4>
-          <p>
-            A weather app primarily for the nordics with the goal of presenting
-            all the information weather providers possess in a gorgeous and
-            useful way.
-          </p>
-        </div>
-        <img
-          class="solsken-img"
-          src="/images/solsken-iphone14pro.webp"
-          alt=""
-        />
-      </a>
-      <div class="double-cards">
-        <a class="project project-center" href="/ultrawider">
-          <div>
-            <h3>ultrawider</h3>
-            <h4>Black bars? Gone.</h4>
-          </div>
-          <img
-            class="avodoro-img"
-            src="/images/ultrawider/icon-256.png"
-            alt=""
-          />
+      <div class="flex justify-center gap-2">
+        <a
+          href="https://github.com/martinryberglaude"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm bg-black p-2 font-extralight text-white hover:underline"
+        >
+          <GithubLogo class="w-4" />
+          Github
         </a>
         <a
-          class="project project-center"
-          href="https://github.com/MartinRybergLaude/avodoro-timer"
+          href="https://www.linkedin.com/in/martinryberglaude/"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-white p-2 font-light text-black hover:underline"
         >
-          <div>
-            <h3>avodoro</h3>
-            <h4>Pomodoro. Avocados. Avodoro.</h4>
-          </div>
-          <img class="avodoro-img" src="/images/avodoro.svg" alt="" />
+          <LinkedinLogo class="w-5" />
+          LinkedIn
         </a>
       </div>
-      <a
-        class="project project-center"
-        href="https://github.com/MartinRybergLaude/QuantumSnakeConsole"
-      >
-        <div>
-          <h3>game-squad</h3>
-          <h4>Squad up and vote.</h4>
-        </div>
-        <img class="gamesquad-img" src="/images/gamesquad-mockup.webp" alt="" />
-      </a>
-      <a class="arrow-link bottom-link" href="/projects">
-        See all projects
-        <Icon name="arrow_right" />
-      </a>
-    </div>
-  </section>
+    </section>
 
-  <style>
-    h1 {
-      font-size: 64px;
-      display: inline-block;
-      word-spacing: 100vw;
-      font-family: var(--font-serif);
-      font-weight: 200;
-      animation: fadein 600ms;
-      position: relative;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    .btn {
-      margin-top: 32px;
-      width: 100%;
-    }
-    .cta img {
-      border-radius: var(--radius);
-      margin: 0;
-      width: 30%;
-      height: auto;
-      position: absolute;
-      top: 5%;
-      right: 32px;
-    }
-    p {
-      margin: 0;
-    }
-    .cta {
-      position: relative;
-      margin-top: 200px;
-      width: 100%;
-    }
-    .cta-content {
-      padding: var(--page-padding);
-    }
-    .cta-content p {
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 2;
-    }
-    .link {
-      display: block;
-      margin-top: 16px;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-text-1);
-    }
-    .posts {
-      margin-top: 16px;
-    }
-    .post {
-      margin-top: 32px;
-      cursor: pointer;
-      transition: transform 200ms ease;
-    }
-    .post:hover {
-      transform: translateX(-4px);
-    }
-    .post h3 {
-      font-weight: 600;
-      font-size: 18px;
-      margin-top: 0;
-      margin-bottom: 8px;
-    }
-    .bottom-link {
-      margin-top: 16px;
-    }
-    .projects {
-      margin-top: 64px;
-    }
-    .projects h2,
-    .projects .arrow-link {
-      margin: var(--padding) 0;
-    }
-    .projects-list {
-      display: flex;
-      flex-flow: column nowrap;
-      gap: 32px;
-    }
-    .double-cards {
-      display: flex;
-      flex-flow: column nowrap;
-      gap: 32px;
-    }
-    .project {
-      width: 100%;
-      height: 340px;
-      padding: 32px;
-      background: var(--color-bg-light);
-      border: 1px solid var(--color-bg-dark);
-      border-radius: var(--radius);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-flow: column nowrap;
-    }
-    .project-center {
-      align-items: center;
-      text-align: center;
-    }
-
-    .project-tall {
-      height: 400px;
-    }
-    .project > div {
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-    .project-center > div {
-      align-items: center;
-    }
-
-    .project img {
-      padding: 0;
-      margin: 16px 0 0 0;
-    }
-    .project h3 {
-      font-weight: 600;
-      font-size: 18px;
-      text-align: left;
-      margin-top: 0;
-      margin-bottom: 8px;
-    }
-    .project h4 {
-      font-weight: 500;
-      font-size: 32px;
-      text-align: left;
-      margin-top: 0;
-      margin-bottom: 24px;
-    }
-    .project-center h3 {
-      text-align: center;
-    }
-    .project-center h4 {
-      text-align: center;
-    }
-    .solsken-img {
-      position: absolute;
-      top: 280px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .gamesquad-img {
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .avodoro-img {
-      position: absolute;
-      height: 120px;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 4px;
-    }
-    .tags li {
-      font-size: 14px;
-      background-color: var(--color-1);
-      color: black;
-      padding: 0 6px;
-      border-radius: 4px;
-    }
-    @media (prefers-color-scheme: dark) {
-      .project {
-        background: var(--color-bg) !important;
-        border: 2px solid var(--color-bg-light);
-      }
-    }
-    @media (min-width: 440px) {
-      .solsken-img {
-        top: 200px;
-      }
-    }
-    @media (min-width: 600px) {
-      h1 {
-        margin-left: -8px;
-        font-size: 140px;
-      }
-      .cta-content {
-        width: 50%;
-      }
-      .cta-content p {
-        font-size: 19px;
-      }
-      .cta {
-        margin-top: 64px;
-      }
-      .cta img {
-        width: 50%;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
-      }
-      .posts {
-        margin-top: 80px;
-      }
-      .double-cards {
-        flex-flow: row nowrap;
-      }
-      .project {
-        padding: 64px;
-        height: 400px;
-      }
-      .project-wide {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-      .solsken-img {
-        top: 32px;
-        left: 75%;
-      }
-      .gamesquad-img {
-        top: 32%;
-      }
-      .avodoro-img {
-        top: 50%;
-      }
-      .projects h2,
-      .projects .arrow-link {
-        margin: var(--padding);
-      }
-      .horizontal-scroll {
-        margin-inline: 16px;
-        gap: 32px;
-        justify-content: space-between;
-      }
-      .project-bg {
-        width: 200px;
-        height: 260px;
-      }
-      .project h3 {
-        margin-bottom: 16px;
-        font-size: 20px;
-      }
-    }
-
-    @media (min-width: 920px) {
-      h1 {
-        word-spacing: initial;
-      }
-    }
-
-    @keyframes fadein {
-      from {
-        opacity: 0;
-        top: 32px;
-      }
-      to {
-        opacity: 1;
-        top: 0;
-      }
-    }
-  </style>
-</Page>
+    <section class="flex flex-col gap-y-6">
+      <h2 class="font-regular ml-6 text-2xl">Articles</h2>
+      <ul class="flex flex-col gap-6">
+        {
+          posts.slice(0, 3).map((post) => (
+            <li>
+              <a
+                href={`/articles/${post.id}`}
+                class="group block rounded-lg border-2 border-black bg-white p-6 transition hover:cursor-pointer"
+              >
+                <div class="flex items-start justify-between">
+                  <h3 class="mb-2 text-lg group-hover:underline">
+                    &gt; {post.data.title}
+                  </h3>
+                  <FormattedDate date={post.data.pubDate} />
+                </div>
+                <p class="text-md text-black">{post.data.description}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="relative ml-6 inline-flex">
+        <a
+          href="/articles"
+          class="relative flex items-center gap-2 text-lg hover:underline"
+        >
+          <span
+            class="absolute inset-x-0 bottom-0 -z-10 h-[50%] bg-[#7FFF00]/30"
+          ></span>
+          All posts →
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

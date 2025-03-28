@@ -1,35 +1,43 @@
 ---
-const today = new Date();
+const currentYear = new Date().getFullYear();
 ---
 
-<footer>
-  <p>Hello! 👋 Welcome to Martin's little site.</p>
-  <p class="mt">Copyright &copy;</p>
-  <p class="italics">All rights reserved.</p>
+<footer class="mx-auto mt-auto max-w-screen-md px-4 py-12">
+  <div class="flex flex-col items-center gap-8 text-sm">
+    <div class="flex flex-col items-center gap-6 sm:flex-row">
+      <a
+        href="mailto:contact@mrlaude.com"
+        class="text-black hover:underline"
+        aria-label="Email"
+      >
+        contact@mrlaude.com
+      </a>
+      <a
+        href="https://github.com/martinryberglaude"
+        class="text-black hover:underline"
+        aria-label="GitHub"
+      >
+        github
+      </a>
+      <a
+        href="https://linkedin.com/in/martinryberglaude"
+        class="text-black hover:underline"
+        aria-label="LinkedIn"
+      >
+        linkedin
+      </a>
+      <a
+        href="https://bsky.app/profile/mrlaude.com"
+        class="text-black hover:underline"
+        aria-label="Bluesky"
+      >
+        bluesky
+      </a>
+    </div>
+    <div>
+      <p class="text-sm text-black">
+        &copy; {currentYear}
+      </p>
+    </div>
+  </div>
 </footer>
-<style>
-  footer {
-    margin-top: 64px;
-    margin-inline: 16px;
-    border-top: 2px solid var(--color-bg-dark);
-    padding: 64px 0;
-    text-align: center;
-  }
-  p {
-    margin: 0;
-    max-width: none;
-  }
-  .mt {
-    margin-top: 64px;
-  }
-
-  .italics {
-    font-style: italic;
-  }
-
-  @media (min-width: 600px) {
-    footer {
-      margin-inline: 48px;
-    }
-  }
-</style>
