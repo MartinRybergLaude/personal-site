@@ -6,9 +6,22 @@
   src: url("/fonts/Drafting.woff2") format("woff2");
   font-style: monospace;
   font-weight: 100 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Jetbrains";
+  src: url("/fonts/Jetbrains.woff2") format("woff2");
+  font-style: monospace;
+  font-weight: 100 900;
   font-display: swap;
 }
 
 @theme {
   --font-mono: "Drafting", "monospace";
+  --font-jetbrains: "Jetbrains", "monospace";
+}
+
+::selection {
+  background: #d5f7ba;
 }

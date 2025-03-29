@@ -1,5 +1,6 @@
 ---
-// Minimal header component
+import { Image } from "astro:assets";
+import logo from "../assets/images/favicon.png";
 ---
 
 <header class="w-full py-6">
@@ -7,22 +8,11 @@
     class="container mx-auto flex max-w-screen-md flex-col items-center justify-center font-light"
   >
     <nav>
-      <ul class="flex space-x-8">
-        <li>
-          <a href="/" class="text-black hover:underline dark:text-white">home</a
-          >
-        </li>
-        <li>
-          <a href="/articles" class="text-black hover:underline dark:text-white"
-            >articles</a
-          >
-        </li>
-        <li>
-          <a href="/contact" class="text-black hover:underline dark:text-white"
-            >contact</a
-          >
-        </li>
-      </ul>
+      <a href="/" class="flex flex-col items-center gap-4 hover:underline"
+        ><Image src={logo} alt="logo" width={32} height={32} quality={100} />
+
+        {Astro.url.pathname !== "/" && <p>Martin Ryberg Laude</p>}
+      </a>
     </nav>
   </div>
 </header>
