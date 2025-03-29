@@ -15,21 +15,25 @@ const posts = (await getCollection("blog")).sort(
   <div class="flex flex-col gap-y-20 py-20">
     <!-- Hero section -->
     <section class="flex flex-col gap-y-6 text-center">
-      <h1 class="text-5xl font-light tracking-tight">Martin Ryberg Laude</h1>
-      <p class="mx-auto max-w-2xl text-lg text-neutral-900">
+      <h1 class="text-5xl font-light tracking-tight text-black dark:text-white">
+        Martin Ryberg Laude
+      </h1>
+      <p
+        class="mx-auto max-w-2xl text-lg font-light text-black dark:text-white"
+      >
         Swedish guy passionate about software, design, and anything inbetween.
       </p>
       <div class="flex justify-center gap-2">
         <a
           href="https://github.com/martinryberglaude"
-          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm bg-black p-2 font-extralight text-white hover:underline"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
         >
           <GithubLogo class="w-4" />
           Github
         </a>
         <a
           href="https://www.linkedin.com/in/martinryberglaude/"
-          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-white p-2 font-light text-black hover:underline"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-white p-2 font-light text-black hover:underline dark:border-white"
         >
           <LinkedinLogo class="w-5" />
           LinkedIn
@@ -38,22 +42,26 @@ const posts = (await getCollection("blog")).sort(
     </section>
 
     <section class="flex flex-col gap-y-6">
-      <h2 class="font-regular ml-6 text-2xl">Articles</h2>
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        Articles
+      </h2>
       <ul class="flex flex-col gap-6">
         {
           posts.slice(0, 3).map((post) => (
             <li>
               <a
                 href={`/articles/${post.id}`}
-                class="group block rounded-lg border-2 border-black bg-white p-6 transition hover:cursor-pointer"
+                class="group block rounded-lg border-2 border-black bg-white p-6 transition hover:cursor-pointer dark:border-white dark:bg-neutral-900"
               >
                 <div class="flex items-start justify-between">
-                  <h3 class="mb-2 text-lg group-hover:underline">
+                  <h3 class="mb-2 text-lg font-light group-hover:underline dark:text-white">
                     &gt; {post.data.title}
                   </h3>
                   <FormattedDate date={post.data.pubDate} />
                 </div>
-                <p class="text-md text-black">{post.data.description}</p>
+                <p class="text-md font-light text-black dark:text-white">
+                  {post.data.description}
+                </p>
               </a>
             </li>
           ))
@@ -62,7 +70,7 @@ const posts = (await getCollection("blog")).sort(
       <div class="relative ml-6 inline-flex">
         <a
           href="/articles"
-          class="relative flex items-center gap-2 text-lg hover:underline"
+          class="relative flex items-center gap-2 text-lg font-light hover:underline dark:text-white"
         >
           <span
             class="absolute inset-x-0 bottom-0 -z-10 h-[50%] bg-[#7FFF00]/30"

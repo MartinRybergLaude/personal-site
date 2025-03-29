@@ -9,16 +9,6 @@
   font-display: swap;
 }
 
- body {
-   background: #f5f4f0 url("../assets/images/paper.png") repeat 0 0;
- }
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #0f0f0e url("../assets/images/paper_dark.png") repeat 0 0;
-  }
-}
-
 @theme {
   --font-mono: "Drafting", "monospace";
 }

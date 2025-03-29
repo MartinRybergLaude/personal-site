@@ -7,13 +7,13 @@ import "../styles/global.css";
 const { title, description } = Astro.props;
 ---
 
-<html lang="en" class="h-full bg-[#f5f4f0] font-mono">
+<html lang="en" class="min-h-[100vh] bg-[#f5f4f0] font-mono">
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body class="h-full">
+  <body class="min-h-[100vh]">
     <Header />
-    <main class="mx-auto min-h-[70%] max-w-screen-md px-4">
+    <main class="mx-auto max-w-screen-md px-4">
       <slot />
     </main>
     <Footer />

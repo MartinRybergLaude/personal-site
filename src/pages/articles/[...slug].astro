@@ -28,7 +28,9 @@ const { Content } = await render(post);
         />
       )
     }
-    <article class="prose-sm sm:prose-lg pt-12">
+    <article
+      class="prose sm:prose-md md:prose-lg prose-neutral dark:prose-invert !max-w-none pt-12 [&_h1]:!font-light [&_h2]:!font-light [&_h3]:!font-light [&_h4]:!font-light [&_h5]:!font-light [&_h6]:!font-light"
+    >
       <div class="flex items-start justify-between">
         <h1>{post.data.title}</h1>
         <FormattedDate date={post.data.pubDate} />

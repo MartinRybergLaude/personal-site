@@ -14,7 +14,7 @@ const posts = (await getCollection("blog")).sort(
       posts.map((post) => (
         <li>
           <a href={`/articles/${post.id}/`} class="group">
-            <h4 class="title text-xl group-hover:underline">
+            <h4 class="title text-xl font-light group-hover:underline dark:text-white">
               &gt; {post.data.title}
             </h4>
             <p class="date">
