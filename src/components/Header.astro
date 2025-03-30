@@ -9,9 +9,18 @@ import logo from "../assets/images/favicon.png";
   >
     <nav>
       <a href="/" class="flex flex-col items-center gap-4 hover:underline"
-        ><Image src={logo} alt="logo" width={32} height={32} quality={100} />
-
-        {Astro.url.pathname !== "/" && <p>Martin Ryberg Laude</p>}
+        ><Image
+          src={logo}
+          alt="logo"
+          width={128}
+          height={128}
+          class="h-8 w-8"
+        />
+        {
+          Astro.url.pathname !== "/" && (
+            <p class="text-black dark:text-white">Martin Ryberg Laude</p>
+          )
+        }
       </a>
     </nav>
   </div>

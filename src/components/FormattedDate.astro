@@ -18,6 +18,9 @@ const formattedDate = new Intl.DateTimeFormat(
 ).format(new Date(date));
 ---
 
-<time datetime={date.toISOString()} class="text-sm text-black dark:text-white">
+<time
+  datetime={date.toISOString()}
+  class="text-sm text-nowrap text-black dark:text-white"
+>
   {formattedDate}
 </time>

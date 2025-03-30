@@ -25,3 +25,11 @@
 ::selection {
   background: #d5f7ba;
 }
+
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    background: #345e12;
+  }
+}
+
+

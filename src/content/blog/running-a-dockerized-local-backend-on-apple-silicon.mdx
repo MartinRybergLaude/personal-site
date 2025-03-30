@@ -1,0 +1,57 @@
+---
+title: "Running a dockerized local backend on Apple Silicon"
+description: "Speed up your docker containers by up to 17x."
+pubDate: "Jul 07 2022"
+---
+
+## Background
+
+As an owner of an M1 Macbook Air at the time of writing, I can vouch for the incredible speed and efficiency of Apple Silicon. In fact, it was the primary factor for switching over to mac at all in my case. Blazing fast, with a battery lasting longer than I could possibly need in my day. Sounds great and all, but Apple Silicon is different in another way as well — it runs on ARM. This instruction set is known from the mobile world, but is emerging as a viable alternative for laptops and even desktop workstations, evidently. This is a slow process though, because not only is the hardware different, but the software is different too. Any apps, programs, or packages need to be compiled to ARM, or run through emulation like Apple’s Rosetta.
+
+Ever since the first M1-equiped macs came out, this has been a work-in-progress for software developers across the globe, and today, most of this transition is complete. Almost all my mac apps run on ARM natively, and rosetta can be used for those apps that don’t, and it works just fine in most cases. But what about depencies of a project?
+
+## The problem and the easy solution
+
+If you’re creating a new project now, you’ll most likely be fine, both on the frontend and backend. Docker images are officially compiled for both instruction sets for most dependencies of recent, so go on, you can stop reading here. If you on the other hand work on older projects, you will run into issues. First thing you might do is try the good old `docker-compose build` and if it works — congratulations. If it doesn’t... A quick Google search will tell you to throw `export DOCKER_DEFAULT_PLATFORM=linux/amd64` into your .zshrc or equivalent file and call it a day. This tells docker to retrieve all images for amd64 only, the older instruction set, and run them all through QEMU (similar to Rosetta). It works, but at the cost of keeping the temperatures high and your project running slow as a turtle. In fact, it might run so slow you can't work at all, as in my case where each API call could take upwards of 40 minutes, which according to my standards is a catastrophe and quite unworkable.
+
+## A better solution
+
+So, we are not happy with the one-liner solution, this needs improvement. Since the core problem here is our project containing images where no arm64 (not amd64, note the difference) alternative exists, we are left with another option: Build our own images for arm64 and push to dockerhub, which needs to be done for each problematic dependency and each version upgrade of these. I’m not going to go into detail on how to do this, it varies by dependency, but I recommend doing this systematically. Keep two images compiled on your own in your dockerhub and use these for all projects, making sure to do it again for each upgrade, until the official image gains support.
+
+But this is not enough, far from it. If you’ve got autodeploy configured from your repository’s main branch, you might be fine, but in the event you build and push locally, you might just take down the entire production server trying to so. Remember — we configured your machine to build for arm64. Unless your server infrastructure consists of a bunch of Raspberry Pi’s, this is the wrong architecture for your server. Usually what you do here is either set up autodeploy (the safe option, highly recommended) or use a makefile to keep separate build commands for arm64 and amd64. An example of this would be to set a different build-target for arm64, and picking it using a .env in `docker-compose.yml` (did you know this file supports locally sourced environment variables, with default fallbacks?). It could look something like this:
+
+```other
+services:
+  app:
+    platform: linux/${BUILD_ARCH:-amd64}
+```
+
+_docker-compose.yml_
+
+```other
+BUILD_ARCH=arm64
+BUILD_TARGET=dev
+```
+
+_.env_
+
+```other
+.PHONY: build-app
+build-app:
+	docker build \
+		-t $(REGISTRY)/$(APP_IMAGE):dev \
+		--build-arg SOURCE_COMMIT=$(shell git rev-parse HEAD) \
+		--build-arg BUILD_TARGET=dev \
+```
+
+_Makefile_
+
+A simple `make build-app` should now build your project for arm64, and a `docker-compose up -d` should work beautifully. You can verify that everything is running natively by checking your docker dashboard, as any containers running through emulation will have a yellow warning sign — a warning about the slow speeds you'll likely encounter ^
+
+## Conclusion
+
+Having this up and running makes development on an M1-equipped Mac a breeze, and even though it might take some work, that's something we have to live with during the transition, especially on legacy projects. Count yourself lucky if this issue never arises!
+
+## References
+
+- Docker Docs. (2021). [Leverage multi-CPU architecture support](https://docs.docker.com/desktop/multi-arch/). (Accessed 2022-06-23).

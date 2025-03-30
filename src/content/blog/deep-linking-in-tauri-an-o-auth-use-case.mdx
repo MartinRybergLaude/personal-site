@@ -1,0 +1,114 @@
+---
+title: "Deep linking in Tauri - an OAuth use case"
+description: "It's now possible to leverage deep linking in Tauri on all platforms! Here's how."
+pubDate: "Mar 02 2023"
+---
+
+Deeplinks allow webpages to link to an installed app on the user’s operating system, and consequently have the browser open the app. It’s useful in many scenarios, a few of which are already built-in, like mail links. One of the most common use cases for deeplinks though is OAuth flows, where an installed app sends the user to an external website for authentication, which upon success redirects the user back to the app. Deeplinks make for a nice and smooth authentication experience, preferred by many to PKCE.
+
+This pattern is especially common among electron apps, since it’s all web based in first place. This has resulted in packages being made specifically for that use case in electron, making the process quite easy. But what if you’re using a newer contender in the web app arena, like Tauri?
+
+I’m glad to report this is now possible in Tauri, after years of waiting!
+
+Windows and Linux implementations have been around for quite a while but MacOS specifically has been the problematic one. With the latest fixes from Tauri developer [Fabian Lars](https://github.com/FabianLars), MacOS support has arrived, in the form of [tauri-plugin-deep-link](https://github.com/FabianLars/tauri-plugin-deep-link).
+
+But let’s back up a bit and review what the process will look like. Usually, it’s something like this:
+
+![CleanShot 2023-03-01 at 21.09.50.png](https://res.craft.do/user/full/cf2fd0af-d7c6-db82-e90b-02d6d493f9eb/doc/3916D260-A992-49E9-BD83-F626D9D16A8F/4A993DB0-D43D-4929-8098-359242EE9484_2/puK7d9DHgrZ7vBXHbtZFZajmXJEgF4KiLSPr2s8TDycz/CleanShot%202023-03-01%20at%2021.09.50.png)
+
+Perhaps without the backend parts, as Google’s callback url can be specified to be the custom url scheme. Regardless, provided the Google part (and backend if needed) is sorted, here’s out to get the Tauri part working.
+
+First, install [tauri-plugin-deep-link](https://github.com/FabianLars/tauri-plugin-deep-link) by adding this to your `Cargo.toml` , and hit save:
+
+```yaml
+[dependencies]
+tauri-plugin-deep-link = { git = "https://github.com/FabianLars/tauri-plugin-deep-link", branch = "main" }
+```
+
+_Cargo.toml_
+
+Then, add the necessary initialisations to your Tauri entry file, `main.rs`. This here is minimal setup taken from Fabian's example at [Github](https://github.com/FabianLars/tauri-plugin-deep-link/tree/main/example), it's expected you adapt it to your use case, but for a basic installation this will work:
+
+```rust
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
+use tauri::Manager;
+
+
+fn main() {
+     // prepare() checks if it's a single instance and tries to send the args otherwise.
+    // It should always be the first line in your main function (with the exception of loggers or similar)
+    tauri_plugin_deep_link::prepare("com.company.myapp");
+    // It's expected to use the identifier from tauri.conf.json
+    // Unfortuenetly getting it is pretty ugly without access to sth that implements `Manager`.
+
+    tauri::Builder::default()
+        .setup(|app| {
+        // If you need macOS support this must be called in .setup() !
+        // Otherwise this could be called right after prepare() but then you don't have access to tauri APIs
+        let handle = app.handle();
+        tauri_plugin_deep_link::register(
+            "myapp",
+            move |request| {
+            dbg!(&request);
+            handle.emit_all("scheme-request-received", request).unwrap();
+            },
+        )
+        .unwrap(/* If listening to the scheme is optional for your app, you don't want to unwrap here. */);
+        Ok(())
+        })
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
+}
+```
+
+_main.rs_
+
+Make sure to replace `myapp` with your url scheme in the register call, and `com.company.myapp` with your app's package name.
+
+Next, if you want macOS support, you’ll additionally need to provide a `Info.plist` file next your `cargo.toml` file. This one needs to contain the url schemes you'd like to be associated with your app, and since this file can't be generated at runtime, you’ll need to provide the list of url schemes beforehand. The contents should follow this format:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleURLName</key>
+                <string>com.company.myapp</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>myapp</string>
+                </array>
+            </dict>
+        </array>
+    </dict>
+</plist>
+```
+
+_Info.plist_
+
+You can put multiple url schemes in the array if you want. Just make sure to replace `com.company.myapp` with your Tauri app’s package name there.
+
+Finally, you can listen for the `scheme-request-received` event in your Javascript and take it from there. If using React you'd wanna do something like this:
+
+```typescript
+useEffect(() => {
+  const unlisten = async () =>
+    await listen("scheme-request-received", async (event) => {
+      console.log("RECEIVED", event.payload);
+      // Handle the params from here, for instance storing the tokens
+    });
+  return () => {
+    unlisten();
+  };
+}, []);
+```
+
+_main.tsx_
+
+For this to work properly on macOS it’s possible you need to actually build your app and install it into the Applications directory for the url schemes to work. If so simply generate a build with `tauri build --debug` and install.
+
+After all of this, it should now be working. If it isn’t make sure the package names and url scheme names are the same at all places where they show up. Since writing this, the plugin might have had further updates as well, so be sure to check out the plugin repo for any updates in the future. Until next time!
