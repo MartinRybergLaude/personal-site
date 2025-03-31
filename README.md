@@ -1,68 +1,97 @@
-# Astro Starter Kit: Blog
+# 🌟 Personal Website
 
-```sh
-bun create astro@latest -- --template blog
+A modern, fast, and responsive personal website built with Astro, featuring a blog and project showcase.
+
+## 🚀 Technologies
+
+This project is built with:
+
+- [Astro](https://astro.build/) - The web framework for content-driven websites
+- [Tailwind CSS](https://tailwindcss.com/) - For styling
+- [MDX](https://mdxjs.com/) - For enhanced markdown content
+- [TypeScript](https://www.typescriptlang.org/) - For type safety
+
+## 📂 Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
+/
+├── public/             # Static assets
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+│   ├── assets/         # Images and other assets
+│   ├── components/     # Reusable UI components
+│   ├── content/        # Blog posts and other content
+│   ├── layouts/        # Page layouts
+│   ├── pages/          # Page components and routes
+│   └── styles/         # Global styles
+└── package.json        # Project dependencies and scripts
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 📝 Content
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+The website includes:
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+- Blog articles on web development, tooling, and tech topics
+- Project showcases (Gamesquad, Solsken, Ultrawider)
+- RSS feed for blog subscribers
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🔧 Development
 
-## 🧞 Commands
+### Prerequisites
 
-All commands are run from the root of the project, from a terminal:
+- [Node.js](https://nodejs.org/) (v18 or later recommended)
+- [Bun](https://bun.sh/) (for package management)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+### Getting Started
 
-## 👀 Want to learn more?
+1. Clone the repository
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+   ```bash
+   git clone https://github.com/MartinRybergLaude/personal-site.git
+   cd personal-site
+   ```
 
-## Credit
+2. Install dependencies
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+   ```bash
+   bun install
+   ```
+
+3. Start the development server
+
+   ```bash
+   bun run dev
+   ```
+
+4. Open your browser and visit `http://localhost:4321`
+
+## 🏗️ Building for Production
+
+To create a production build:
+
+```bash
+bun run build
+```
+
+Preview the production build:
+
+```bash
+bun run preview
+```
+
+## 🌐 Deployment
+
+The site is configured to be deployed to any static hosting service (Netlify, Vercel, GitHub Pages, etc.).
+
+## 🔄 RSS Feed
+
+An RSS feed is available at `/rss.xml` for users to subscribe to blog updates.
+
+## 🎨 Customization
+
+- Edit `src/consts.ts` to update site metadata
+- Modify themes in `astro.config.mjs` to change code highlighting styles
+- Add or modify content in the `src/content` directory
+
+## 📄 License
+
+European Union Public License 1.2
