@@ -8,7 +8,7 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<Layout title="Blog" description="Blog posts by Martin Ryberg Laude">
+<Layout title="Articles" description="Articles by Martin Ryberg Laude">
   <ul class="flex flex-col gap-8 py-20">
     {
       posts.map((post) => (
