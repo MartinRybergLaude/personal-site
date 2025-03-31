@@ -1,0 +1,195 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import UmbrellaSimple from "phosphor-astro/UmbrellaSimple.astro";
+import ChartLine from "phosphor-astro/ChartLine.astro";
+import MapPin from "phosphor-astro/MapPin.astro";
+import Gauge from "phosphor-astro/Gauge.astro";
+import GlobeSimple from "phosphor-astro/GlobeSimple.astro";
+import Icon from "../assets/images/solsken.svg";
+import Screenshot from "../assets/images/solsken_screenshot.png";
+import Screenshot2 from "../assets/images/solsken_screenshot2.png";
+import Screenshot3 from "../assets/images/solsken_screenshot3.png";
+---
+
+<Layout
+  title="Solsken"
+  description="Solsken is a beautiful weather app for the Nordic countries with detailed metrics, charts, and a choice between SMHI and YR.no as weather providers."
+>
+  <div class="flex flex-col gap-y-16 py-20">
+    <!-- Hero section -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <div class="flex items-center justify-center gap-4">
+        <Icon width="40" height="40" />
+        <h1
+          class="text-5xl font-light tracking-tight text-black dark:text-white"
+        >
+          Solsken
+        </h1>
+      </div>
+      <p
+        class="mx-auto max-w-2xl text-lg font-light text-black dark:text-white"
+      >
+        Beautiful weather forecasts tailored for the Nordic countries
+      </p>
+      <div class="flex justify-center gap-2">
+        <a
+          href="https://solsken.app/"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <GlobeSimple class="w-4" />
+          Visit website
+        </a>
+      </div>
+    </section>
+
+    <!-- Features Bento Grid -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        Features
+      </h2>
+
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- Feature 1: Beautiful Nordic Design -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <MapPin class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Nordic focus</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Specially designed for Sweden, Norway, Denmark, Finland, and
+            Iceland, with local weather providers for the most accurate weather
+            information.
+          </p>
+        </div>
+
+        <!-- Feature 2: Detailed Metrics -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <Gauge class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Detailed metrics</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Comprehensive weather data including temperature, wind, rain,
+            humidity, pressure, sunrise and sunset times, and more.
+          </p>
+        </div>
+
+        <!-- Feature 3: Charts -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <ChartLine class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Charts</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Visualize weather trends with beautiful, intuitive charts. Day by
+            day, hour by hour.
+          </p>
+        </div>
+
+        <!-- Feature 4: Rain radar -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <UmbrellaSimple class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Rain radar</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            See the rain radar for your area. With past hours and future hours
+            on a detailed map.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Weather Providers -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        Weather sources
+      </h2>
+      <div
+        class="rounded-lg border-2 border-black bg-white p-6 dark:border-white dark:bg-neutral-900"
+      >
+        <p class="text-md mb-4 font-light text-black dark:text-white">
+          Choose your preferred weather data provider. Switch anytime between:
+        </p>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; SMHI</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Swedish Meteorological and Hydrological Institute. Known for
+              accurate Nordic forecasts with excellent regional coverage.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; YR.no</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Norwegian Meteorological Institute and NRK's weather service.
+              Highly respected for their precise forecasting, especially for
+              Norwegian regions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshot showcase -->
+    <section class="flex flex-col gap-y-6">
+      <h2
+        class="ml-6 text-center text-2xl font-light text-black dark:text-white"
+      >
+        App showcase
+      </h2>
+      <div class="flex flex-col items-center justify-center gap-6">
+        <div class="grid grid-cols-2 gap-2">
+          <Image
+            width="600"
+            src={Screenshot2}
+            alt="Solsken screenshot iphone"
+          />
+          <Image
+            width="600"
+            src={Screenshot3}
+            alt="Solsken screenshot iphone"
+          />
+        </div>
+        <Image
+          width="1200"
+          src={Screenshot}
+          alt="Solsken screenshot desktop"
+          class="w-full"
+        />
+      </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <h2 class="text-2xl font-light text-black dark:text-white">
+        Experience Solsken today
+      </h2>
+      <p
+        class="text-md mx-auto mb-4 max-w-2xl font-light text-black dark:text-white"
+      >
+        Download now and get the most beautiful, accurate Nordic weather
+        experience.
+      </p>
+      <div class="flex justify-center gap-2">
+        <a
+          href="https://solsken.app/"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <GlobeSimple class="w-4" />
+          Visit website
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

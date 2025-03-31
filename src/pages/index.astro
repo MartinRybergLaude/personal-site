@@ -79,5 +79,48 @@ const posts = (await getCollection("blog")).sort(
         </a>
       </div>
     </section>
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        Products
+      </h2>
+      <ul class="flex flex-col gap-6 p-6">
+        <li>
+          <a href={`/solsken`} class="group block">
+            <h3
+              class="text-lg font-light group-hover:underline dark:text-white"
+            >
+              &gt; Solsken
+            </h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Accessible and detailed weather tailored for the Nordics.
+            </p>
+          </a>
+        </li>
+        <li>
+          <a href={`/ultrawider`} class="group block">
+            <h3
+              class="text-lg font-light group-hover:underline dark:text-white"
+            >
+              &gt; Ultrawider
+            </h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Get rid of the black bars.
+            </p>
+          </a>
+        </li>
+        <li>
+          <a href={`/gamesquad`} class="group block">
+            <h3
+              class="text-lg font-light group-hover:underline dark:text-white"
+            >
+              &gt; Gamesquad
+            </h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Squad up and vote for what games to play.
+            </p>
+          </a>
+        </li>
+      </ul>
+    </section>
   </div>
 </Layout>

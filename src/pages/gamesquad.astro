@@ -1,0 +1,199 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GameController from "phosphor-astro/GameController.astro";
+import ThumbsUp from "phosphor-astro/ThumbsUp.astro";
+import UsersThree from "phosphor-astro/UsersThree.astro";
+import ListPlus from "phosphor-astro/ListPlus.astro";
+import GlobeSimple from "phosphor-astro/GlobeSimple.astro";
+---
+
+<Layout
+  title="GameSquad"
+  description="GameSquad is a collaborative tool that helps friends decide what games to play together through shared lists and voting."
+>
+  <div class="flex flex-col gap-y-16 py-20">
+    <!-- Hero section -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <div class="flex items-center justify-center gap-4">
+        <GameController class="h-10 w-10 text-black dark:text-white" />
+        <h1
+          class="text-5xl font-light tracking-tight text-black dark:text-white"
+        >
+          GameSquad
+        </h1>
+      </div>
+      <p
+        class="mx-auto max-w-2xl text-lg font-light text-black dark:text-white"
+      >
+        Never argue about what to play again.
+      </p>
+      <div class="flex justify-center gap-2">
+        <a
+          href="https://gamesquad.win/"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <GlobeSimple class="w-4" />
+          Visit website
+        </a>
+      </div>
+    </section>
+
+    <!-- Features Bento Grid -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        Features
+      </h2>
+
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- Feature 1: Create Game Sessions -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <UsersThree class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Invite friends</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Create game night sessions and invite your friends with a simple
+            code.
+          </p>
+        </div>
+
+        <!-- Feature 2: Add Games -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <ListPlus class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">
+              Shared game lists
+            </h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Anyone in the session can add their favorite games to the shared
+            list. 200 000+ games to choose from.
+          </p>
+        </div>
+
+        <!-- Feature 3: Vote on Games -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <ThumbsUp class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">
+              Democratic voting
+            </h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Everyone votes on which games they want to play. Upvote your
+            favorites and downvote the ones you'd rather skip.
+          </p>
+        </div>
+
+        <!-- Feature 4: Real-time Updates -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <GameController class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">
+              Game night simplified
+            </h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            See real-time updates as votes come in. The most popular games rise
+            to the top, making the decision clear.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        How it works
+      </h2>
+
+      <div
+        class="rounded-lg border-2 border-black bg-white p-6 dark:border-white dark:bg-neutral-900"
+      >
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Create</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Start a new session for your game night and share the unique code
+              with your friends.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Contribute</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Everyone adds their favorite games to the shared list.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Vote</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Cast your votes and watch as the group's preferences become clear.
+              The highest-rated game wins!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage example -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <h2 class="text-2xl font-light text-black dark:text-white">
+        Perfect for any gaming group
+      </h2>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <h3 class="mb-3 text-left text-lg font-light dark:text-white">
+            &gt; Online friends
+          </h3>
+          <p class="text-md text-left font-light text-black dark:text-white">
+            Decide which multiplayer game to launch for your Discord group. No
+            more endless debates about what to play.
+          </p>
+        </div>
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <h3 class="mb-3 text-left text-lg font-light dark:text-white">
+            &gt; In-person game nights
+          </h3>
+          <p class="text-md text-left font-light text-black dark:text-white">
+            Plan your board game nights or console gaming sessions in advance.
+            Everyone gets a say in what hits the table.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <h2 class="text-2xl font-light text-black dark:text-white">
+        Start using GameSquad today
+      </h2>
+      <p
+        class="text-md mx-auto mb-4 max-w-2xl font-light text-black dark:text-white"
+      >
+        Completely free to use. Make your next game night drama-free.
+      </p>
+      <div class="flex justify-center gap-2">
+        <a
+          href="https://gamesquad.win/"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <GlobeSimple class="w-4" />
+          Try GameSquad
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

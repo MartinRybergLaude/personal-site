@@ -1,0 +1,134 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import AppleLogo from "phosphor-astro/AppleLogo.astro";
+import Icon from "../assets/images/ultrawider.png";
+import Screenshot from "../assets/images/ultrawider_screenshot.png";
+import Screenshot2 from "../assets/images/ultrawider_screenshot2.png";
+import Screenshot3 from "../assets/images/ultrawider_screenshot3.png";
+---
+
+<Layout
+  title="Ultrawider"
+  description="Ultrawider is a Safari extension that makes Youtube better for ultrawide displays."
+>
+  <div class="flex flex-col gap-y-16 py-20">
+    <!-- Hero section -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <div class="flex items-center justify-center gap-4">
+        <Image
+          src={Icon}
+          width="80"
+          height="80"
+          alt="Ultrawider icon"
+          class="h-12 w-12 shrink-0"
+        />
+        <h1
+          class="text-5xl font-light tracking-tight text-black dark:text-white"
+        >
+          Ultrawider
+        </h1>
+      </div>
+      <p
+        class="mx-auto max-w-2xl text-lg font-light text-black dark:text-white"
+      >
+        Get rid of the black bars.
+      </p>
+      <div class="flex justify-center gap-2">
+        <a
+          href="https://apps.apple.com/se/app/ultrawider/id6473668797?l=en-GB&mt=12"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <AppleLogo class="w-4" />
+          Mac App Store
+        </a>
+      </div>
+    </section>
+
+    <!-- Features Bento Grid -->
+    <section class="flex flex-col gap-y-6">
+      <h2
+        class="ml-6 text-center text-2xl font-light text-black dark:text-white"
+      >
+        Ultrawider is a Safari extension that makes Youtube better for ultrawide
+        displays.
+      </h2>
+
+      <!-- Before/After Images -->
+      <div class="flex flex-col items-center gap-6">
+        <div class="flex flex-col items-center">
+          <h3 class="mb-3 text-lg font-light dark:text-white">Before</h3>
+          <!-- Replace with your actual before image -->
+          <div
+            class="overflow-hidden rounded-lg border-2 border-black dark:border-white"
+          >
+            <Image
+              src={Screenshot}
+              alt="Before using Ultrawider - video with black bars"
+              class="w-full"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <h3 class="mb-3 text-lg font-light dark:text-white">After</h3>
+          <!-- Replace with your actual after image -->
+          <div
+            class="overflow-hidden rounded-lg border-2 border-black dark:border-white"
+          >
+            <Image
+              src={Screenshot2}
+              alt="After using Ultrawider - full screen video without black bars"
+              class="w-full"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="flex flex-col gap-y-6">
+      <h2
+        class="ml-6 text-center text-2xl font-light text-black dark:text-white"
+      >
+        How it works
+      </h2>
+      <p class="text-center text-lg font-light text-black dark:text-white">
+        Simply press the widen button when watching a 21:9 video.
+      </p>
+      <div class="flex justify-center">
+        <!-- Replace with your actual usage image -->
+        <div
+          class="overflow-hidden rounded-lg border-2 border-black dark:border-white"
+        >
+          <Image
+            src={Screenshot3}
+            alt="Ultrawider interface showing the widen button"
+            class="w-full max-w-2xl"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <h2 class="text-2xl font-light text-black dark:text-white">
+        Experience Ultrawider today
+      </h2>
+      <p
+        class="text-md mx-auto mb-4 max-w-2xl font-light text-black dark:text-white"
+      >
+        Download now for Safari on Mac.
+      </p>
+      <div class="flex justify-center gap-2">
+        <a
+          href="https://apps.apple.com/se/app/ultrawider/id6473668797?l=en-GB&mt=12"
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <AppleLogo class="w-4" />
+          Mac App Store
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>
