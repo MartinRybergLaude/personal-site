@@ -30,6 +30,10 @@
   ::selection {
     background: #345e12;
   }
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
 }
-
 
