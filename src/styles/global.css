@@ -17,13 +17,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Instrument";
+  src: url("/fonts/Instrument.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @theme {
   --font-mono: "Drafting", "monospace";
   --font-jetbrains: "Jetbrains", "monospace";
+  --font-serif: "Instrument", "serif";
 }
 
 ::selection {
-  background: #d5f7ba;
+  background: #c4d8d0;
 }
 
 @media (prefers-color-scheme: dark) {

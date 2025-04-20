@@ -26,7 +26,7 @@ const posts = (await getCollection("blog")).sort(
         />
         <div class="flex flex-col gap-y-6 text-center md:text-start">
           <h1
-            class="font-regular text-2xl tracking-tight text-black dark:text-white"
+            class="font-serif text-4xl tracking-tight text-black dark:text-white"
           >
             Martin Ryberg Laude
           </h1>
@@ -37,33 +37,50 @@ const posts = (await getCollection("blog")).sort(
           <div
             class="mx-auto grid max-w-xs grid-cols-2 gap-4 md:mx-0 md:max-w-none"
           >
-            <a
-              href="https://github.com/martinryberglaude"
-              class="text-md inline-flex h-10 min-w-28 items-center justify-center gap-2 rounded-sm border border-black bg-black text-sm font-extralight text-white hover:underline dark:border-white"
+            <div
+              class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
             >
-              <GithubLogo class="w-4" />
-              Github
-            </a>
-            <a
-              href="https://www.linkedin.com/in/martinryberglaude/"
-              class="text-md inline-flex h-10 min-w-28 items-center justify-center gap-2 rounded-sm border border-black bg-white text-sm font-light text-black hover:underline dark:border-white"
+              <a
+                href="https://github.com/martinryberglaude"
+                class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
+              >
+                <GithubLogo class="w-4" />
+                Github
+              </a>
+            </div>
+            <div
+              class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
             >
-              <LinkedinLogo class="w-5" />
-              LinkedIn
-            </a>
+              <a
+                href="https://www.linkedin.com/in/martinryberglaude/"
+                class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
+              >
+                <LinkedinLogo class="w-5" />
+                LinkedIn
+              </a>
+            </div>
 
-            <a
-              href="https://x.com/mrlaudeirl"
-              class="text-md inline-flex h-10 min-w-28 items-center justify-center gap-2 rounded-sm bg-stone-200 text-sm font-extralight text-black hover:bg-stone-200/50 dark:border-white"
+            <div
+              class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
             >
-              <XLogo class="w-4" />
-            </a>
-            <a
-              href="https://bsky.app/profile/mrlaude.com"
-              class="text-md inline-flex h-10 min-w-28 items-center justify-center gap-2 rounded-sm bg-stone-200 text-sm font-light text-black hover:bg-stone-200/50 dark:border-white"
+              <a
+                href="https://x.com/mrlaudeirl"
+                class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center justify-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
+              >
+                <XLogo class="w-4" />
+              </a>
+            </div>
+            <div
+              class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
             >
-              <BlueskyLogo class="w-4" width="16" height="16" fill="black" />
-            </a>
+              <a
+                href="https://bsky.app/profile/mrlaude.com"
+                class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center justify-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
+              >
+                <BlueskyLogo class="w-4" width="16" height="16" />
+                Bluesky
+              </a>
+            </div>
           </div>
           <div class="flex flex-1 flex-col justify-end">
             <p class="text-md text-center font-light text-black md:text-start">
@@ -77,7 +94,9 @@ const posts = (await getCollection("blog")).sort(
     </section>
 
     <section class="flex flex-col gap-y-6">
-      <h2 class="ml-2 text-xl font-light text-black md:ml-6 dark:text-white">
+      <h2
+        class="ml-2 font-serif text-3xl font-light text-black md:ml-6 dark:text-white"
+      >
         Latest articles
       </h2>
       <ul class="flex flex-col gap-6 p-2 md:p-6">
@@ -102,20 +121,21 @@ const posts = (await getCollection("blog")).sort(
           ))
         }
       </ul>
-      <div class="relative ml-2 inline-flex md:ml-6">
+      <div
+        class="relative ml-2 h-10 w-fit rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover md:ml-6"
+      >
         <a
           href="/articles"
-          class="text-md relative flex items-center gap-2 font-light hover:underline dark:text-white"
+          class="inline-flex h-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium whitespace-nowrap text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent active:translate-x-px active:translate-y-px"
         >
-          <span
-            class="absolute inset-x-0 bottom-0 -z-10 h-[50%] bg-[#7FFF00]/30"
-          ></span>
           All articles →
         </a>
       </div>
     </section>
     <section class="flex flex-col gap-y-6">
-      <h2 class="ml-2 text-xl font-light text-black md:ml-6 dark:text-white">
+      <h2
+        class="ml-2 font-serif text-3xl font-light text-black md:ml-6 dark:text-white"
+      >
         Products
       </h2>
       <ul class="flex flex-col gap-6 p-2 md:p-6">
