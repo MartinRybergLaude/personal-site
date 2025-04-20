@@ -12,10 +12,22 @@ const { title, description } = Astro.props;
     <BaseHead title={title} description={description} />
   </head>
   <body class="min-h-[100vh]">
-    <Header />
-    <main class="mx-auto max-w-screen-md px-4">
-      <slot />
-    </main>
-    <Footer />
+    <div
+      class="frame-container relative lg:before:fixed lg:before:top-0 lg:before:bottom-0 lg:before:left-[calc(50%-400px)] lg:before:z-10 lg:before:block lg:before:w-px lg:before:bg-stone-300 lg:before:content-[''] lg:after:fixed lg:after:top-0 lg:after:right-[calc(50%-400px)] lg:after:bottom-0 lg:after:z-10 lg:after:block lg:after:w-px lg:after:bg-stone-300 lg:after:content-[''] lg:dark:before:bg-stone-700 lg:dark:after:bg-stone-700"
+    >
+      <Header />
+      <div
+        class="header-line sticky top-0 z-20 hidden h-px w-full bg-stone-300 lg:block dark:bg-stone-700"
+      >
+      </div>
+      <main class="relative z-10 mx-auto max-w-screen-md px-4">
+        <slot />
+      </main>
+      <div
+        class="z-20 hidden h-px w-full bg-stone-300 lg:block dark:bg-stone-700"
+      >
+      </div>
+      <Footer />
+    </div>
   </body>
 </html>

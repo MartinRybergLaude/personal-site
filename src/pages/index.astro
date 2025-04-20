@@ -4,8 +4,11 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import GithubLogo from "phosphor-astro/GithubLogo.astro";
 import LinkedinLogo from "phosphor-astro/LinkedinLogo.astro";
+import XLogo from "phosphor-astro/XLogo.astro";
+import BlueskyLogo from "src/assets/bluesky_logo.svg";
 import FormattedDate from "src/components/FormattedDate.astro";
-
+import { Image } from "astro:assets";
+import Avatar from "src/assets/images/avatar.png";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
@@ -14,52 +17,84 @@ const posts = (await getCollection("blog")).sort(
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <div class="flex flex-col gap-y-20 py-20">
     <!-- Hero section -->
-    <section class="flex flex-col gap-y-6 text-center">
-      <h1 class="text-5xl font-light tracking-tight text-black dark:text-white">
-        Martin Ryberg Laude
-      </h1>
-      <p
-        class="mx-auto max-w-2xl text-lg font-light text-black dark:text-white"
-      >
-        Swedish guy passionate about software, design, and anything inbetween.
-      </p>
-      <div class="flex justify-center gap-2">
-        <a
-          href="https://github.com/martinryberglaude"
-          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
-        >
-          <GithubLogo class="w-4" />
-          Github
-        </a>
-        <a
-          href="https://www.linkedin.com/in/martinryberglaude/"
-          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-white p-2 font-light text-black hover:underline dark:border-white"
-        >
-          <LinkedinLogo class="w-5" />
-          LinkedIn
-        </a>
+    <section class="flex flex-col gap-y-6">
+      <div class="grid grid-cols-1 gap-8 px-2 md:grid-cols-2 md:px-6">
+        <Image
+          src={Avatar}
+          alt="Martin Ryberg Laude"
+          class="mx-auto w-full max-w-[80px] rounded md:max-w-full"
+        />
+        <div class="flex flex-col gap-y-6 text-center md:text-start">
+          <h1
+            class="font-regular text-2xl tracking-tight text-black dark:text-white"
+          >
+            Martin Ryberg Laude
+          </h1>
+          <p class="text-md max-w-2xl font-light text-black dark:text-white">
+            Swedish guy passionate about software, design, and anything
+            inbetween.
+          </p>
+          <div
+            class="mx-auto grid max-w-xs grid-cols-2 gap-4 md:mx-0 md:max-w-none"
+          >
+            <a
+              href="https://github.com/martinryberglaude"
+              class="text-md inline-flex h-10 min-w-28 items-center justify-center gap-2 rounded-sm border border-black bg-black text-sm font-extralight text-white hover:underline dark:border-white"
+            >
+              <GithubLogo class="w-4" />
+              Github
+            </a>
+            <a
+              href="https://www.linkedin.com/in/martinryberglaude/"
+              class="text-md inline-flex h-10 min-w-28 items-center justify-center gap-2 rounded-sm border border-black bg-white text-sm font-light text-black hover:underline dark:border-white"
+            >
+              <LinkedinLogo class="w-5" />
+              LinkedIn
+            </a>
+
+            <a
+              href="https://x.com/martinryberglaude"
+              class="text-md inline-flex h-10 min-w-28 items-center justify-center gap-2 rounded-sm bg-stone-200/50 text-sm font-extralight text-black hover:bg-stone-200"
+            >
+              <XLogo class="w-4" />
+            </a>
+            <a
+              href="https://bsky.app/profile/martinryberglaude.bsky.social"
+              class="text-md inline-flex h-10 min-w-28 items-center justify-center gap-2 rounded-sm bg-stone-200/50 text-sm font-light text-black hover:bg-stone-200 dark:border-white"
+            >
+              <BlueskyLogo class="w-4" width="16" height="16" fill="black" />
+            </a>
+          </div>
+          <div class="flex flex-1 flex-col justify-end">
+            <p class="text-md text-center font-light text-black md:text-start">
+              Founding engineer @ <a href="https://ednia.se" class="underline"
+                >Ednia</a
+              >
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="flex flex-col gap-y-6">
-      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+      <h2 class="ml-2 text-xl font-light text-black md:ml-6 dark:text-white">
         Latest articles
       </h2>
-      <ul class="flex flex-col gap-6">
+      <ul class="flex flex-col gap-6 p-2 md:p-6">
         {
           posts.slice(0, 3).map((post) => (
             <li>
               <a
                 href={`/articles/${post.id}`}
-                class="group block rounded-lg border-2 border-black bg-white p-6 transition hover:cursor-pointer dark:border-white dark:bg-neutral-900"
+                class="group block transition hover:cursor-pointer"
               >
                 <div class="flex items-start justify-between">
-                  <h3 class="mb-2 text-lg font-light group-hover:underline dark:text-white">
+                  <h3 class="text-md mb-2 font-medium group-hover:underline dark:text-white">
                     &gt; {post.data.title}
                   </h3>
                   <FormattedDate date={post.data.pubDate} />
                 </div>
-                <p class="text-md font-light text-black dark:text-white">
+                <p class="text-sm font-light text-black dark:text-white">
                   {post.data.description}
                 </p>
               </a>
@@ -67,10 +102,10 @@ const posts = (await getCollection("blog")).sort(
           ))
         }
       </ul>
-      <div class="relative ml-6 inline-flex">
+      <div class="relative ml-2 inline-flex md:ml-6">
         <a
           href="/articles"
-          class="relative flex items-center gap-2 text-lg font-light hover:underline dark:text-white"
+          class="text-md relative flex items-center gap-2 font-light hover:underline dark:text-white"
         >
           <span
             class="absolute inset-x-0 bottom-0 -z-10 h-[50%] bg-[#7FFF00]/30"
@@ -80,18 +115,18 @@ const posts = (await getCollection("blog")).sort(
       </div>
     </section>
     <section class="flex flex-col gap-y-6">
-      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+      <h2 class="ml-2 text-xl font-light text-black md:ml-6 dark:text-white">
         Products
       </h2>
-      <ul class="flex flex-col gap-6 p-6">
+      <ul class="flex flex-col gap-6 p-2 md:p-6">
         <li>
           <a href={`/solsken`} class="group block">
             <h3
-              class="text-lg font-light group-hover:underline dark:text-white"
+              class="text-md font-medium group-hover:underline dark:text-white"
             >
               &gt; Solsken
             </h3>
-            <p class="text-md font-light text-black dark:text-white">
+            <p class="text-sm font-light text-black dark:text-white">
               Accessible and detailed weather tailored for the Nordics.
             </p>
           </a>
@@ -99,11 +134,11 @@ const posts = (await getCollection("blog")).sort(
         <li>
           <a href={`/ultrawider`} class="group block">
             <h3
-              class="text-lg font-light group-hover:underline dark:text-white"
+              class="text-md font-medium group-hover:underline dark:text-white"
             >
               &gt; Ultrawider
             </h3>
-            <p class="text-md font-light text-black dark:text-white">
+            <p class="text-sm font-light text-black dark:text-white">
               Get rid of the black bars.
             </p>
           </a>
@@ -111,11 +146,11 @@ const posts = (await getCollection("blog")).sort(
         <li>
           <a href={`/gamesquad`} class="group block">
             <h3
-              class="text-lg font-light group-hover:underline dark:text-white"
+              class="text-md font-medium group-hover:underline dark:text-white"
             >
               &gt; Gamesquad
             </h3>
-            <p class="text-md font-light text-black dark:text-white">
+            <p class="text-sm font-light text-black dark:text-white">
               Squad up and vote for what games to play.
             </p>
           </a>
