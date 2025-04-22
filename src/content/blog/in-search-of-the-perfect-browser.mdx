@@ -1,0 +1,84 @@
+---
+title: "In search of the perfect browser"
+description: "My thoughts on the browsers I've tried out recently."
+pubDate: "Apr 22 2025"
+heroImage: "../../assets/images/laptop_boy.png"
+---
+
+As one of the most used tools of mine, it's frustrating how browsers all still come with one annoyance or the other. Theoretically it doesn't sound so difficult to perfect this type of application, but as we have seen with Arc, it's difficult to make it a solid business case even if you do. Besides, most people I talk to seem perfectly content with whatever browser they're using. I wonder if it's a matter of not knowing what you're missing, or if I am ridiculously sensitive to issues many can't even notice.
+
+Below is a list of some browsers I've tried and what I did not like with them.
+
+## Arc
+
+You were the chosen one!
+
+Nah but Arc did a lot of things right. I vastly prefer having a collapsable sidebar with my tabs and no top bar at all, and Blink is my preferred browser engine by a long shot. And a highly underrated feature — the way pinned tabs work. Pin a page and that page _exactly_ is pinned. If you navigate to it, that page loads. Click around until you're on a completely different page and close the window, and when you go back to the pinned tab, it resets to the original page you pinned. All other pinned tab behaviors like that of Chrome feel terrible after using this.
+
+So what went wrong?
+
+Failed business case most likely. Even theoretically this power user browser sounds hard to monetize. Relatively few used it to start off with, and slapping a subscription on that would've reduced that number even more. I don't see much of a viable teams monetization strategy here either, so I get why this happened.
+
+Still, there were things I did not like. The theming system was not my cup of tea, as I prefer white during light mode and dark gray during dark mode. This wasn't really doable in Arc. You could have white in light mode, but then dark mode would be light gray. Dark gray in dark mode would result in slightly less darker gray in light mode. Ew. I did not like full transparency in the sidebar either, which was a possibility. As soon as a window goes behind Arc, it would look terrible. Further, browser extensions behaved as floating windows, that you had to manually close, instead of dropdown menus of sorts as in most browsers. I found that annoying.
+
+Had The Browser Company kept developing Arc I would've probably stuck to it after all. The annoyances were the fewest of the browsers I had tried at the time.
+
+## Chrome
+
+It is the most popular browser in the world by far, and in my opinion, it does a lot of things right. The design is gorgeous nowadays, and it feels simple and bloat-free. Everything works well since it runs Blink, and even the memory hog reputation doesn't apply anymore with efficient memory saving measures built in nowadays.
+
+My biggest issue with chrome isn't the lack of sidebar tabs, not the privacy concerns, nor the Manifest V3 debacle.
+
+No.
+
+It's that `ctrl` + `tab ` doesn't work the way I need it to. I don't want it to cycle my tabs from left to right — I want it to cycle my tabs by most recently used.
+
+This is how I set up my code editors, and this is how I want to set up my browser. In Firefox, there's a checkbox for this in the settings. In Chrome? Almost impossible. Extensions won't work either has `ctrl` + `tab` is counted as some system shortcut, so it can't be overridden. People suggest installing software like Autohotkey and remapping stuff but at that point you've lost me. Shame.
+
+## Edge
+
+I used to use Edge for quite a while, ever since the Blink rewrite. Used to be very solid, with a decent sidebar and useful features. Nowadays it's bloated beyond belief however. There's stuff crammed in everywhere, sidebars, copilots, rewards, shopping, MSN stuff... Even with it all cleaned out, I can't shake the feeling that this thing is full of crap. That's a no for me.
+
+## Brave
+
+Bloated with a ton of weird crypto stuff and reward programs. Having a built in ad blocker isn't a big feature imo, as it's easy enough to install extensions. Also, they really need some UI designers. Somehow they made Chromium look bad, and their attempt at a vertical sidebar looks terrible. No thanks.
+
+## Firefox
+
+People love to recommend this one. Look at any discussion about browsers on forums like Reddit and any time someone asks for browser advice there's an army of people going "Firefox." "Firefox, never looked back" "Switched to firefox, much better" and things like that.
+
+Unfortunately I cannot relate _at all_.
+
+Sorry, but I can't stand the Gecko engine. It's slower, doesn't always work on pages I visit, and font rendering looks _terrible_. Smooth scrolling with a trackpad feels like crap too, no matter what developer settings I use to correct it. Scroll in general stutters an awful lot as well. No thanks. At least on a mac it's an all around terrible experience.
+
+And the UI... what on earth are they doing? Big floating tabs that take up even more vertical space than ever. It's a sad state of affairs and I do hope Mozilla gets their act together sometime.
+
+## Zen
+
+Arc-like UI and all that but it uses Gecko so it's a no right off the bat. If only they had chosen Blink instead...
+
+## Safari
+
+Safari could be great. I love the UI, which does have support for vertical tabs. It's lightweight, clean, and has extensions that are of surprisingly high quality. I still haven't found a dark mode extension as good as [Noir](https://getnoir.app/), for example.
+
+The problems with Safari come twofold.
+
+1. Stability. Every now and then I end up in a borked state where the browser must be entirely restarted to work again. Tab groups are really glitchy and pages sometimes randomly reload.
+2. Webkit. It's actually a really solid — fonts look great, scrolling is smooth, it's fast, and efficient. Unfortunately they decided to include the horrible page swipe animation when swiping between pages on the trackpad, INSIDE THE ENGINE. That means there's practically no way to disable it. What's worse — after the animation finishes, **the previous page reloads entirely**. This doesn't happen when using `cmd`+`left arrow` to move back a page. This doesn't happen in any other browser engine. And it's a total dealbreaker for me.
+
+I know you can sort of hack around that second part by using BetterTouchTool to map a swipe to simulate `cmd`+`left arrow` and similar workarounds, but then there's no animation or indication whatsoever instead, and comes with other drawbacks. Shame.
+
+## Dia
+
+This is the browser that The Browser Company abandoned Arc for. So how is it? Shortly put, it's a very pretty Chrome with some AI stuff built in. That AI stuff is moderately useful sometimes, but here's the reason I use this browser now:
+
+`ctrl`+`tab` behaves as I want, cycling through the last used tabs. By default. It even has a pretty tab switching UI.
+
+And better yet — pinned tabs work like in Arc.
+
+Chrome extensions work, although the Arc issue with floating extension windows is an issue here as well.
+Otherwise it's a minimal, well designed Chrome with proper `ctrl`+`tab` behavior. And that's the best option for me right now. I miss having a sidebar, but I'd much rather live without it than live with the dealbreakers found in other browsers for now.
+
+## Closing remarks
+
+We'll see how long I stick with Dia and we'll see where this whole market is going, but there still ain't no perfection to be found for me here yet. I doubt Dia is going in a direction where power user features like the sidebar comes back, but right now it's a state where I'm mostly happy. Far more than the alternatives, at least.
