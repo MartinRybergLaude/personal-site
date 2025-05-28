@@ -9,6 +9,7 @@ import BlueskyLogo from "src/assets/bluesky_logo.svg";
 import FormattedDate from "src/components/FormattedDate.astro";
 import { Image } from "astro:assets";
 import Avatar from "src/assets/images/avatar.png";
+import Contributions from "src/components/Contributions";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
@@ -176,6 +177,20 @@ const posts = (await getCollection("blog")).sort(
           </a>
         </li>
       </ul>
+    </section>
+    <section class="flex flex-col gap-y-6 text-black dark:text-white">
+      <h2
+        class="ml-2 font-serif text-3xl font-light md:ml-6"
+      >
+        Contributions
+      </h2>
+      <Contributions client:only="react">
+        <Fragment slot="fallback">
+          <div class="flex h-36 rounded-md w-full items-center justify-center bg-stone-200 dark:bg-stone-800">
+            <p>Loading contributions...</p>
+          </div>
+        </Fragment/>
+      </Contributions>
     </section>
   </div>
 </Layout>
