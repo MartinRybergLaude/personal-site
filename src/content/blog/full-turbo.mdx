@@ -1,0 +1,121 @@
+---
+title: "Full turbo — a monorepo overhaul"
+description: "A monorepo overhaul with pnpm & Turborepo."
+pubDate: "Jun 02 2025"
+heroImage: "../../assets/images/cozy_work.png"
+---
+
+Monorepos are commonplace now in the web circles, allowing type safety and imports across packages. When it works, it’s a great developer experience. Import whatever you need, and make sure all the packages build correctly before deploying. If this is enough for you, you might not even have to worry about circular dependencies and workspace hoisting. 
+
+But it’s not even close to the peak power of monorepos when configured right. If the dependency graph is in good shape, all packages keep their dependencies listed properly, and you only rebuild what’s actually necessary given the changes you made, you unlock a lot more potential.
+
+This was the goal of a turborepo conversion project I took on early at Ednia. 
+
+The basic setup was fairly simple. The existing monorepo had a few top level directories with packages inside. There was no real difference between packages and apps, providers and consumers. All packages were hoisted to a top-level `node_modules` with [npm workspaces](https://docs.npmjs.com/cli/v11/using-npm/workspaces), which allowed imports in any direction and across anything without listing dependencies in the packages themselves. E.g if one package listed `@tanstack/react-query` as a dependency, all packages in the entire monorepo would then be able to import it without listing it as a dependency. On top of that was [NX](https://nx.dev/getting-started/intro) with [Lerna](https://lerna.js.org/), which was set up to run type checks and tests across all packages as a pre-push hook. 
+
+## Fixing the dependency graph
+
+The first step was to switch to [pnpm](https://pnpm.io/) and its workspaces, rather than npm. In my experience, pnpm has by far the most stable and supported workspaces implementation. You can probably get things to work with npm or bun as well, but I wasn’t about to experiment too much here. I know pnpm will work, so I ran with it. 
+
+The first thing pnpm detected was all the dependency issues, as pnpm by default does not hoist dependencies (which is a good thing). So, first up was fixing those:
+
+1. Find all imports with dependencies not listed in `package.json` .
+2. Add the imports to `package.json`.
+3. Fix all relative imports to import from workspace packages.
+
+Now the monorepo did compile, but with a ridiculous amount of cyclical dependency warnings. I initially elected to ignore it, but a first attempt at building the [Next.js](https://nextjs.org/) app proved these could not simply be ignored. Webpack crashed with SIGTRAP memory exception. I was fairly sure the cyclical dependencies were the issue here, as it makes sense on a high level if the bundler isn’t smart enough to block the dependency cycles. 
+
+So, next up was fixing the cycles, and this can take time.
+
+It boils down to the structure of the code and where certain code resides. In this instance, apps (consumers) imported components from each other left and right, and even packages imported from apps.
+
+I let GPT-4o chart up the dependency cycles and then gave that to Sonnet 4 in Cursor to determine how to fix each cycle, one by one. Some of them were successful right of the bat, while others required manual intervention and some thought as to where code should reside.
+
+Eventually the cycles were eliminated however and lo-and-behold — the Next.js app compiled just fine. 
+
+## Full turbo
+
+With that out of the way, I could move on to switching from Lerna to Turborepo.
+
+Technically, Lerna should have more or less the same capabilities as Turborepo, if you can configure it right, which is imo a lot harder. Since I already knew how Turborepo should be set up (and know my way around things Turborepo’s docs don’t cover well) it was far faster and easier to just switch. 
+
+This consisted of setting up a turbo.json with some basic tasks, e.g `build`, `check-types` , and `test`. Since our apps (consumers) all use JIT compilation, I decided to make `build` depend on `check-types` rather than `build`, to save CI time. This does not affect the speed comparisons, as only `check-types` and `test` were run with Lerna prior to this. 
+
+The final `turbo.json` looked like the following:
+
+```json
+{
+    "$schema": "https://turborepo.com/schema.json",
+    "tasks": {
+      "build": {
+        "dependsOn": ["^check-types"],
+        "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+        "env": [
+          "omitted for security :)"
+        ] ,
+        "inputs": [
+          "$TURBO_DEFAULT$",
+          ".env.production.local",
+          ".env.local",
+          ".env.production",
+          ".env"
+        ]
+      },
+      "build:prod": {
+        "dependsOn": ["^check-types"],
+        "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+        "env": [
+         "omitted for security :)"
+        ] ,
+        "inputs": [
+          "$TURBO_DEFAULT$",
+          ".env.development.local",
+          ".env.local",
+          ".env.development",
+          ".env"
+        ]
+      },
+      "build:clean": {
+        "dependsOn": ["^check-types"]
+      },
+      "unbuild": {
+        "dependsOn": [],
+        "cache": false
+      },
+      "test": {
+        "dependsOn": ["^test"]
+      },
+      "check-types": {
+        "dependsOn": ["^check-types"]
+      },
+      "dev": {
+        "inputs": [
+          "$TURBO_DEFAULT$",
+          ".env.development.local",
+          ".env.local",
+          ".env.development",
+          ".env"
+        ],
+        "persistent": true,
+        "cache": false
+      }
+    }
+  }
+```
+
+With that set up, all that was left was reconfiguring the husky pre-push hook to run turbo commands instead of lerna, and switch build command in Vercel to do the same. Now, when running for instance `turbo run check-types` locally it would run through all packages the first time. The second time, all the results are cached. Whenever you change some code, only packages affected by that change are re-run. 
+
+This can (and should) be taken further with remote caching for CI and builds. You can self host a remote cache where the turbo cache is stored between CI runs (and if you want between your teammates), which dramatically speeds up most CI runs. Take for instance dependabot dependency updates, which often only affect a single package somewhere in the monorepo. Instead of running the full suite of type-checks and tests, you will with this only run the type-checks and tests relevant to that package. Since we use Vercel, remote cache is as simple as a toggle in the dashboard, but I’ve heard that it can be a bit complicated to set up yourself and self host.
+
+## Results
+
+The first thing I noticed was that Turborepo runs 49 packages in total in our monorepo, while Lerna only ran 29. Some of these were missing a check-types script in some `package.json` files, while others were unexplainable. Lerna just did not seem to discover a lot of packages, even with a triple-checked Lerna configuration and the correct scripts available. So the first result is changes in almost half of packages being much more safe. Then came the numbers.
+
+When changing code isolated to our Next.js app, these are the pre-push results running locally:
+
+- Before: `64.23s`
+- After: `6.834s`
+
+As for CI, Next.js site changes only reduced from 6min to 5min, as webpack remains the big bottleneck there (and type checks are not run at all there yet). However, when the Next.js site is not changed — as is the case with dependabot upgrades — the time is reduced to 1min on average. And if you’ve ever used dependabot or similar Github integrations, you know that these are quite plentiful. 
+
+So in the end, we have a fixed dependency graph, faster dependency installations and much faster type checks and builds. Tidier, safer, faster.
