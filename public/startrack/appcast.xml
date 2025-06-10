@@ -3,6 +3,18 @@
     <channel>
         <title>Startrack</title>
         <item>
+            <title>1.4</title>
+            <pubDate>Tue, 10 Jun 2025 23:26:47 +0200</pubDate>
+            <sparkle:version>5</sparkle:version>
+            <sparkle:shortVersionString>1.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://mrlaude.com/startrack/Startrack%201.4.dmg" length="4880175" type="application/octet-stream" sparkle:edSignature="Pvr/qODI97Y9Ao8IA/aD1Sn99Hoj2reZ+W5TqtOTutxuFSa2b46Xo3gDmfR7t3579EBQ1JJdboJVeZazIzs7Bg=="/>
+            <sparkle:deltas>
+                <enclosure url="https://mrlaude.com/startrack/Startrack5-4.delta" sparkle:deltaFrom="4" length="10226" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="864864" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="MaUCPORXFwygE60nYpnuwsl/GFIKWljorbCxMuUkrz6gCI8ha5dLgtYwxKvBHOnnnbpwxLeCI3opIhtKl3nIBw=="/>
+                <enclosure url="https://mrlaude.com/startrack/Startrack5-3.delta" sparkle:deltaFrom="3" length="10034" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="864864" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="JPzx0l/16gr/SycE8BgzKlVTCoKPzuJQSJXmagZ9DP/bG6t1BD1XXqie32Ri/Hi89pV/Yiv1OoXhjDboJ36kBQ=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.3</title>
             <pubDate>Tue, 10 Jun 2025 23:13:54 +0200</pubDate>
             <sparkle:version>4</sparkle:version>
