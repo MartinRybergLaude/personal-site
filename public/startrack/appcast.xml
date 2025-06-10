@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Startrack</title>
+        <item>
+            <title>1.0</title>
+            <pubDate>Tue, 10 Jun 2025 17:13:37 +0200</pubDate>
+            <sparkle:version>1</sparkle:version>
+            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://mrlaude.com/startrack/Startrack%201.0.dmg" length="4876146" type="application/octet-stream" sparkle:edSignature="ic+okyP/JxJHob6OgxueSGONkqyMNQrjM7qU4+7l2JswwaF6MaaeJe39PBZN/KNm9X/J+noi7O5Hs4YPh3WCDw=="/>
+        </item>
+    </channel>
+</rss>
