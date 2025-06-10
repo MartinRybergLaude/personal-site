@@ -3,23 +3,12 @@
     <channel>
         <title>Startrack</title>
         <item>
-            <title>1.1</title>
-            <pubDate>Tue, 10 Jun 2025 18:47:06 +0200</pubDate>
-            <sparkle:version>2</sparkle:version>
-            <sparkle:shortVersionString>1.1</sparkle:shortVersionString>
+            <title>1.2</title>
+            <pubDate>Tue, 10 Jun 2025 20:40:48 +0200</pubDate>
+            <sparkle:version>3</sparkle:version>
+            <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://mrlaude.com/startrack/Startrack%201.1.dmg" length="4876096" type="application/octet-stream" sparkle:edSignature="7hDshXhGLCkw37995lYwo34iIOxb4KvLqVcicFwV2OKSEBzY5xc14s/1uy4zVN7gjYvR9ThZ8CLB+nNSqXpuBg=="/>
-            <sparkle:deltas>
-                <enclosure url="https://mrlaude.com/startrack/Startrack2-1.delta" sparkle:deltaFrom="1" length="25158" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="846480" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="L0YdiyARoLfn2j4pcgPQxeBTZLc+qWbAMUzcCLiqmkMjmLow/z2NxRf0DUy2RY3M43P9wI4f0eLG4UZzOa/yCQ=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>1.0</title>
-            <pubDate>Tue, 10 Jun 2025 17:13:37 +0200</pubDate>
-            <sparkle:version>1</sparkle:version>
-            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://mrlaude.com/startrack/Startrack%201.0.dmg" length="4876146" type="application/octet-stream" sparkle:edSignature="ic+okyP/JxJHob6OgxueSGONkqyMNQrjM7qU4+7l2JswwaF6MaaeJe39PBZN/KNm9X/J+noi7O5Hs4YPh3WCDw=="/>
+            <enclosure url="https://mrlaude.com/startrack/Startrack%201.2.dmg" length="4880718" type="application/octet-stream" sparkle:edSignature="XHqpZCwDKKtEww2RM2pzVtQBdSMH4Czohwaq9GK6Ut9UYGCrMp87sCJgqJpAVmJgUFagwY1mRDAD9zPYSl7/Bg=="/>
         </item>
     </channel>
 </rss>
