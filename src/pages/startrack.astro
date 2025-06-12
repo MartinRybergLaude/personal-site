@@ -1,0 +1,272 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import Star from "phosphor-astro/Star.astro";
+import Heart from "phosphor-astro/Heart.astro";
+import MusicNote from "phosphor-astro/MusicNote.astro";
+import Desktop from "phosphor-astro/Desktop.astro";
+import Lightning from "phosphor-astro/Lightning.astro";
+import AppleLogo from "phosphor-astro/AppleLogo.astro";
+import Icon from "../assets/images/startrack.png";
+import DemoVideo from "../assets/images/startrack_demo.mp4";
+import Screenshot from "../assets/images/startrack_screenshot.png";
+import { readFileSync } from "fs";
+import path from "path";
+
+async function getLatestDownloadUrl() {
+  try {
+    const appcastPath = path.join(
+      process.cwd(),
+      "public/startrack/appcast.xml"
+    );
+    const xmlContent = readFileSync(appcastPath, "utf-8");
+
+    const itemMatches = xmlContent.match(/<item>[\s\S]*?<\/item>/g);
+    if (itemMatches && itemMatches.length > 0) {
+      const firstItem = itemMatches[0];
+      const urlMatch = firstItem.match(/enclosure url="([^"]+)"/);
+      if (urlMatch) {
+        return urlMatch[1];
+      }
+    }
+
+    const fallbackUrlMatch = xmlContent.match(/enclosure url="([^"]+)"/);
+    if (fallbackUrlMatch) {
+      return fallbackUrlMatch[1];
+    }
+  } catch (error) {
+    console.error("Error reading appcast:", error);
+  }
+
+  return "/startrack/Startrack%201.5.dmg";
+}
+
+const downloadUrl = await getLatestDownloadUrl();
+---
+
+<Layout
+  title="Startrack"
+  description="Startrack is a Mac menu bar app that lets you instantly favorite the currently playing track in Apple Music with a single click."
+>
+  <div class="flex flex-col gap-y-16 py-20">
+    <!-- Hero section -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <div class="flex items-center justify-center gap-4">
+        <Image
+          src={Icon}
+          width="80"
+          height="80"
+          alt="Startrack icon"
+          class="h-12 w-12 shrink-0"
+        />
+        <h1
+          class="font-serif text-5xl font-light tracking-tight text-black dark:text-white"
+        >
+          Startrack
+        </h1>
+      </div>
+      <p
+        class="mx-auto max-w-2xl text-lg font-light text-black dark:text-white"
+      >
+        Instantly favorite your Apple Music tracks from the menu bar
+      </p>
+      <div class="flex justify-center gap-2">
+        <a
+          href={downloadUrl}
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <AppleLogo class="w-4" />
+          Download
+        </a>
+      </div>
+    </section>
+
+    <!-- Demo showcase -->
+    <section class="flex flex-col gap-y-6">
+      <h2
+        class="ml-6 text-center text-2xl font-light text-black dark:text-white"
+      >
+        See it in action
+      </h2>
+      <div class="flex flex-col items-center justify-center gap-6">
+        <div
+          class="flex w-full items-center justify-center overflow-hidden rounded-lg border-2 border-black bg-gray-100 dark:border-white dark:bg-neutral-800"
+        >
+          <video
+            src={DemoVideo}
+            autoplay
+            loop
+            muted
+            playsinline
+            class="h-full w-full object-cover"></video>
+        </div>
+      </div>
+    </section>
+    <!-- Features Bento Grid -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        Features
+      </h2>
+
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- Feature 1: One-click favoriting -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <Heart class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">
+              One-click favorite
+            </h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Click the star in your menu bar to instantly favorite the currently
+            playing track in Apple Music.
+          </p>
+        </div>
+
+        <!-- Feature 2: Menu bar integration -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <Desktop class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Menu bar native</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Lives quietly in your menu bar as a star icon. Always accessible,
+            never intrusive.
+          </p>
+        </div>
+
+        <!-- Feature 3: Apple Music only -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <MusicNote class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">
+              Apple Music focused
+            </h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Designed specifically for Apple Music. Integration using
+            Applescript.
+          </p>
+        </div>
+
+        <!-- Feature 4: Universal compatibility -->
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <Lightning class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Universal binary</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Works on both Intel and Apple Silicon Macs. Optimized for
+            performance on all Mac hardware.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        How it works
+      </h2>
+
+      <div
+        class="rounded-lg border-2 border-black bg-white p-6 dark:border-white dark:bg-neutral-900"
+      >
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Install</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Download Startrack and it appears as a star icon in your menu bar.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Play music</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Start playing any track in Apple Music on your Mac.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">
+              &gt; Click to favorite
+            </h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Click the star in your menu bar to instantly add the current track
+              to your favorites.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex w-full items-center justify-center overflow-hidden rounded-lg border-2 border-black bg-gray-100 dark:border-white dark:bg-neutral-800"
+      >
+        <Image
+          src={Screenshot}
+          alt="Startrack screenshot"
+          class="h-full w-full"
+        />
+      </div>
+    </section>
+
+    <!-- Perfect for -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <h2 class="text-2xl font-light text-black dark:text-white">
+        Perfect for music lovers
+      </h2>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <h3 class="mb-3 text-left text-lg font-light dark:text-white">
+            &gt; Discover new favorites
+          </h3>
+          <p class="text-md text-left font-light text-black dark:text-white">
+            Instantly save tracks you love while listening to new playlists or
+            radio stations.
+          </p>
+        </div>
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <h3 class="mb-3 text-left text-lg font-light dark:text-white">
+            &gt; Build your collection
+          </h3>
+          <p class="text-md text-left font-light text-black dark:text-white">
+            Never lose track of a great song again. Build your favorites
+            collection effortlessly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <h2 class="text-2xl font-light text-black dark:text-white">
+        Start using Startrack today
+      </h2>
+      <p
+        class="text-md mx-auto mb-4 max-w-2xl font-light text-black dark:text-white"
+      >
+        Available now on the Mac App Store. Compatible with macOS 12.0 and
+        later.
+      </p>
+      <div class="flex justify-center gap-2">
+        <a
+          href={downloadUrl}
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <AppleLogo class="w-4" />
+          Download
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

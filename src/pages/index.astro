@@ -11,7 +11,7 @@ import { Image } from "astro:assets";
 import Avatar from "src/assets/images/avatar.png";
 import Contributions from "src/components/Contributions";
 const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
@@ -153,6 +153,18 @@ const posts = (await getCollection("blog")).sort(
           </a>
         </li>
         <li>
+          <a href={`/startrack`} class="group block">
+            <h3
+              class="text-md font-medium group-hover:underline dark:text-white"
+            >
+              &gt; Startrack
+            </h3>
+            <p class="text-sm font-light text-black dark:text-white">
+              Favorite songs in Apple Music from your menu bar.
+            </p>
+          </a>
+        </li>
+        <li>
           <a href={`/ultrawider`} class="group block">
             <h3
               class="text-md font-medium group-hover:underline dark:text-white"
@@ -179,17 +191,15 @@ const posts = (await getCollection("blog")).sort(
       </ul>
     </section>
     <section class="flex flex-col gap-y-6 text-black dark:text-white">
-      <h2
-        class="ml-2 font-serif text-3xl font-light md:ml-6"
-      >
-        Contributions
-      </h2>
+      <h2 class="ml-2 font-serif text-3xl font-light md:ml-6">Contributions</h2>
       <Contributions client:only="react">
         <Fragment slot="fallback">
-          <div class="flex h-36 rounded-md w-full items-center justify-center bg-stone-200 dark:bg-stone-800">
+          <div
+            class="flex h-36 w-full items-center justify-center rounded-md bg-stone-200 dark:bg-stone-800"
+          >
             <p>Loading contributions...</p>
           </div>
-        </Fragment/>
+        </Fragment>
       </Contributions>
     </section>
   </div>
