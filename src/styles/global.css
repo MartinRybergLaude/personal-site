@@ -25,10 +25,19 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @theme {
   --font-mono: "Drafting", "monospace";
   --font-jetbrains: "Jetbrains", "monospace";
   --font-serif: "Instrument", "serif";
+  --font-sans: "Satoshi", "sans-serif";
 }
 
 ::selection {
@@ -45,4 +54,3 @@
     background-color: var(--shiki-dark-bg) !important;
   }
 }
-
