@@ -44,6 +44,11 @@
   background: #c4d8d0;
 }
 
+.astro-code,
+.astro-code span {
+  background-color: #f0efec !important;
+}
+
 @media (prefers-color-scheme: dark) {
   ::selection {
     background: #345e12;
