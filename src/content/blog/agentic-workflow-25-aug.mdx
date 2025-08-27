@@ -1,0 +1,39 @@
+---
+title: "Agentic workflow (aug. 2025)"
+description: "Current LLM tools and workflows I use."
+pubDate: "Aug 27 2025"
+heroImage: "../../assets/images/valley.jpg"
+---
+
+Few deny that LLMs have brought radical changes to the way programmers work. What started as improved inline autocompletions evolved into swarms of agents independently working on the codebase doing tons of tool calls to achieve their tasks.
+
+In my case, I’ve adopted these new paradigms rather aggressively, while stopping just short of [vibe coding](https://x.com/karpathy/status/1886192184808149383). It’s a fast-moving field though, and the possibilities and optimal workflows change almost every week. Not to mention new model drops, where some are better at some tasks and worse at others.
+
+This here serves as an update on what AI-related tech and workflows I currently use in my day-to-day software engineering work. I intend to update this with new posts whenever significant changes have arrived, and through that hopefully acquire a holistic perspective on the developments made in this realm and how they affect my work.
+
+## Technology
+
+- [Cursor](https://cursor.com/)
+- [Context7](https://context7.com/)
+- [Intric](https://www.intric.ai/en)
+- [GPT 5](https://openai.com/index/introducing-gpt-5/)
+
+## Workflow
+
+I use Cursor at the moment for three reasons:
+
+1. I still want a code reading/editing experience first, agentic experience second
+2. GPT 5
+3. Cursor Tab
+
+I find it funny that after so long, I still find the Cursor Tab experience to be vastly superior to alternatives. Originally powered by [Supermaven](https://supermaven.com/) tech, it’s lightning fast and far more precise than the experience I get from VS Code, Windsurf or Zed. It’s not unlikely that the importance of this will fall as agentic experiences improve though.
+
+On that note, I use GPT 5 High for pretty much everything now. From my personal experience it is much more precise in what it does than Claude. What that means in practice is basically that it does what I tell it to and none of what I don’t. Claude has a strong tendency to start working on adjacent things or sometimes blatantly random things, a phenomenon that gets worse the larger the scope of the task. GPT 5 is also far less agreeable, not only avoiding the dreaded “you’re absolutely right\!” but actively rejecting some tasks I give it when it finds strong evidence that it’s the wrong move. These things causes GPT 5 to work extremely well for assisted coding, when you know generally what you wanna do and how, but want to leave the work to an LLM agent. The tradeoff is probably that it’s worse for vibe coding, but I can’t confirm that.
+
+Another interesting thing I’m apparently late to the party with is [Context7](https://context7.com/). I added it as an [MCP](https://modelcontextprotocol.io/docs/getting-started/intro) server in Cursor, and whenever you add “use context7” to the prompt, the agent will find up to date documentation on whatever framework or library you’re working with and retrieve that context. This is super important to me, since I now work with the cutting edge of Svelte 5 and SvelteKit, which GPT 5 by default is pretty terrible at, often trying to write Svelte 4 instead. Knowledge cutoff is a thing, as is the relative amount of training data, so having Context7 is really great.
+
+Outside of the editor experience, I use Intric now ever since starting my employment there. The model selection is great, as is the custom assistant customization. I have two assistants at the moment, one for coding and related questions based on GPT 5 with search capabilities and some relevant knowledge thrown in, and one for image generation. We recently landed some really nice features like artifacts as well, which makes this experience really nice. The PWA experience is great on mobile too, so I use it there as well for general AI tasks.
+
+## Things I want to try
+
+I intend to try out [Amp](https://ampcode.com/), whose approach I really like. Contrary to something like [OpenCode](https://github.com/sst/opencode), the philosophy here is that you don’t make the model decisions and fiddle with settings. They pick the best for you and build a great experience around that. I’ll give it a spin until next time.
