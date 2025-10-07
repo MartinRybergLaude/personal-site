@@ -11,7 +11,7 @@ import { Image } from "astro:assets";
 import Avatar from "src/assets/images/avatar.png";
 import Contributions from "src/components/Contributions";
 const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
@@ -27,7 +27,7 @@ const posts = (await getCollection("blog")).sort(
         />
         <div class="flex flex-col gap-y-6 text-center md:text-start">
           <h1
-            class="font-serif text-4xl tracking-tight text-black dark:text-white"
+            class="font-serif text-3xl tracking-tight text-black dark:text-white"
           >
             Martin Ryberg Laude
           </h1>
@@ -94,7 +94,7 @@ const posts = (await getCollection("blog")).sort(
 
     <section class="flex flex-col gap-y-6">
       <h2
-        class="ml-2 font-serif text-3xl font-light text-black md:ml-6 dark:text-white"
+        class="ml-2 font-serif text-2xl font-light text-black md:ml-6 dark:text-white"
       >
         Latest articles
       </h2>
@@ -133,7 +133,7 @@ const posts = (await getCollection("blog")).sort(
     </section>
     <section class="flex flex-col gap-y-6">
       <h2
-        class="ml-2 font-serif text-3xl font-light text-black md:ml-6 dark:text-white"
+        class="ml-2 font-serif text-2xl font-light text-black md:ml-6 dark:text-white"
       >
         Products
       </h2>
@@ -189,7 +189,7 @@ const posts = (await getCollection("blog")).sort(
       </ul>
     </section>
     <section class="flex flex-col gap-y-6 text-black dark:text-white">
-      <h2 class="ml-2 font-serif text-3xl font-light md:ml-6">Contributions</h2>
+      <h2 class="ml-2 font-serif text-2xl font-light md:ml-6">Contributions</h2>
       <Contributions client:only="react">
         <Fragment slot="fallback">
           <div
