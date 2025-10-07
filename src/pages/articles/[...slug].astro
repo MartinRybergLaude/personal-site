@@ -18,7 +18,7 @@ const { Content } = await render(post);
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-  <div class="py-12">
+  <div class="px-2 py-14 md:px-6">
     {
       post.data.heroImage && (
         <Picture
@@ -29,10 +29,10 @@ const { Content } = await render(post);
       )
     }
     <article
-      class="prose sm:prose-md prose-neutral dark:prose-invert prose-headings:font-serif prose-code:font-jetbrains prose-p:font-sans prose-li:font-sans mark !max-w-none pt-12"
+      class="prose md:prose-lg prose-stone dark:prose-invert prose-headings:font-serif prose-h2:text-2xl prose-h3:text-2xl prose-h4:text-xl prose-headings:mb-4 prose-code:font-jetbrains prose-p:font-charter prose-li:font-charter mark !max-w-none pt-12"
     >
-      <div class="flex flex-col items-start">
-        <h1 class="!font-serif !text-4xl !font-medium">
+      <div class="flex flex-col items-start gap-2">
+        <h1 class="!font-serif !text-3xl !font-medium">
           {post.data.title}
         </h1>
         <FormattedDate date={post.data.pubDate} />
