@@ -1,0 +1,20 @@
+---
+title: "Thoughts on the Agent Client Protocol"
+description: "Reflections on the agent client protocol."
+pubDate: "Oct 16 2025"
+heroImage: "../../assets/images/valley2.jpg"
+---
+
+I've been hopping around between different AI agents and frameworks and something that has become increasingly annoying is the lock-in to specific interfaces.
+
+Codex is great for some tasks (not involving Svelte 5, it's useless at this without heavy context7 use and prompting), Claude at other tasks. In a week perhaps Gemini 3 will come in and take the crown. But to use each of these you have to use the interfaces they come with.
+
+For instance, to use Claude you have to use Claude Code, or their VSCode extension. Sure, it's a good CLI, but not the best (that'd be [amp](https://ampcode.com/)). Besides, I prefer my agent interactions to be in-editor. Specifically, I prefer my diffs in the files themselves the way Cursor does it. Neither Claude Code nor Codex do that (likely because of VSCode limitations).
+
+Further, I don't want to use VSCode either. Nowadays it's a heavy app to run, especially with multiple instances, and forks like Cursor are even worse.
+
+In comes the glorious *Agent Client Protocol* spearheaded by [Zed](https://zed.dev/) and nowadays [Jetbrains too](https://blog.jetbrains.com/ai/2025/10/jetbrains-zed-open-interoperability-for-ai-coding-agents-in-your-ide/) for obvious reasons.
+
+What it does is basically connect to instances of Claude Code, Codex, Gemini Code or any other terminal agent and bind it to an app. In Zed's case, it allows you to use these tools as if they are Cursor, within Zed. Same chat sidebar, approval prompts, and of course, in-file diffs with approvals. It works *really* well. And if you got a Cursor subscription to work with, you don't have to miss out either. There are several implementations of ACP for the Cursor CLI, allowing you to turn Zed almost literally into Cursor.
+
+Great stuff! I'm hoping this gets better and better, giving devs a choice in how they interface with these tools, so you're not stuck with some half-assed VSCode extensions or limited TUIs.
