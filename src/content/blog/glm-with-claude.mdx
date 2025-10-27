@@ -1,0 +1,14 @@
+---
+title: "GLM 4.6 with Claude Code"
+description: "Notes and takeaways."
+pubDate: "Oct 27 2025"
+heroImage: "../../assets/images/claude.png"
+---
+
+Claude code is a phenomenal TUI for programming with Claude. Lots of clever features, good results, fancy design. The problem is Claude's plans and their usage limits, where I tend to run into the daily limit in the first 2-3h of my day, and the weekly limit within the next day. I don't even consider that particularly heavy usage.
+
+That's why the release (and bench results) of [GLM 4.6](https://z.ai/blog/glm-4.6) caught my interest. The results look promising, achieving around 90% or higher of the performance of Sonnet 4.5, with cheaper plans and much higher usage limits. Additionally, they have an endpoint in their API mimicking the look of Anthropic's, allowing the use of Claude Code with their models.
+
+So I set up Claude Code to use GLM 4.6 instead and have been running with that in combination with [Codex](https://github.com/openai/codex), and it's been working quite well. Codex, when supplied with the right context, is far better at figuring difficult things out and coming up with good solutions, but that is the case compared against Sonnet 4.5 too. My use case for Sonnet has mostly been "grunt work", i.e refactorings, code style reviews, and implementing a plan made in Codex. For this use case, I barely notice a difference between Sonnet 4.5 and GLM 4.6. Sonnet is better at figuring things out on its own, that much is clear, but that's not my use case for it.
+
+So far I therefore only see a strong win here, with Claude Code being both faster and cheaper with this workflow configured with GLM 4.6. I hear a Haiku-equivalent GLM 4.6 Air is dropping sometime soon as well, which might make some workflows even faster. I also intend to try this workflow with Kimi K2 soon. Exciting times.
