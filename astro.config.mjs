@@ -5,12 +5,12 @@ import sitemap from "@astrojs/sitemap";
 
 import tailwindcss from "@tailwindcss/vite";
 
-import react from "@astrojs/react";
+import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://mrlaude.com",
-  integrations: [mdx(), sitemap(), react()],
+  integrations: [mdx(), sitemap(), svelte()],
 
   vite: {
     plugins: [tailwindcss()],
