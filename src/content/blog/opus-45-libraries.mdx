@@ -1,0 +1,44 @@
+---
+title: "The New Economics of Not Using Libraries"
+description: "Reaching for a library is increasingly a thing of the past."
+pubDate: "Dec 21 2025"
+heroImage: "../../assets/images/plane_drink.jpeg"
+---
+
+I'm not going to spend much time preaching to the choir. [Claude Opus 4.5](https://www.anthropic.com/news/claude-opus-4-5) is a ridiculously good model for producing software code, and represents yet another complete workflow shift in my day-to-day work.
+
+Most of my time is no longer spent in an editor; the terminal has taken over the role of my primary workspace. The usual setup for each project is [Ghostty](https://ghostty.org/) running with three tabs:
+
+1. Various development servers required to run the project in split panes.
+2. [Claude Code](https://claude.com/product/claude-code).
+3. [Lazygit](https://github.com/jesseduffield/lazygit).
+
+And somehow, this now covers most of my work as a programmer.
+
+But another shift I've noticed is how I go about building software with this newfound power. A core tenet in my work has always been to avoid reinventing the wheel. One could make many strong arguments as to why that is a reasonable guideline, but in my case it's almost exclusively been a time-saving measure. Reinventing a table library takes an enormous amount of time, and therefore you should not do it and instead throw in an existing solution.
+
+At least that used to be the case. 
+
+Last week I elected to go against this belief and Claude my way to a table library, and the success of this endeavour is not to be understated. Granted, this was not solely a random act of defiance. As I nowadays work mostly in Svelte 5, there simply were no good existing solutions available. [TanStack Table](https://tanstack.com/table/latest) has as of writing not been updated to Svelte 5, and another alternative I found had subpar DX and no built-in virtualization support. The result was nonetheless amazing. 
+
+A year ago, I led an evaluation of possible table solutions for an enterprise, finance-based application. The requirements were so extensive that the only reasonable choice ended up being [AG Grid](https://www.ag-grid.com/), a ready-to-go, fairly framework-agnostic datagrid solution maintained by a huge team of engineers. Costly, and the React version is more of a thin wrapper that doesn't really consider reactivity on a fundamental level, but in the end we built an interface for it that worked well for our use. The whole process took weeks.
+
+Now, I managed to build something in days. Not even close to the same feature set, but building something yourself has the distinct advantage of enabling you to focus on the particular requirements list you have. In this case the list looked more or less like this:
+
+- Full virtualization
+- Infinite scroll
+- Pagination
+- Filtering
+- Sorting
+- Sticky columns
+- Row selection (with a checkbox column)
+- Expandable rows (with maintained virtualization)
+- Custom cell renderers
+- Custom sort comparators
+- Server side sorting support
+- Server side filtering support
+- Responsive sizing
+
+All built with Svelte 5 runes.
+
+It's a testament to how far LLMs for programming have come for sure. Just a year ago this would've been a far greater task than it now ended up being. As I'm a highly product-oriented engineer, I find this development exciting, as it lets me spend less time on adapting libraries or building boilerplate and more time refining and perfecting a great product. Let's see what the next year brings in this field!
