@@ -27,10 +27,34 @@
 }
 
 @font-face {
-  font-family: "Satoshi";
-  src: url("/fonts/Satoshi.woff2") format("woff2");
+  font-family: "Computer Modern";
+  src: url("/fonts/cmunrm.woff") format("woff");
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Computer Modern";
+  src: url("/fonts/cmunti.woff") format("woff");
+  font-style: italic;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Computer Modern";
+  src: url("/fonts/cmunbx.woff") format("woff");
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Computer Modern";
+  src: url("/fonts/cmunbi.woff") format("woff");
+  font-style: italic;
+  font-weight: bold;
   font-display: swap;
 }
 
@@ -38,7 +62,7 @@
   --font-mono: "Drafting", "monospace";
   --font-jetbrains: "Jetbrains", "monospace";
   --font-serif: "Instrument", "serif";
-  --font-sans: "Satoshi", "sans-serif";
+  --font-sans: "Computer Modern", "serif";
 }
 
 ::selection {
@@ -48,6 +72,11 @@
 .astro-code,
 .astro-code span {
   background-color: #f0efec !important;
+}
+
+.prose {
+  --tw-prose-body: #1c1917;
+  line-height: 1.6;
 }
 
 .prose li::marker {
@@ -84,6 +113,10 @@
   .astro-code span {
     color: var(--shiki-dark) !important;
     background-color: var(--shiki-dark-bg) !important;
+  }
+
+  .prose {
+    --tw-prose-body: #e7e5e4;
   }
 
   .prose li::marker {
