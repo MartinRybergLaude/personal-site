@@ -1,0 +1,279 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import AppleLogo from "phosphor-astro/AppleLogo.astro";
+import GithubLogo from "phosphor-astro/GithubLogo.astro";
+import GitBranch from "phosphor-astro/GitBranch.astro";
+import Terminal from "phosphor-astro/Terminal.astro";
+import GitPullRequest from "phosphor-astro/GitPullRequest.astro";
+import Robot from "phosphor-astro/Robot.astro";
+import Lightning from "phosphor-astro/Lightning.astro";
+import Stack from "phosphor-astro/Stack.astro";
+import Icon from "../assets/images/jetline.png";
+
+const downloadUrl =
+  "https://github.com/MartinRybergLaude/jetline/releases/latest";
+const repoUrl = "https://github.com/MartinRybergLaude/jetline";
+---
+
+<Layout
+  title="Jetline"
+  description="Jetline is a native SwiftUI Mac app for running parallel coding agents in git worktrees, with an embedded libghostty terminal and a GitHub-aware inspector."
+>
+  <div class="flex flex-col gap-y-16 py-20">
+    <!-- Hero section -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <div class="flex items-center justify-center gap-4">
+        <Image
+          src={Icon}
+          width="80"
+          height="80"
+          alt="Jetline icon"
+          class="h-12 w-12 shrink-0"
+        />
+        <h1
+          class="font-serif text-5xl font-light tracking-tight text-black dark:text-white"
+        >
+          Jetline
+        </h1>
+      </div>
+      <p
+        class="mx-auto max-w-2xl text-lg font-light text-black dark:text-white"
+      >
+        Run parallel coding agents in git worktrees. Native SwiftUI, libghostty
+        terminal, GitHub-aware.
+      </p>
+      <div class="flex flex-wrap justify-center gap-2">
+        <a
+          href={downloadUrl}
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <AppleLogo class="w-4" />
+          Download
+        </a>
+        <a
+          href={repoUrl}
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black p-2 font-extralight text-black hover:underline dark:border-white dark:text-white"
+        >
+          <GithubLogo class="w-4" />
+          Source
+        </a>
+      </div>
+    </section>
+
+    <!-- Features Bento Grid -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        Features
+      </h2>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <GitBranch class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">
+              Workspace = worktree
+            </h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Every workspace is a real git worktree on disk. Spin up branches,
+            import existing ones, or pull a PR in as a workspace and start
+            working without stashing.
+          </p>
+        </div>
+
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <Terminal class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">
+              libghostty terminal
+            </h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Embedded terminal powered by libghostty. Multiple session tabs per
+            workspace, ⌘1…⌘9 to jump, drag to reorder, detached views survive
+            reparents.
+          </p>
+        </div>
+
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <Robot class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Agent agnostic</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Wraps <code>claude</code>, <code>codex</code>, and <code>vibe</code>
+             CLIs in a first-class way. Resolves binaries, applies prompt
+            overrides, and gives each agent its own PTY.
+          </p>
+        </div>
+
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <GitPullRequest class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">GitHub inspector</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Live diff (combined / PR / local), PR status with checks, and
+            ahead/behind position against the base branch. FSEvents-backed so
+            the view follows the filesystem.
+          </p>
+        </div>
+
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <Lightning class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">
+              Fast-path git actions
+            </h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Commit, create PR, pull, rebase, fix CI, fix comments, review,
+            merge. Clean rebases and pulls run as plain git — no agent tokens
+            spent — and only hand off when there's an actual conflict.
+          </p>
+        </div>
+
+        <div
+          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
+        >
+          <div class="mb-3 flex items-center gap-2">
+            <Stack class="h-6 w-6 text-black dark:text-white" />
+            <h3 class="text-lg font-light dark:text-white">Per-repo scripts</h3>
+          </div>
+          <p class="text-md font-light text-black dark:text-white">
+            Setup, run, and archive scripts per repo with exclusive run
+            semantics. Prompt overrides globally or per-repo. Bring your own
+            agents, themes, and binary paths.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        How it works
+      </h2>
+
+      <div
+        class="rounded-lg border-2 border-black bg-white p-6 dark:border-white dark:bg-neutral-900"
+      >
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Add a repo</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Point Jetline at a local clone. It tracks the default branch and
+              stores worktrees under <code>~/.jetline/worktrees</code>.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">
+              &gt; Open a workspace
+            </h3>
+            <p class="text-md font-light text-black dark:text-white">
+              New branch, imported branch, or pulled-in PR. A worktree is
+              created, a terminal tab spawns, the agent boots into it.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Ship</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Commit, open a PR, watch checks, address comments, merge — all
+              from the action bar. Conflicts hand off to the agent with the
+              right context already loaded.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="flex flex-col gap-y-6">
+      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
+        Why Jetline
+      </h2>
+      <div
+        class="rounded-lg border-2 border-black bg-white p-6 dark:border-white dark:bg-neutral-900"
+      >
+        <p class="text-md mb-4 font-light text-black dark:text-white">
+          Similar in spirit to web-based agent harnesses, but built differently:
+        </p>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Native</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              SwiftUI app. No Electron, no browser, no server. The terminal is
+              libghostty in-process, not a websocket to somewhere else.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">&gt; Local</h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Your code, your worktrees, your <code>gh</code> auth. SQLite
+              persistence lives at <code>~/.jetline/jetline.sqlite</code>. Set
+              <code>JETLINE_DATA_DIR</code> to relocate it.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">
+              &gt; Token-frugal
+            </h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Routine git operations don't touch an LLM. Agents are invoked
+              when judgement is needed — conflicts, CI failures, review
+              comments — not for every push.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-light dark:text-white">
+              &gt; Bring your own agent
+            </h3>
+            <p class="text-md font-light text-black dark:text-white">
+              Claude, Codex, Vibe, or a plain shell. Binary paths and prompt
+              templates are configurable globally and per-repo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section class="flex flex-col gap-y-6 text-center">
+      <h2 class="text-2xl font-light text-black dark:text-white">
+        Try Jetline
+      </h2>
+      <p
+        class="text-md mx-auto mb-4 max-w-2xl font-light text-black dark:text-white"
+      >
+        macOS 14 or later. Open source under EUPL v1.2.
+      </p>
+      <div class="flex flex-wrap justify-center gap-2">
+        <a
+          href={downloadUrl}
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
+        >
+          <AppleLogo class="w-4" />
+          Download
+        </a>
+        <a
+          href={repoUrl}
+          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black p-2 font-extralight text-black hover:underline dark:border-white dark:text-white"
+        >
+          <GithubLogo class="w-4" />
+          Source
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>
