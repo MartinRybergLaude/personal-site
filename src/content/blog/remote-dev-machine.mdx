@@ -1,0 +1,45 @@
+---
+title: "Remote Development Machine"
+description: "A new workflow for the agent era."
+pubDate: "Aug 30 2026"
+heroImage: "../../assets/images/macbook-scratched.jpeg"
+---
+
+We've all seen it at this point. People walking around the office with their MacBooks kept slightly open. Wouldn't want to disturb our agents, would we?
+
+And yes, there are fairly simple solutions to that, like `sudo pmset disablesleep 1`, but that comes with its own set of gotchas. My MacBook nearly melted into a soup in my bag after I accidentally left that option turned on. Poor airflow in there.
+
+There's a better solution. And as a bonus, it saves the laptop's battery and keeps it nice and cool when working. It also allows you to cheap out on the laptop, if you have a beefier machine at home, or rent a VPS (although that is far from as affordable as it used to be!).
+
+## Solution
+
+That solution is setting up the machine at home as a remote dev box. The gist of it is that you run your dev servers and agents on that machine instead, and access it all through ssh.
+
+It sounds super simple, but there are quite a few gotchas here as well. First you have to solve persistent agent sessions and manage that in a sane way. Tmux is the classic answer, but I've been giving [Herdr](https://herdr.dev/) a try recently and it really feels like a perfect fit for this scenario. Just run it on the remote machine and run the agents and dev servers in there. Wonderful.
+
+But then you have the issue of accessing the dev servers and getting past CORS problems.
+
+There are a couple alternatives here, but the one I went with was enabling SOCKS5 forwarding in my Macbook's ssh config specific to that remote machine with `DynamicForward 1080` in the Host block.That doesn't magically solve anything, but it does if you then set up a new Chromium profile launched with some arguments that tell your Chromium browser of choice to connect specifically to the forwarded SOCKS5. I chose to do this with an Automator script saved as an app:
+
+```
+open -na "Helium" --args \
+  --user-data-dir="$HOME/.helium-dev" \
+  --proxy-server="socks5://127.0.0.1:1080" \
+  --proxy-bypass-list="<-loopback>"
+```
+
+Then open your app inside that dev browser and all should work, no CORS issues and everything fully functional, so long as you keep the ssh tunnel open. The only thing to keep in mind is that you might have to tell Vite and such dev servers to use IPv4 and not IPv6, otherwise it won't be reachable through the tunnel through normal localhost.
+
+## Explanation
+
+So what does this SOCKS5 proxy stuff do?
+
+The naive approach is forwarding ports one by one in your ssh config. That works, but it gets old fast once a project has a frontend, an auth server, a database and a couple of containers. And you have to remember to add each new one. Dynamic forwarding replaces all that with a single tunnel. Instead of declaring ports up front, the browser tells ssh where it wants to go and ssh makes that connection from the remote side. Every port becomes reachable, including ones you haven't even started yet.
+
+The neat part is where the connection actually happens. Since ssh does the connecting over on the remote machine, your browser still believes it's talking to `http://localhost:5173`. That's the origin it sends along, and that's what your backend sees, what your cookies get scoped to, and what your OAuth redirect URIs match against. Nothing has any idea the traffic went anywhere. So a staging API that only whitelists localhost, a session cookie, browser APIs that demand a secure context... all of it just works, exactly like it would if the dev server was running on the laptop.
+
+Oh and that `--proxy-bypass-list="<-loopback>"` flag? Chromium basically just refuses to proxy loopback addresses by default, so without that line Chromium will still sidestep the tunnel for any localhost url. So don't forget that line.
+
+## Thoughts
+
+I've been using this setup for a few days now and it's quite nice! No worries of any agent work ever getting interrupted, and the MacBook becomes a simple interface. It has resulted in me attempting significantly longer agent runs with grander scopes, successfully I might add.
