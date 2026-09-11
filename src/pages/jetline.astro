@@ -1,279 +1,901 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import AppleLogo from "phosphor-astro/AppleLogo.astro";
-import GithubLogo from "phosphor-astro/GithubLogo.astro";
-import GitBranch from "phosphor-astro/GitBranch.astro";
-import Terminal from "phosphor-astro/Terminal.astro";
-import GitPullRequest from "phosphor-astro/GitPullRequest.astro";
-import Robot from "phosphor-astro/Robot.astro";
-import Lightning from "phosphor-astro/Lightning.astro";
-import Stack from "phosphor-astro/Stack.astro";
-import Icon from "../assets/images/jetline.png";
+/**
+ * Jetline product page.
+ *
+ * Self-contained: it renders its own <html> shell (reusing only BaseHead,
+ * Header and Footer) and every style, visual and script lives in this file.
+ * Nothing here leaks into the rest of the site.
+ */
+import { Image, getImage } from "astro:assets";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../assets/images/jetline-hero.png";
 
 const downloadUrl =
   "https://github.com/MartinRybergLaude/jetline/releases/latest";
 const repoUrl = "https://github.com/MartinRybergLaude/jetline";
+
+const title = "Jetline";
+const description =
+  "Jetline is a native Mac app for running coding agents in parallel git worktrees, with a built-in libghostty terminal and GitHub status alongside.";
+
+const og = await getImage({ src: Hero, width: 1200, format: "jpg" });
 ---
 
-<Layout
-  title="Jetline"
-  description="Jetline is a native SwiftUI Mac app for running parallel coding agents in git worktrees, with an embedded libghostty terminal and a GitHub-aware inspector."
->
-  <div class="flex flex-col gap-y-16 py-20">
-    <!-- Hero section -->
-    <section class="flex flex-col gap-y-6 text-center">
-      <div class="flex items-center justify-center gap-4">
-        <Image
-          src={Icon}
-          width="80"
-          height="80"
-          alt="Jetline icon"
-          class="h-12 w-12 shrink-0"
-        />
-        <h1
-          class="font-serif text-5xl font-light tracking-tight text-black dark:text-white"
-        >
-          Jetline
-        </h1>
-      </div>
-      <p
-        class="mx-auto max-w-2xl text-lg font-light text-black dark:text-white"
-      >
-        Run parallel coding agents in git worktrees. Native SwiftUI, libghostty
-        terminal, GitHub-aware.
-      </p>
-      <div class="flex flex-wrap justify-center gap-2">
-        <a
-          href={downloadUrl}
-          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
-        >
-          <AppleLogo class="w-4" />
-          Download
-        </a>
-        <a
-          href={repoUrl}
-          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black p-2 font-extralight text-black hover:underline dark:border-white dark:text-white"
-        >
-          <GithubLogo class="w-4" />
-          Source
-        </a>
-      </div>
-    </section>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} image={og.src} />
+    <link
+      rel="preload"
+      href="/fonts/Satoshi.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <Header />
 
-    <!-- Features Bento Grid -->
-    <section class="flex flex-col gap-y-6">
-      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
-        Features
-      </h2>
+    <main class="jl">
+      <!-- Hero -->
+      <section class="jl-hero" aria-label="Jetline">
+        <div class="jl-hero-frame">
+          <Image
+            src={Hero}
+            alt="The word Jetline over clouds, with a jet and its contrail above misted hills."
+            widths={[640, 960, 1280, 1800, 2048]}
+            sizes="(max-width: 1240px) 100vw, 1180px"
+            loading="eager"
+            fetchpriority="high"
+            format="webp"
+            quality={82}
+            class="jl-hero-img"
+          />
+        </div>
+      </section>
 
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div
-          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
-        >
-          <div class="mb-3 flex items-center gap-2">
-            <GitBranch class="h-6 w-6 text-black dark:text-white" />
-            <h3 class="text-lg font-light dark:text-white">
-              Workspace = worktree
+      <!-- Intro -->
+      <section class="jl-intro">
+        <h1 class="jl-headline">Coding agents in parallel git worktrees.</h1>
+        <div class="jl-actions">
+          <a href={downloadUrl} class="jl-btn jl-btn--solid">Download</a>
+          <a href={repoUrl} class="jl-link">
+            View on GitHub
+            <svg
+              class="jl-chevron"
+              viewBox="0 0 8 12"
+              fill="none"
+              aria-hidden="true"
+              ><path
+                d="M1.5 1.5 6 6l-4.5 4.5"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >
+          </a>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="jl-section" aria-label="Features">
+        <div class="jl-grid">
+          <article class="jl-card jl-card--worktree" data-reveal>
+            <h3 class="jl-tile">
+              Every workspace is a real git worktree.
+              <span class="jl-soft"
+                >Create a branch, import one, or pull in a PR. Nothing to stash.</span
+              >
             </h3>
-          </div>
-          <p class="text-md font-light text-black dark:text-white">
-            Every workspace is a real git worktree on disk. Spin up branches,
-            import existing ones, or pull a PR in as a workspace and start
-            working without stashing.
-          </p>
-        </div>
+            <svg
+              class="jl-tree"
+              viewBox="0 0 520 220"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path class="jl-tree-main" d="M20 110 H500" stroke-width="2"
+              ></path>
+              <path
+                class="jl-tree-branch"
+                d="M120 110 C160 110 160 40 200 40 H360"
+                stroke-width="2"></path>
+              <path
+                class="jl-tree-branch"
+                d="M180 110 C220 110 220 180 260 180 H420"
+                stroke-width="2"></path>
+              <path
+                class="jl-tree-branch"
+                d="M260 110 C300 110 300 40 340 40"
+                stroke-width="2"
+                stroke-dasharray="4 5"></path>
+              <circle class="jl-tree-dot" cx="120" cy="110" r="5"></circle>
+              <circle class="jl-tree-dot" cx="180" cy="110" r="5"></circle>
+              <circle class="jl-tree-dot" cx="260" cy="110" r="5"></circle>
+              <circle
+                class="jl-tree-dot jl-tree-dot--main"
+                cx="500"
+                cy="110"
+                r="6"></circle>
+              <g class="jl-tree-label" transform="translate(360 22)">
+                <rect width="118" height="36" rx="18"></rect>
+                <text x="59" y="23" text-anchor="middle">feat/inspector</text>
+              </g>
+              <g class="jl-tree-label" transform="translate(420 162)">
+                <rect width="90" height="36" rx="18"></rect>
+                <text x="45" y="23" text-anchor="middle">PR #214</text>
+              </g>
+              <text class="jl-tree-axis" x="20" y="134">main</text>
+            </svg>
+          </article>
 
-        <div
-          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
-        >
-          <div class="mb-3 flex items-center gap-2">
-            <Terminal class="h-6 w-6 text-black dark:text-white" />
-            <h3 class="text-lg font-light dark:text-white">
-              libghostty terminal
+          <article class="jl-card" data-reveal>
+            <h3 class="jl-tile">
+              Built-in terminal.
+              <span class="jl-soft"
+                >libghostty, in-process. Multiple tabs per workspace,
+                <span class="jl-nowrap">⌘1 to ⌘9</span> to switch.</span
+              >
             </h3>
-          </div>
-          <p class="text-md font-light text-black dark:text-white">
-            Embedded terminal powered by libghostty. Multiple session tabs per
-            workspace, ⌘1…⌘9 to jump, drag to reorder, detached views survive
-            reparents.
-          </p>
-        </div>
+            <div class="jl-term" aria-hidden="true">
+              <div class="jl-term-bar">
+                <span class="jl-term-tab is-active">claude</span>
+                <span class="jl-term-tab">codex</span>
+                <span class="jl-term-tab">zsh</span>
+              </div>
+              <div class="jl-term-body">
+                <div>
+                  <span class="jl-term-prompt">›</span> claude --continue
+                </div>
+                <div class="jl-term-dim">Reading Workspace.swift</div>
+                <div class="jl-term-dim">Running xcodebuild test</div>
+                <div class="jl-term-ok">42 tests passed</div>
+                <div>
+                  <span class="jl-term-prompt">›</span>
+                  <span class="jl-term-cursor"></span>
+                </div>
+              </div>
+            </div>
+          </article>
 
-        <div
-          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
-        >
-          <div class="mb-3 flex items-center gap-2">
-            <Robot class="h-6 w-6 text-black dark:text-white" />
-            <h3 class="text-lg font-light dark:text-white">Agent agnostic</h3>
-          </div>
-          <p class="text-md font-light text-black dark:text-white">
-            Wraps <code>claude</code>, <code>codex</code>, and <code>vibe</code>
-             CLIs in a first-class way. Resolves binaries, applies prompt
-            overrides, and gives each agent its own PTY.
-          </p>
-        </div>
-
-        <div
-          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
-        >
-          <div class="mb-3 flex items-center gap-2">
-            <GitPullRequest class="h-6 w-6 text-black dark:text-white" />
-            <h3 class="text-lg font-light dark:text-white">GitHub inspector</h3>
-          </div>
-          <p class="text-md font-light text-black dark:text-white">
-            Live diff (combined / PR / local), PR status with checks, and
-            ahead/behind position against the base branch. FSEvents-backed so
-            the view follows the filesystem.
-          </p>
-        </div>
-
-        <div
-          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
-        >
-          <div class="mb-3 flex items-center gap-2">
-            <Lightning class="h-6 w-6 text-black dark:text-white" />
-            <h3 class="text-lg font-light dark:text-white">
-              Fast-path git actions
+          <article class="jl-card" data-reveal>
+            <h3 class="jl-tile">
+              Works with Claude, Codex, and Vibe.
+              <span class="jl-soft">Or a plain shell.</span>
             </h3>
-          </div>
-          <p class="text-md font-light text-black dark:text-white">
-            Commit, create PR, pull, rebase, fix CI, fix comments, review,
-            merge. Clean rebases and pulls run as plain git — no agent tokens
-            spent — and only hand off when there's an actual conflict.
-          </p>
-        </div>
+            <ul class="jl-pills" aria-label="Supported agents">
+              <li>claude</li>
+              <li>codex</li>
+              <li>vibe</li>
+              <li class="jl-pill--muted">zsh</li>
+            </ul>
+          </article>
 
-        <div
-          class="rounded-lg border-2 border-black bg-white p-6 transition dark:border-white dark:bg-neutral-900"
-        >
-          <div class="mb-3 flex items-center gap-2">
-            <Stack class="h-6 w-6 text-black dark:text-white" />
-            <h3 class="text-lg font-light dark:text-white">Per-repo scripts</h3>
-          </div>
-          <p class="text-md font-light text-black dark:text-white">
-            Setup, run, and archive scripts per repo with exclusive run
-            semantics. Prompt overrides globally or per-repo. Bring your own
-            agents, themes, and binary paths.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- How it works -->
-    <section class="flex flex-col gap-y-6">
-      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
-        How it works
-      </h2>
-
-      <div
-        class="rounded-lg border-2 border-black bg-white p-6 dark:border-white dark:bg-neutral-900"
-      >
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-light dark:text-white">&gt; Add a repo</h3>
-            <p class="text-md font-light text-black dark:text-white">
-              Point Jetline at a local clone. It tracks the default branch and
-              stores worktrees under <code>~/.jetline/worktrees</code>.
-            </p>
-          </div>
-          <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-light dark:text-white">
-              &gt; Open a workspace
+          <article class="jl-card" data-reveal>
+            <h3 class="jl-tile">
+              Diff, checks, and PR status in a side panel.
+              <span class="jl-soft">Updates as files change.</span>
             </h3>
-            <p class="text-md font-light text-black dark:text-white">
-              New branch, imported branch, or pulled-in PR. A worktree is
-              created, a terminal tab spawns, the agent boots into it.
-            </p>
-          </div>
-          <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-light dark:text-white">&gt; Ship</h3>
-            <p class="text-md font-light text-black dark:text-white">
-              Commit, open a PR, watch checks, address comments, merge — all
-              from the action bar. Conflicts hand off to the agent with the
-              right context already loaded.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+            <div class="jl-status" aria-hidden="true">
+              <div class="jl-status-row">
+                <span class="jl-status-dot is-ok"></span>
+                <span>Build</span>
+                <span class="jl-status-meta">2m 04s</span>
+              </div>
+              <div class="jl-status-row">
+                <span class="jl-status-dot is-ok"></span>
+                <span>Test</span>
+                <span class="jl-status-meta">1m 31s</span>
+              </div>
+              <div class="jl-status-row">
+                <span class="jl-status-dot is-run"></span>
+                <span>Lint</span>
+                <span class="jl-status-meta">Running</span>
+              </div>
+              <div class="jl-status-foot">
+                <span class="jl-diff"><b>+142</b> <i>−38</i></span>
+                <span>3 ahead, 0 behind</span>
+              </div>
+            </div>
+          </article>
 
-    <!-- Comparison -->
-    <section class="flex flex-col gap-y-6">
-      <h2 class="ml-6 text-2xl font-light text-black dark:text-white">
-        Why Jetline
-      </h2>
-      <div
-        class="rounded-lg border-2 border-black bg-white p-6 dark:border-white dark:bg-neutral-900"
-      >
-        <p class="text-md mb-4 font-light text-black dark:text-white">
-          Similar in spirit to web-based agent harnesses, but built differently:
+          <article class="jl-card jl-card--center" data-reveal>
+            <h3 class="jl-tile">
+              Native SwiftUI.
+              <span class="jl-soft">No Electron. No local server.</span>
+            </h3>
+          </article>
+
+          <article class="jl-card jl-card--fastpath" data-reveal>
+            <h3 class="jl-tile">
+              Routine git runs as git.
+              <span class="jl-soft"
+                >Commit, pull, rebase, and merge without an agent. Conflicts are
+                handed to one, with context.</span
+              >
+            </h3>
+            <ul class="jl-actionbar" aria-hidden="true">
+              <li>Commit</li>
+              <li>Create PR</li>
+              <li>Pull</li>
+              <li>Rebase</li>
+              <li>Fix CI</li>
+              <li>Fix comments</li>
+              <li>Review</li>
+              <li>Merge</li>
+            </ul>
+          </article>
+
+          <article class="jl-card" data-reveal>
+            <h3 class="jl-tile">
+              Scripts per repo.
+              <span class="jl-soft"
+                >Setup, run, and archive. Prompt overrides globally or per repo.</span
+              >
+            </h3>
+            <ul class="jl-scripts" aria-hidden="true">
+              <li><span>Setup</span><span>bun install</span></li>
+              <li><span>Run</span><span>bun dev</span></li>
+              <li><span>Archive</span><span>git worktree prune</span></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Download -->
+      <section class="jl-cta" aria-labelledby="cta">
+        <h2 id="cta" class="jl-headline jl-headline--sm">Download Jetline.</h2>
+        <div class="jl-actions">
+          <a href={downloadUrl} class="jl-btn jl-btn--solid">Download</a>
+          <a href={repoUrl} class="jl-link">
+            View on GitHub
+            <svg
+              class="jl-chevron"
+              viewBox="0 0 8 12"
+              fill="none"
+              aria-hidden="true"
+              ><path
+                d="M1.5 1.5 6 6l-4.5 4.5"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >
+          </a>
+        </div>
+        <p class="jl-footnote">
+          macOS 14 or later. Open source under the EUPL 1.2.
         </p>
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-light dark:text-white">&gt; Native</h3>
-            <p class="text-md font-light text-black dark:text-white">
-              SwiftUI app. No Electron, no browser, no server. The terminal is
-              libghostty in-process, not a websocket to somewhere else.
-            </p>
-          </div>
-          <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-light dark:text-white">&gt; Local</h3>
-            <p class="text-md font-light text-black dark:text-white">
-              Your code, your worktrees, your <code>gh</code> auth. SQLite
-              persistence lives at <code>~/.jetline/jetline.sqlite</code>. Set
-              <code>JETLINE_DATA_DIR</code> to relocate it.
-            </p>
-          </div>
-          <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-light dark:text-white">
-              &gt; Token-frugal
-            </h3>
-            <p class="text-md font-light text-black dark:text-white">
-              Routine git operations don't touch an LLM. Agents are invoked
-              when judgement is needed — conflicts, CI failures, review
-              comments — not for every push.
-            </p>
-          </div>
-          <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-light dark:text-white">
-              &gt; Bring your own agent
-            </h3>
-            <p class="text-md font-light text-black dark:text-white">
-              Claude, Codex, Vibe, or a plain shell. Binary paths and prompt
-              templates are configurable globally and per-repo.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <!-- Download CTA -->
-    <section class="flex flex-col gap-y-6 text-center">
-      <h2 class="text-2xl font-light text-black dark:text-white">
-        Try Jetline
-      </h2>
-      <p
-        class="text-md mx-auto mb-4 max-w-2xl font-light text-black dark:text-white"
-      >
-        macOS 14 or later. Open source under EUPL v1.2.
-      </p>
-      <div class="flex flex-wrap justify-center gap-2">
-        <a
-          href={downloadUrl}
-          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black bg-black p-2 font-extralight text-white hover:underline dark:border-white"
-        >
-          <AppleLogo class="w-4" />
-          Download
-        </a>
-        <a
-          href={repoUrl}
-          class="text-md inline-flex min-w-30 items-center justify-center gap-2 rounded-sm border border-black p-2 font-extralight text-black hover:underline dark:border-white dark:text-white"
-        >
-          <GithubLogo class="w-4" />
-          Source
-        </a>
-      </div>
-    </section>
-  </div>
-</Layout>
+    <Footer />
+
+    <script>
+      // Reveal-on-scroll. Cosmetic only: without JS or with reduced motion,
+      // everything is simply visible.
+      const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (!("IntersectionObserver" in window) || reduce.matches) {
+        els.forEach((el) => el.classList.add("is-in"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                (e.target as HTMLElement).classList.add("is-in");
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.1 },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  /* Satoshi already ships with the site (public/fonts) but is declared only
+     here, so it costs nothing on other pages. */
+  @font-face {
+    font-family: "Satoshi";
+    src: url("/fonts/Satoshi.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+  }
+
+  /* ── Tokens ───────────────────────────────────────────────────────── */
+  html {
+    --jl-bg: #f5f4f0;
+    --jl-card: #ffffff;
+    --jl-card-2: #f0efeb;
+    --jl-ink: #1d1d1f;
+    --jl-ink-2: #6e6e73;
+    --jl-ink-3: #86868b;
+    --jl-line-strong: rgba(0, 0, 0, 0.2);
+    --jl-sky: #7fb2d3;
+    --jl-sky-soft: #dbe9f2;
+    --jl-cream: #f2e6d8;
+    --jl-ok: #3f8f5a;
+    --jl-run: #d9a63a;
+
+    --jl-sans:
+      "Satoshi", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+    background: var(--jl-bg);
+    color: var(--jl-ink);
+    font-family: var(--jl-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      --jl-bg: #10100e;
+      --jl-card: #1a1a18;
+      --jl-card-2: #222220;
+      --jl-ink: #f5f5f7;
+      --jl-ink-2: #a1a1a6;
+      --jl-ink-3: #86868b;
+      --jl-line-strong: rgba(255, 255, 255, 0.24);
+      --jl-sky: #8fbedc;
+      --jl-sky-soft: #1d2b35;
+      --jl-cream: #2a2622;
+      --jl-ok: #6fc48a;
+      --jl-run: #e0b656;
+    }
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .jl {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+    box-sizing: border-box;
+  }
+  @media (min-width: 768px) {
+    .jl {
+      padding: 0 24px 64px;
+    }
+  }
+
+  /* ── Type scale (after apple.com: size / line-height / tracking) ──── */
+  /* Headline  40/1.1/0            Intro   21/1.19/+0.011em
+     Section   32/1.125/+0.004em   Tile    21/1.19/+0.011em
+     Body      17/1.47/-0.022em    Small   14/1.43/-0.016em
+     Footnote  12/1.33/-0.01em                                          */
+
+  .jl-headline {
+    margin: 0;
+    font-weight: 600;
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+  .jl-headline--sm {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    line-height: 1.125;
+  }
+
+  /* Bento tile headline: lead phrase in ink, remainder in secondary. */
+  .jl-tile {
+    margin: 0;
+    max-width: 26ch;
+    font-weight: 600;
+    font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
+    line-height: 1.19;
+    letter-spacing: 0.011em;
+    text-wrap: pretty;
+  }
+  .jl-soft {
+    color: var(--jl-ink-2);
+  }
+  .jl-nowrap {
+    white-space: nowrap;
+  }
+
+  code {
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--jl-ink);
+  }
+
+  .jl-footnote {
+    margin: 14px 0 0;
+    font-size: 0.75rem;
+    line-height: 1.33;
+    letter-spacing: -0.01em;
+    color: var(--jl-ink-3);
+  }
+
+  /* ── Actions ──────────────────────────────────────────────────────── */
+  .jl-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 24px;
+    margin-top: 22px;
+  }
+  .jl-btn {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 999px;
+    font-size: 1.0625rem;
+    line-height: 1;
+    letter-spacing: -0.022em;
+    text-decoration: none;
+    transition:
+      transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
+      opacity 0.2s;
+  }
+  .jl-btn:hover {
+    opacity: 0.85;
+  }
+  .jl-btn:active {
+    transform: scale(0.98);
+  }
+  .jl-btn--solid {
+    background: var(--jl-ink);
+    color: var(--jl-bg);
+  }
+  .jl-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.0625rem;
+    letter-spacing: -0.022em;
+    color: var(--jl-ink);
+    text-decoration: none;
+  }
+  .jl-link:hover {
+    text-decoration: underline;
+  }
+  .jl-chevron {
+    width: 7px;
+    height: 11px;
+    margin-top: 1px;
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────────────── */
+  .jl-hero {
+    padding-top: 8px;
+  }
+  .jl-hero-frame {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--jl-sky-soft);
+    animation: jl-rise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .jl-hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: 50% 38%;
+    animation: jl-zoom 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  @media (min-width: 640px) {
+    .jl-hero-img {
+      aspect-ratio: 4 / 3;
+    }
+  }
+  @media (min-width: 900px) {
+    .jl-hero-frame {
+      border-radius: 28px;
+    }
+    .jl-hero-img {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  /* ── Intro ────────────────────────────────────────────────────────── */
+  .jl-intro {
+    text-align: center;
+    padding: clamp(48px, 7vw, 88px) 0 clamp(40px, 6vw, 72px);
+    animation: jl-rise 1.1s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .jl-intro .jl-headline {
+    margin: 0 auto;
+    max-width: 22ch;
+  }
+
+  /* ── Sections ─────────────────────────────────────────────────────── */
+  .jl-section {
+    padding: clamp(32px, 5vw, 56px) 0;
+  }
+
+  /* ── Bento grid ───────────────────────────────────────────────────── */
+  .jl-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 640px) {
+    .jl-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .jl-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-auto-rows: minmax(120px, auto);
+    }
+    /* Tiles: [4 + 2] / [2 + 2 + 2] / [4 + 2] */
+    .jl-grid > :nth-child(1) {
+      grid-column: span 4;
+      grid-row: span 2;
+    }
+    .jl-grid > :nth-child(2) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .jl-grid > :nth-child(3),
+    .jl-grid > :nth-child(4),
+    .jl-grid > :nth-child(5),
+    .jl-grid > :nth-child(7) {
+      grid-column: span 2;
+    }
+    .jl-grid > :nth-child(6) {
+      grid-column: span 4;
+    }
+  }
+
+  .jl-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 28px;
+    border-radius: 24px;
+    background: var(--jl-card);
+    overflow: hidden;
+  }
+  @media (min-width: 900px) {
+    .jl-card {
+      padding: 32px;
+    }
+  }
+
+  .jl-card--center {
+    justify-content: center;
+  }
+
+  /* reveal */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+  .jl-grid > :nth-child(2).is-in {
+    transition-delay: 0.08s;
+  }
+  .jl-grid > :nth-child(3).is-in {
+    transition-delay: 0.16s;
+  }
+  .jl-grid > :nth-child(4).is-in {
+    transition-delay: 0.24s;
+  }
+
+  /* Worktree tile */
+  .jl-card--worktree {
+    background:
+      radial-gradient(
+        120% 90% at 100% 100%,
+        var(--jl-sky-soft) 0%,
+        transparent 55%
+      ),
+      var(--jl-card);
+  }
+  .jl-tree {
+    width: 100%;
+    max-width: 560px;
+    margin-top: auto;
+    align-self: flex-end;
+    overflow: visible;
+  }
+  .jl-tree-main {
+    stroke: var(--jl-line-strong);
+  }
+  .jl-tree-branch {
+    stroke: var(--jl-sky);
+    stroke-linecap: round;
+  }
+  .jl-tree-dot {
+    fill: var(--jl-card);
+    stroke: var(--jl-sky);
+    stroke-width: 2;
+  }
+  .jl-tree-dot--main {
+    fill: var(--jl-ink);
+    stroke: var(--jl-ink);
+  }
+  .jl-tree-label rect {
+    fill: var(--jl-ink);
+  }
+  .jl-tree-label text {
+    fill: var(--jl-bg);
+    font-family: var(--jl-sans);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .jl-tree-axis {
+    fill: var(--jl-ink-3);
+    font-family: var(--jl-sans);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Terminal tile */
+  .jl-term {
+    margin-top: auto;
+    border-radius: 14px;
+    background: #16171a;
+    color: #e6e6e3;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .jl-term-bar {
+    display: flex;
+    gap: 4px;
+    padding: 8px 8px 0;
+    background: #0f1012;
+  }
+  .jl-term-tab {
+    padding: 5px 12px;
+    border-radius: 8px 8px 0 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(230, 230, 227, 0.5);
+  }
+  .jl-term-tab.is-active {
+    background: #16171a;
+    color: #e6e6e3;
+  }
+  .jl-term-body {
+    padding: 12px 16px 14px;
+  }
+  .jl-term-body > div + div {
+    padding-left: 14px;
+  }
+  .jl-term-body > div:last-child {
+    padding-left: 0;
+  }
+  .jl-term-prompt {
+    color: var(--jl-sky);
+    font-weight: 700;
+  }
+  .jl-term-dim {
+    color: rgba(230, 230, 227, 0.5);
+  }
+  .jl-term-ok {
+    color: #7fd39a;
+  }
+  .jl-term-cursor {
+    display: inline-block;
+    width: 7px;
+    height: 1em;
+    vertical-align: -0.15em;
+    background: #e6e6e3;
+    animation: jl-blink 1.1s steps(1) infinite;
+  }
+
+  /* Agents tile */
+  .jl-pills {
+    list-style: none;
+    margin: auto 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .jl-pills li {
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: var(--jl-card-2);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.016em;
+  }
+  .jl-pills .jl-pill--muted {
+    color: var(--jl-ink-3);
+  }
+
+  /* Status tile */
+  .jl-status {
+    margin-top: auto;
+    border-radius: 14px;
+    background: var(--jl-card-2);
+    font-size: 14px;
+    letter-spacing: -0.016em;
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+  }
+  .jl-status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    font-weight: 500;
+  }
+  .jl-status-row:first-child {
+    padding-top: 12px;
+  }
+  .jl-status-meta {
+    margin-left: auto;
+    font-weight: 400;
+    color: var(--jl-ink-3);
+  }
+  .jl-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .jl-status-dot.is-ok {
+    background: var(--jl-ok);
+  }
+  .jl-status-dot.is-run {
+    background: var(--jl-run);
+    animation: jl-pulse 1.6s ease-out infinite;
+  }
+  .jl-status-foot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--jl-ink-3);
+  }
+  @media (prefers-color-scheme: dark) {
+    .jl-status-foot {
+      background: rgba(255, 255, 255, 0.04);
+    }
+  }
+  .jl-diff b {
+    font-weight: 600;
+    color: var(--jl-ok);
+  }
+  .jl-diff i {
+    font-style: normal;
+    font-weight: 600;
+    color: #c65d5d;
+  }
+
+  /* Fast-path tile */
+  .jl-card--fastpath {
+    background:
+      linear-gradient(180deg, transparent 40%, var(--jl-cream) 140%),
+      var(--jl-card);
+  }
+  .jl-actionbar {
+    list-style: none;
+    margin: auto 0 0;
+    padding: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    border-radius: 14px;
+    background: var(--jl-card-2);
+  }
+  .jl-actionbar li {
+    padding: 7px 12px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.016em;
+    color: var(--jl-ink-2);
+  }
+  .jl-actionbar li:first-child {
+    background: var(--jl-card);
+    color: var(--jl-ink);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Scripts tile */
+  .jl-scripts {
+    list-style: none;
+    margin: auto 0 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+    font-size: 14px;
+    letter-spacing: -0.016em;
+  }
+  .jl-scripts li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    background: var(--jl-card-2);
+  }
+  .jl-scripts li > span:first-child {
+    color: var(--jl-ink-3);
+  }
+  .jl-scripts li > span:last-child {
+    font-weight: 500;
+  }
+
+  /* ── Download ─────────────────────────────────────────────────────── */
+  .jl-cta {
+    text-align: center;
+    padding: clamp(56px, 8vw, 96px) 0 clamp(32px, 5vw, 56px);
+  }
+
+  /* ── Motion ───────────────────────────────────────────────────────── */
+  @keyframes jl-rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes jl-zoom {
+    from {
+      transform: scale(1.04);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes jl-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes jl-pulse {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--jl-run) 60%, transparent);
+    }
+    100% {
+      box-shadow: 0 0 0 8px transparent;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .jl-hero-frame,
+    .jl-hero-img,
+    .jl-intro,
+    .jl-term-cursor,
+    .jl-status-dot.is-run {
+      animation: none;
+    }
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .jl-btn,
+    .jl-card {
+      transition: none;
+    }
+  }
+</style>
