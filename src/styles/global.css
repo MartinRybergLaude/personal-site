@@ -27,6 +27,14 @@
 }
 
 @font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Computer Modern";
   src: url("/fonts/cmunrm.woff") format("woff");
   font-style: normal;
@@ -63,6 +71,7 @@
   --font-jetbrains: "Jetbrains", "monospace";
   --font-serif: "Instrument", "serif";
   --font-sans: "Computer Modern", "serif";
+  --font-satoshi: "Satoshi", "Helvetica Neue", "Arial", "sans-serif";
 }
 
 ::selection {

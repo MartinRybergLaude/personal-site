@@ -1,0 +1,26 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import "../styles/global.css";
+
+const { title, description } = Astro.props;
+---
+
+<html
+  lang="en"
+  class="font-satoshi min-h-[100vh] bg-[#f5f4f0] text-stone-900 antialiased dark:bg-[#10100e] dark:text-stone-100"
+>
+  <head>
+    <BaseHead title={title} description={description} />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <link
+      rel="preload"
+      href="/fonts/Satoshi.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body class="min-h-[100vh]">
+    <slot />
+  </body>
+</html>

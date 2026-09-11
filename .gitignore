@@ -25,3 +25,10 @@ pnpm-debug.log*
 
 # osgrep
 .osgrep
+
+# cloudflare local state and secrets
+.wrangler/
+.dev.vars
+
+# photo publishing staging output
+.photos-out/

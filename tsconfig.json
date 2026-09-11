@@ -5,7 +5,9 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "functions",
+    "scripts"
   ],
   "compilerOptions": {
     "strictNullChecks": true,

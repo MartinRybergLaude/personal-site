@@ -1,0 +1,8 @@
+---
+import PhotoLayout from "../../layouts/PhotoLayout.astro";
+import PhotoApp from "../../components/photos/PhotoApp.svelte";
+---
+
+<PhotoLayout title="Photos" description="Photography by Martin Ryberg Laude">
+  <PhotoApp client:only="svelte" />
+</PhotoLayout>
