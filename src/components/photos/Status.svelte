@@ -15,5 +15,5 @@
 </script>
 
 <div class="flex min-h-[60vh] items-center justify-center">
-  <Label muted>{message}</Label>
+  <Label weight="light">{message}</Label>
 </div>

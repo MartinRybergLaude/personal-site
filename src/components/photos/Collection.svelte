@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fetchJson, formatDate, imageUrl, srcset } from "./api";
   import type { CollectionManifest, Photo } from "./types";
+  import Container from "./Container.svelte";
   import Label from "./Label.svelte";
   import Masonry from "./Masonry.svelte";
   import Status from "./Status.svelte";
@@ -41,55 +42,59 @@
 {#if error}
   <Status {error} />
 {:else if manifest}
-  <header>
-    {#if cover}
-      <div
-        class="h-[62vh] w-full overflow-hidden md:h-[78vh]"
-        style={`background-color: ${cover.color}`}
-      >
-        <img
-          src={imageUrl(slug, cover, 1600)}
-          srcset={srcset(slug, cover)}
-          sizes="100vw"
-          alt={manifest.title}
-          width={cover.width}
-          height={cover.height}
-          fetchpriority="high"
-          decoding="async"
-          class="h-full w-full object-cover"
-        />
-      </div>
-    {/if}
-
-    <div
-      class="mx-auto flex max-w-3xl flex-col items-center gap-8 px-5 pt-14 pb-16 text-center md:pt-20 md:pb-24"
+  <Container>
+    <!--
+      Header: the cover photograph shown uncropped at its own aspect ratio,
+      with the metadata beside it on desktop and below it on narrow screens.
+    -->
+    <header
+      class="grid grid-cols-1 items-start gap-8 pt-10 pb-16 md:grid-cols-[minmax(0,1fr)_13rem] md:gap-10 md:pt-16 md:pb-20"
     >
-      <h1 class="text-sm font-medium uppercase tracking-[0.22em]">{manifest.title}</h1>
-
-      {#if manifest.description}
-        <p class="max-w-xl text-[13px] leading-relaxed text-stone-600 dark:text-stone-400">
-          {manifest.description}
-        </p>
+      {#if cover}
+        <div
+          class="w-full"
+          style={`aspect-ratio: ${cover.width} / ${cover.height}; background-color: ${cover.color}`}
+        >
+          <img
+            src={imageUrl(slug, cover, 960)}
+            srcset={srcset(slug, cover)}
+            sizes="(min-width: 768px) 496px, calc(100vw - 32px)"
+            alt={manifest.title}
+            width={cover.width}
+            height={cover.height}
+            fetchpriority="high"
+            decoding="async"
+            class="block h-full w-full"
+          />
+        </div>
       {/if}
 
-      <dl class="flex flex-wrap items-baseline justify-center gap-x-8 gap-y-3">
-        {#each facts as f (f.k)}
-          <div class="flex items-baseline gap-2">
-            <dt><Label muted>{f.k}</Label></dt>
-            <dd><Label>{f.v}</Label></dd>
-          </div>
-        {/each}
-      </dl>
-    </div>
-  </header>
+      <aside class="flex flex-col gap-6">
+        <h1><Label weight="bold">{manifest.title}</Label></h1>
+
+        {#if manifest.description}
+          <p class="text-[13px] leading-relaxed font-light">{manifest.description}</p>
+        {/if}
+
+        <dl class="flex flex-col gap-2">
+          {#each facts as f (f.k)}
+            <div class="flex flex-col gap-0.5">
+              <dt><Label weight="light">{f.k}</Label></dt>
+              <dd><Label>{f.v}</Label></dd>
+            </div>
+          {/each}
+        </dl>
+      </aside>
+    </header>
+  </Container>
 
   <Masonry {slug} photos={manifest.photos} />
 
-  <footer class="flex justify-center px-5 py-16">
-    <a href="/photos/" class="group">
-      <Label muted class="transition-colors group-hover:text-stone-900 dark:group-hover:text-stone-100">
-        &larr; All collections
-      </Label>
-    </a>
-  </footer>
+  <Container>
+    <footer class="flex justify-center py-16">
+      <a href="/photos/" class="underline-offset-4 hover:underline">
+        <Label weight="light">&larr; All collections</Label>
+      </a>
+    </footer>
+  </Container>
 {/if}

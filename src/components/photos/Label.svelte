@@ -1,17 +1,23 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
+  /**
+   * The one text style used across /photos: small uppercase Satoshi, always
+   * black or white. Hierarchy comes from weight alone.
+   */
   let {
-    muted = false,
+    weight = "regular",
     class: className = "",
     children,
-  }: { muted?: boolean; class?: string; children: Snippet } = $props();
+  }: {
+    weight?: "light" | "regular" | "bold";
+    class?: string;
+    children: Snippet;
+  } = $props();
+
+  const weights = { light: "font-light", regular: "font-medium", bold: "font-bold" };
 </script>
 
-<span
-  class="text-[11px] font-medium uppercase tracking-[0.18em] {muted
-    ? 'text-stone-500 dark:text-stone-400'
-    : 'text-stone-900 dark:text-stone-100'} {className}"
->
+<span class="text-[11px] uppercase tracking-[0.18em] {weights[weight]} {className}">
   {@render children()}
 </span>
