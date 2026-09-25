@@ -11,6 +11,11 @@ export interface Photo {
   /** Object key of the untouched original, if it was uploaded. */
   original?: string;
   caption?: string;
+  /** From EXIF or collection.json overrides. */
+  camera?: string;
+  location?: string;
+  /** ISO date YYYY-MM-DD. */
+  date?: string;
 }
 
 export interface CollectionSummary {

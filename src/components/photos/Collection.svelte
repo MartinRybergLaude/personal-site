@@ -88,7 +88,7 @@
     </header>
   </Container>
 
-  <Bento {slug} photos={manifest.photos} />
+  <Bento {slug} photos={manifest.photos} location={manifest.location} />
 
   <Container>
     <footer class="flex justify-center py-24">

@@ -137,6 +137,19 @@ every image to 480/960/1600/2400px WebP (EXIF stripped), writes a manifest,
 uploads everything and updates the collection index. Add `--originals` to also
 upload the untouched files. Re-running replaces the collection.
 
+Camera and capture date are read from each photo's EXIF and shown in the
+lightbox. Add `--geocode` to turn EXIF GPS coordinates into "Place, Country"
+via OpenStreetMap (one request per second). Anything can be overridden per
+photo in `collection.json`:
+
+```json
+"photos": {
+  "DSC01234.jpg": { "caption": "Reynisfjara", "location": "Vík, Iceland", "camera": "Leica Q3", "date": "2025-08-14" }
+}
+```
+
+Photos without their own location fall back to the collection's location.
+
 ### Previewing locally
 
 ```bash

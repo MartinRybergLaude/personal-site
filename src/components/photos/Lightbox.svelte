@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { imageUrl, srcset } from "./api";
+  import { formatDate, imageUrl, srcset } from "./api";
   import type { Photo } from "./types";
   import Label from "./Label.svelte";
 
@@ -7,12 +7,15 @@
     slug,
     photos,
     index,
+    fallbackLocation,
     onclose,
     onnavigate,
   }: {
     slug: string;
     photos: Photo[];
     index: number;
+    /** Collection location, shown when a photograph has none of its own. */
+    fallbackLocation?: string;
     onclose: () => void;
     onnavigate: (index: number) => void;
   } = $props();
@@ -20,6 +23,10 @@
   const photo = $derived(photos[index]);
   const hasPrev = $derived(index > 0);
   const hasNext = $derived(index < photos.length - 1);
+
+  const details = $derived(
+    [photo.camera, photo.location ?? fallbackLocation, formatDate(photo.date)].filter(Boolean).join("  ·  "),
+  );
 
   function prev() {
     if (hasPrev) onnavigate(index - 1);
@@ -109,9 +116,14 @@
     ></button>
   </div>
 
-  {#if photo.caption}
-    <div class="px-5 pb-6 text-center md:px-8">
-      <Label weight="light">{photo.caption}</Label>
+  {#if photo.caption || details}
+    <div class="flex flex-col items-center gap-2 px-5 pb-6 text-center md:px-8">
+      {#if photo.caption}
+        <Label>{photo.caption}</Label>
+      {/if}
+      {#if details}
+        <Label weight="light">{details}</Label>
+      {/if}
     </div>
   {/if}
 </div>

@@ -4,7 +4,12 @@
   import { compose, ratio } from "./bento";
   import Lightbox from "./Lightbox.svelte";
 
-  let { slug, photos, gap = 12 }: { slug: string; photos: Photo[]; gap?: number } = $props();
+  let {
+    slug,
+    photos,
+    location,
+    gap = 12,
+  }: { slug: string; photos: Photo[]; location?: string; gap?: number } = $props();
 
   const blocks = $derived(compose(photos));
   const indexOf = $derived(new Map(photos.map((p, i) => [p.id, i])));
@@ -108,6 +113,7 @@
     {slug}
     {photos}
     index={active}
+    fallbackLocation={location}
     onclose={() => (active = null)}
     onnavigate={(i) => (active = i)}
   />

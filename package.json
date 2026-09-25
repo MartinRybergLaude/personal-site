@@ -27,6 +27,7 @@
     "@cloudflare/workers-types": "^5.20260911.1",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.20.2",
+    "exif-reader": "^2.0.3",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",

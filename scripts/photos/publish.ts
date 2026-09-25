@@ -1,7 +1,7 @@
 /**
  * Process a folder of photographs into a private collection and upload it to R2.
  *
- *   bun run photos:publish <folder> [--local] [--originals] [--skip-upload]
+ *   bun run photos:publish <folder> [--local] [--originals] [--skip-upload] [--geocode]
  *   (runs under Node, which is required for sharp)
  *
  * <folder> must contain a collection.json:
@@ -12,9 +12,16 @@
  *     "date": "2025-08",                 // YYYY, YYYY-MM or YYYY-MM-DD
  *     "location": "Iceland",
  *     "camera": "Leica Q3",
- *     "cover": "DSC01234.jpg"            // filename in the folder (default: first)
+ *     "cover": "DSC01234.jpg",           // filename in the folder (default: first)
+ *     "photos": {                        // optional per-photo overrides
+ *       "DSC01234.jpg": { "caption": "...", "location": "...", "camera": "...", "date": "2025-08-14" }
+ *     }
  *   }
  * plus the .jpg / .jpeg / .png / .tif files, ordered by filename.
+ *
+ * Camera and capture date are read from EXIF. With --geocode, GPS coordinates
+ * are reverse-geocoded to "Place, Country" via OpenStreetMap Nominatim (one
+ * request per second, cached per run). Overrides in collection.json win.
  *
  * Derivatives are written to .photos-out/<slug>/ and uploaded together with
  * manifest.json; collections.json in the bucket is updated to include the
@@ -41,6 +48,7 @@ import {
   NoSuchKey,
 } from "@aws-sdk/client-s3";
 import sharp from "sharp";
+import exifReader from "exif-reader";
 
 const execFileAsync = promisify(execFile);
 
@@ -52,7 +60,13 @@ type Photo = {
   sizes: number[];
   original?: string;
   caption?: string;
+  camera?: string;
+  location?: string;
+  /** ISO date YYYY-MM-DD. */
+  date?: string;
 };
+
+type PhotoOverrides = Partial<Pick<Photo, "caption" | "location" | "camera" | "date">>;
 
 type CollectionConfig = {
   slug: string;
@@ -62,7 +76,9 @@ type CollectionConfig = {
   location?: string;
   camera?: string;
   cover?: string;
+  /** Legacy: filename -> caption. Prefer `photos`. */
   captions?: Record<string, string>;
+  photos?: Record<string, PhotoOverrides>;
 };
 
 const WIDTHS = [480, 960, 1600, 2400];
@@ -82,6 +98,7 @@ if (!folder) {
   process.exit(1);
 }
 const LOCAL = flags.has("--local");
+const GEOCODE = flags.has("--geocode");
 const ORIGINALS = flags.has("--originals");
 const SKIP_UPLOAD = flags.has("--skip-upload");
 
@@ -210,6 +227,77 @@ async function pool<T, R>(
   return results;
 }
 
+// ---------- exif ----------
+
+type Exif = { camera?: string; date?: string; lat?: number; lon?: number };
+
+function dmsToDecimal(dms: number[] | undefined, ref: string | undefined): number | undefined {
+  if (!dms || dms.length < 2) return undefined;
+  const [d, m = 0, sec = 0] = dms;
+  const value = d + m / 60 + sec / 3600;
+  return ref === "S" || ref === "W" ? -value : value;
+}
+
+function cameraName(make?: string, model?: string): string | undefined {
+  const mk = make?.trim();
+  const md = model?.trim();
+  if (!md) return mk || undefined;
+  if (!mk) return md;
+  // "LEICA CAMERA AG" + "LEICA Q3" -> "LEICA Q3"; "SONY" + "ILCE-7M4" -> "SONY ILCE-7M4".
+  const brand = mk.split(/\s+/)[0].toLowerCase();
+  return md.toLowerCase().startsWith(brand) ? md : `${mk.split(/\s+/)[0]} ${md}`;
+}
+
+function readExif(buffer: Buffer | undefined): Exif {
+  if (!buffer) return {};
+  try {
+    const exif = exifReader(buffer) as any;
+    const taken: Date | string | undefined = exif.Photo?.DateTimeOriginal ?? exif.Image?.DateTime;
+    let date: string | undefined;
+    if (taken instanceof Date && !isNaN(taken.valueOf())) date = taken.toISOString().slice(0, 10);
+    else if (typeof taken === "string") date = taken.slice(0, 10).replace(/:/g, "-");
+    return {
+      camera: cameraName(exif.Image?.Make, exif.Image?.Model),
+      date,
+      lat: dmsToDecimal(exif.GPSInfo?.GPSLatitude, exif.GPSInfo?.GPSLatitudeRef),
+      lon: dmsToDecimal(exif.GPSInfo?.GPSLongitude, exif.GPSInfo?.GPSLongitudeRef),
+    };
+  } catch {
+    return {};
+  }
+}
+
+// ---------- reverse geocoding (opt-in) ----------
+
+const geocodeCache = new Map<string, string | undefined>();
+let geocodeQueue: Promise<unknown> = Promise.resolve();
+
+/** "Place, Country" for a coordinate, via Nominatim at their 1 req/s limit. */
+function geocode(lat: number, lon: number): Promise<string | undefined> {
+  const key = `${lat.toFixed(2)},${lon.toFixed(2)}`;
+  if (geocodeCache.has(key)) return Promise.resolve(geocodeCache.get(key));
+  const task = geocodeQueue.then(async () => {
+    if (geocodeCache.has(key)) return geocodeCache.get(key);
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=jsonv2&zoom=10&accept-language=en`;
+    let place: string | undefined;
+    try {
+      const res = await fetch(url, { headers: { "User-Agent": "personal-site-photos-publish/1.0" } });
+      if (res.ok) {
+        const a = ((await res.json()) as any).address ?? {};
+        const local = a.city ?? a.town ?? a.village ?? a.municipality ?? a.county ?? a.state;
+        place = [local, a.country].filter(Boolean).join(", ") || undefined;
+      }
+    } catch {
+      /* leave undefined */
+    }
+    geocodeCache.set(key, place);
+    await new Promise((r) => setTimeout(r, 1100));
+    return place;
+  });
+  geocodeQueue = task.catch(() => {});
+  return task;
+}
+
 // ---------- processing ----------
 
 async function processPhoto(
@@ -221,6 +309,7 @@ async function processPhoto(
   const id = slugify(stem);
   const base = sharp(src, { failOn: "none" }).rotate(); // apply EXIF orientation
   const meta = await base.metadata();
+  const exif = readExif(meta.exif);
   const swap = (meta.orientation ?? 1) >= 5;
   const srcWidth = swap ? meta.height! : meta.width!;
 
@@ -253,8 +342,18 @@ async function processPhoto(
     photo.original = `${id}${ext}`;
     await copyFile(src, join(outDir, photo.original));
   }
-  const caption = config.captions?.[basename(src)];
-  if (caption) photo.caption = caption;
+  const file = basename(src);
+  const overrides: PhotoOverrides = { ...config.photos?.[file] };
+  if (config.captions?.[file]) overrides.caption ??= config.captions[file];
+
+  photo.caption = overrides.caption;
+  photo.camera = overrides.camera ?? exif.camera;
+  photo.date = overrides.date ?? exif.date;
+  photo.location = overrides.location;
+  if (!photo.location && GEOCODE && exif.lat !== undefined && exif.lon !== undefined) {
+    photo.location = await geocode(exif.lat, exif.lon);
+  }
+  for (const k of ["caption", "camera", "date", "location"] as const) if (!photo[k]) delete photo[k];
   return photo;
 }
 
