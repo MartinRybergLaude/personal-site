@@ -5,6 +5,6 @@
   let { class: className = "", children }: { class?: string; children: Snippet } = $props();
 </script>
 
-<div class="mx-auto w-full max-w-screen-md px-4 {className}">
+<div class="mx-auto w-full max-w-6xl px-5 md:px-8 {className}">
   {@render children()}
 </div>

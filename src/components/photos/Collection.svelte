@@ -3,7 +3,7 @@
   import type { CollectionManifest, Photo } from "./types";
   import Container from "./Container.svelte";
   import Label from "./Label.svelte";
-  import Masonry from "./Masonry.svelte";
+  import Bento from "./Bento.svelte";
   import Status from "./Status.svelte";
   import TopBar from "./TopBar.svelte";
 
@@ -48,7 +48,7 @@
       with the metadata beside it on desktop and below it on narrow screens.
     -->
     <header
-      class="grid grid-cols-1 items-start gap-8 pt-10 pb-16 md:grid-cols-[minmax(0,1fr)_13rem] md:gap-10 md:pt-16 md:pb-20"
+      class="grid grid-cols-1 items-start gap-10 pt-12 pb-20 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-16 md:pt-20 md:pb-28"
     >
       {#if cover}
         <div
@@ -56,9 +56,9 @@
           style={`aspect-ratio: ${cover.width} / ${cover.height}; background-color: ${cover.color}`}
         >
           <img
-            src={imageUrl(slug, cover, 960)}
+            src={imageUrl(slug, cover, 1600)}
             srcset={srcset(slug, cover)}
-            sizes="(min-width: 768px) 496px, calc(100vw - 32px)"
+            sizes="(min-width: 1216px) 784px, (min-width: 768px) calc(100vw - 368px), calc(100vw - 40px)"
             alt={manifest.title}
             width={cover.width}
             height={cover.height}
@@ -88,10 +88,10 @@
     </header>
   </Container>
 
-  <Masonry {slug} photos={manifest.photos} />
+  <Bento {slug} photos={manifest.photos} />
 
   <Container>
-    <footer class="flex justify-center py-16">
+    <footer class="flex justify-center py-24">
       <a href="/photos/" class="underline-offset-4 hover:underline">
         <Label weight="light">&larr; All collections</Label>
       </a>
