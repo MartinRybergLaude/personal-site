@@ -75,11 +75,16 @@
   </button>
 {/snippet}
 
-<section
-  class="relative z-20 flex flex-col"
-  style={`gap: ${gap}px; padding: 0 ${gap}px; width: ${viewport}px; margin-left: calc(50% - ${viewport / 2}px)`}
+<!--
+  Full-bleed band: hairline dividers top and bottom, and the page background
+  painted behind so the site's fixed vertical frame lines end at the hairlines.
+-->
+<div
+  class="relative z-20 border-t border-b border-stone-300 bg-[#f5f4f0] py-8 dark:border-stone-700 dark:bg-[#10100e]"
+  style={`width: ${viewport}px; margin-left: calc(50% - ${viewport / 2}px)`}
 >
-  {#each blocks as block, b (b)}
+<section class="flex flex-col" style={`gap: ${gap}px; padding: 0 ${gap}px`}>
+{#each blocks as block, b (b)}
     {#if block.kind === "hero"}
       {@render frame(block.photo, "100vw")}
     {:else if block.kind === "row"}
@@ -121,6 +126,7 @@
     {/if}
   {/each}
 </section>
+</div>
 
 {#if active !== null}
   <Lightbox
