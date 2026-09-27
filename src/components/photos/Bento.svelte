@@ -16,6 +16,17 @@
 
   let active = $state<number | null>(null);
 
+  // Full-bleed: the grid lives inside the site's narrow <main>, so it pulls
+  // itself out to the viewport's inner width (measured, not 100vw, so a
+  // scrollbar never causes horizontal overflow).
+  let viewport = $state(0);
+  $effect(() => {
+    const measure = () => (viewport = document.documentElement.clientWidth);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  });
+
   /** Fade the image in once decoded, whether it was already cached or not. */
   function reveal(img: HTMLImageElement) {
     const show = () => {
@@ -64,7 +75,10 @@
   </button>
 {/snippet}
 
-<section class="flex w-full flex-col" style={`gap: ${gap}px; padding: 0 ${gap}px`}>
+<section
+  class="relative z-20 flex flex-col"
+  style={`gap: ${gap}px; padding: 0 ${gap}px; width: ${viewport}px; margin-left: calc(50% - ${viewport / 2}px)`}
+>
   {#each blocks as block, b (b)}
     {#if block.kind === "hero"}
       {@render frame(block.photo, "100vw")}

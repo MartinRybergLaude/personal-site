@@ -27,19 +27,18 @@ export function largestUrl(slug: string, photo: Photo): string {
   return imageUrl(slug, photo, photo.sizes[photo.sizes.length - 1]);
 }
 
+/** Same style as the site's FormattedDate: browser locale, short month. */
 export function formatDate(iso?: string): string | undefined {
   if (!iso) return undefined;
   const [y, m, d] = iso.split("-").map(Number);
   if (!y) return iso;
   const date = new Date(Date.UTC(y, (m ?? 1) - 1, d ?? 1));
   const opts: Intl.DateTimeFormatOptions = d
-    ? { year: "numeric", month: "long", day: "numeric" }
+    ? { year: "numeric", month: "short", day: "numeric" }
     : m
-      ? { year: "numeric", month: "long" }
+      ? { year: "numeric", month: "short" }
       : { year: "numeric" };
-  return new Intl.DateTimeFormat("en-GB", { ...opts, timeZone: "UTC" }).format(
-    date,
-  );
+  return new Intl.DateTimeFormat(undefined, { ...opts, timeZone: "UTC" }).format(date);
 }
 
 export function routeFromPath(pathname: string): { slug: string | null } {

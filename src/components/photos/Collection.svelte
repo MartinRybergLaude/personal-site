@@ -1,11 +1,9 @@
 <script lang="ts">
   import { fetchJson, formatDate, imageUrl, srcset } from "./api";
   import type { CollectionManifest, Photo } from "./types";
-  import Container from "./Container.svelte";
-  import Label from "./Label.svelte";
   import Bento from "./Bento.svelte";
+  import Button from "./Button.svelte";
   import Status from "./Status.svelte";
-  import TopBar from "./TopBar.svelte";
 
   let { slug }: { slug: string } = $props();
 
@@ -16,7 +14,7 @@
     fetchJson<CollectionManifest>(`/collections/${encodeURIComponent(slug)}.json`)
       .then((data) => {
         manifest = data;
-        document.title = `${data.title} — Photos`;
+        document.title = `${data.title} — Photographs`;
       })
       .catch((e) => (error = e));
   });
@@ -26,75 +24,65 @@
     return manifest.photos.find((p) => p.id === manifest!.cover) ?? manifest.photos[0] ?? null;
   });
 
-  const facts = $derived.by(() => {
-    if (!manifest) return [];
-    return [
-      { k: "Location", v: manifest.location },
-      { k: "Date", v: formatDate(manifest.date) },
-      { k: "Camera", v: manifest.camera },
-      { k: "Photographs", v: String(manifest.photos.length) },
-    ].filter((f): f is { k: string; v: string } => Boolean(f.v));
-  });
+  const facts = $derived(
+    manifest
+      ? [
+          ["Location", manifest.location],
+          ["Camera", manifest.camera],
+          ["Photographs", String(manifest.photos.length)],
+        ].filter((f): f is [string, string] => Boolean(f[1]))
+      : [],
+  );
 </script>
-
-<TopBar back={{ href: "/photos/", label: "Collections" }} />
 
 {#if error}
   <Status {error} />
 {:else if manifest}
-  <Container>
-    <!--
-      Header: the cover photograph shown uncropped at its own aspect ratio,
-      with the metadata beside it on desktop and below it on narrow screens.
-    -->
-    <header
-      class="grid grid-cols-1 items-start gap-10 pt-12 pb-20 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-16 md:pt-20 md:pb-28"
-    >
-      {#if cover}
-        <div
-          class="w-full"
-          style={`aspect-ratio: ${cover.width} / ${cover.height}; background-color: ${cover.color}`}
-        >
-          <img
-            src={imageUrl(slug, cover, 1600)}
-            srcset={srcset(slug, cover)}
-            sizes="(min-width: 1216px) 784px, (min-width: 768px) calc(100vw - 368px), calc(100vw - 40px)"
-            alt={manifest.title}
-            width={cover.width}
-            height={cover.height}
-            fetchpriority="high"
-            decoding="async"
-            class="block h-full w-full"
-          />
-        </div>
+  <!-- Header in the article-page style: hero image, serif title, date, body. -->
+  <header class="px-2 pt-14 pb-12 text-black md:px-6 dark:text-white">
+    {#if cover}
+      <div
+        class="w-full overflow-hidden rounded"
+        style={`aspect-ratio: ${cover.width} / ${cover.height}; background-color: ${cover.color}`}
+      >
+        <img
+          src={imageUrl(slug, cover, 1600)}
+          srcset={srcset(slug, cover)}
+          sizes="(min-width: 768px) 720px, calc(100vw - 48px)"
+          alt={manifest.title}
+          width={cover.width}
+          height={cover.height}
+          fetchpriority="high"
+          decoding="async"
+          class="block h-full w-full"
+        />
+      </div>
+    {/if}
+
+    <div class="flex flex-col items-start gap-2 pt-12">
+      <h1 class="font-serif text-3xl font-medium">{manifest.title}</h1>
+      {#if manifest.date}
+        <time datetime={manifest.date} class="text-sm text-nowrap">{formatDate(manifest.date)}</time>
       {/if}
+    </div>
 
-      <aside class="flex flex-col gap-6">
-        <h1><Label weight="bold">{manifest.title}</Label></h1>
+    {#if manifest.description}
+      <p class="text-md mt-6 max-w-2xl font-light">{manifest.description}</p>
+    {/if}
 
-        {#if manifest.description}
-          <p class="text-[13px] leading-relaxed font-light">{manifest.description}</p>
-        {/if}
-
-        <dl class="flex flex-col gap-2">
-          {#each facts as f (f.k)}
-            <div class="flex flex-col gap-0.5">
-              <dt><Label weight="light">{f.k}</Label></dt>
-              <dd><Label>{f.v}</Label></dd>
-            </div>
-          {/each}
-        </dl>
-      </aside>
-    </header>
-  </Container>
+    <dl class="mt-6 flex flex-col gap-1 text-sm">
+      {#each facts as [k, v] (k)}
+        <div class="flex gap-3">
+          <dt class="font-medium">{k}</dt>
+          <dd class="font-light">{v}</dd>
+        </div>
+      {/each}
+    </dl>
+  </header>
 
   <Bento {slug} photos={manifest.photos} location={manifest.location} />
 
-  <Container>
-    <footer class="flex justify-center py-24">
-      <a href="/photos/" class="underline-offset-4 hover:underline">
-        <Label weight="light">&larr; All collections</Label>
-      </a>
-    </footer>
-  </Container>
+  <div class="px-2 py-14 md:px-6">
+    <Button href="/photos/">All photographs →</Button>
+  </div>
 {/if}

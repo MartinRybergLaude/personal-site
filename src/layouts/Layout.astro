@@ -4,16 +4,17 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 ---
 
 <html lang="en" class="min-h-[100vh] bg-[#f5f4f0] font-mono dark:bg-[#10100e]">
   <head>
     <BaseHead title={title} description={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow, noarchive" />}
   </head>
   <body class="min-h-[100vh]">
     <div
-      class="frame-container relative lg:before:fixed lg:before:top-0 lg:before:bottom-0 lg:before:left-[calc(50%-400px)] lg:before:z-10 lg:before:block lg:before:w-px lg:before:bg-stone-300 lg:before:content-[''] lg:after:fixed lg:after:top-0 lg:after:right-[calc(50%-400px)] lg:after:bottom-0 lg:after:z-10 lg:after:block lg:after:w-px lg:after:bg-stone-300 lg:after:content-[''] lg:dark:before:bg-stone-700 lg:dark:after:bg-stone-700"
+      class="frame-container relative lg:before:fixed lg:before:top-0 lg:before:bottom-0 lg:before:left-[calc(50%-400px)] lg:before:z-0 lg:before:block lg:before:w-px lg:before:bg-stone-300 lg:before:content-[''] lg:after:fixed lg:after:top-0 lg:after:right-[calc(50%-400px)] lg:after:bottom-0 lg:after:z-0 lg:after:block lg:after:w-px lg:after:bg-stone-300 lg:after:content-[''] lg:dark:before:bg-stone-700 lg:dark:after:bg-stone-700"
     >
       <Header />
       <div
