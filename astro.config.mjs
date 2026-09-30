@@ -11,6 +11,9 @@ import svelte from "@astrojs/svelte";
 export default defineConfig({
   site: "https://mrlaude.com",
   integrations: [mdx(), sitemap(), svelte()],
+  redirects: {
+    "/jetline": "https://martinryberglaude.github.io/jetline/",
+  },
 
   vite: {
     plugins: [tailwindcss()],
