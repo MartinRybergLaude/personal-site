@@ -2,7 +2,7 @@
   import type { Snippet } from "svelte";
 
   /**
-   * The one text style used across /photos: small uppercase Satoshi, always
+   * The one text style used across /photos: small uppercase sans, always
    * black or white. Hierarchy comes from weight alone.
    */
   let {

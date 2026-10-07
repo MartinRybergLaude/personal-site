@@ -14,13 +14,13 @@ const posts = (await getCollection("blog")).sort(
       posts.map((post) => (
         <li>
           <a href={`/articles/${post.id}/`} class="group">
-            <h4 class="title font-medium group-hover:underline dark:text-white">
-              &gt; {post.data.title}
+            <h4 class="font-sans text-base group-hover:underline dark:text-white">
+              {post.data.title}
             </h4>
-            <p class="mt-2 font-light dark:text-white">
+            <p class="text-base text-stone-400 dark:text-stone-400">
               {post.data.description}
             </p>
-            <p class="date mt-2">
+            <p class="mt-1">
               <FormattedDate date={post.data.pubDate} />
             </p>
           </a>

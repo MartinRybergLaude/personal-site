@@ -46,16 +46,16 @@
                   class="h-full w-full object-cover"
                 />
               </div>
-              <div class="mt-4 flex items-start justify-between gap-4">
-                <h2 class="text-md font-medium group-hover:underline">&gt; {c.title}</h2>
+              <div class="mt-4 flex items-baseline justify-between gap-4">
+                <h2 class="font-sans text-lg group-hover:underline">{c.title}</h2>
                 {#if c.date}
-                  <time datetime={c.date} class="text-sm text-nowrap">{formatDate(c.date)}</time>
+                  <time datetime={c.date} class="text-sm text-nowrap text-stone-500 tabular-nums">{formatDate(c.date)}</time>
                 {/if}
               </div>
               {#if c.description}
-                <p class="mt-2 text-sm font-light">{c.description}</p>
+                <p class="text-base text-stone-600 dark:text-stone-400">{c.description}</p>
               {/if}
-              <p class="mt-2 text-sm font-light">{meta(c)}</p>
+              <p class="mt-1 text-sm text-stone-500">{meta(c)}</p>
             </a>
           </li>
         {/each}

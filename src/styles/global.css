@@ -2,14 +2,6 @@
 @plugin "@tailwindcss/typography";
 
 @font-face {
-  font-family: "Drafting";
-  src: url("/fonts/Drafting.woff2") format("woff2");
-  font-style: monospace;
-  font-weight: 100 900;
-  font-display: block;
-}
-
-@font-face {
   font-family: "Jetbrains";
   src: url("/fonts/Jetbrains.woff2") format("woff2");
   font-style: monospace;
@@ -18,60 +10,69 @@
 }
 
 @font-face {
-  font-family: "Instrument";
-  src: url("/fonts/Instrument.woff2") format("woff2");
+  font-family: "Timeless Serif";
+  src: url("/fonts/TimelessSerif.woff2") format("woff2");
   font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  size-adjust: 132%;
-}
-
-@font-face {
-  font-family: "Satoshi";
-  src: url("/fonts/Satoshi.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 300 900;
+  font-weight: 200 700;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Computer Modern";
-  src: url("/fonts/cmunrm.woff") format("woff");
-  font-style: normal;
-  font-weight: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Computer Modern";
-  src: url("/fonts/cmunti.woff") format("woff");
+  font-family: "Timeless Serif";
+  src: url("/fonts/TimelessSerifItalic.woff2") format("woff2");
   font-style: italic;
-  font-weight: normal;
+  font-weight: 300 700;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Computer Modern";
-  src: url("/fonts/cmunbx.woff") format("woff");
+  font-family: "Timeless Sans";
+  src: url("/fonts/TimelessSans.woff2") format("woff2");
   font-style: normal;
-  font-weight: bold;
+  font-weight: 300 800;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Computer Modern";
-  src: url("/fonts/cmunbi.woff") format("woff");
+  font-family: "Timeless Sans";
+  src: url("/fonts/TimelessSans.woff2") format("woff2");
   font-style: italic;
-  font-weight: bold;
+  font-weight: 300 800;
   font-display: swap;
 }
 
 @theme {
-  --font-mono: "Drafting", "monospace";
+  --font-mono: "Jetbrains", "monospace";
   --font-jetbrains: "Jetbrains", "monospace";
-  --font-serif: "Instrument", "serif";
-  --font-sans: "Computer Modern", "serif";
-  --font-satoshi: "Satoshi", "Helvetica Neue", "Arial", "sans-serif";
+  /* STYL picks the cut: Sans over Grotesk, Text serif for running text */
+  --font-sans: "Timeless Sans", "sans-serif";
+  --font-sans--font-variation-settings: "STYL" 100;
+  --font-serif: "Timeless Serif", "serif";
+  --font-serif--font-variation-settings: "STYL" 0;
+  --font-text: "Timeless Serif", "serif";
+  --font-text--font-variation-settings: "STYL" 100;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    font-variation-settings: var(--font-serif--font-variation-settings);
+  }
+
+  /* The sans italic axis runs 0-100, so font-style alone barely slants it.
+     The serif italic is a separate file without these axes and ignores them. */
+  em,
+  i,
+  .italic {
+    font-variation-settings:
+      "STYL" 100,
+      "ital" 100;
+  }
 }
 
 ::selection {

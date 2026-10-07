@@ -25,74 +25,78 @@ const posts = (await getCollection("blog")).sort(
           alt="Martin Ryberg Laude"
           class="mx-auto w-full max-w-[80px] rounded md:max-w-full"
         />
-        <div class="flex flex-col gap-y-6 text-center md:text-start">
-          <h1
-            class="font-serif text-3xl tracking-tight text-black dark:text-white"
-          >
-            Martin Ryberg Laude
-          </h1>
-          <p class="text-md max-w-2xl font-light text-black dark:text-white">
-            Swedish guy passionate about software, design, and anything
-            inbetween.
-          </p>
-          <div class="grid grid-cols-2 gap-4 md:mx-0 md:max-w-none">
-            <div
-              class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
+        <!-- Cap height to baseline, so the text block spans exactly the photo's height -->
+        <div
+          class="flex flex-col gap-y-8 text-center md:justify-between md:gap-y-6 md:text-start"
+        >
+          <div class="flex flex-col gap-y-6">
+            <h1
+              class="font-serif text-4xl leading-none font-thin tracking-tight text-black [text-box:trim-both_cap_alphabetic] dark:text-white"
             >
-              <a
-                href="https://github.com/martinryberglaude"
-                class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
-              >
-                <GithubLogo class="w-4" />
-                Github
-              </a>
-            </div>
-            <div
-              class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
-            >
-              <a
-                href="https://www.linkedin.com/in/martinryberglaude/"
-                class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
-              >
-                <LinkedinLogo class="w-5" />
-                LinkedIn
-              </a>
-            </div>
-
-            <div
-              class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
-            >
-              <a
-                href="https://x.com/mrlaudeirl"
-                class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
-              >
-                <XLogo class="w-4" />
-              </a>
-            </div>
-            <div
-              class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
-            >
-              <a
-                href="https://bsky.app/profile/mrlaude.com"
-                class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
-              >
-                <BlueskyLogo class="w-4" width="16" height="16" />
-                Bluesky
-              </a>
-            </div>
+              Martin Ryberg Laude
+            </h1>
+            <p class="text-md max-w-2xl font-light text-black dark:text-white">
+              Swedish guy passionate about software, design, and anything
+              inbetween.
+            </p>
           </div>
-          <div class="flex flex-1 flex-col justify-end">
-            <p
-              class="text-md text-center font-light text-black md:text-start dark:text-white"
-            >
-              Software Engineer @ Intric
+          <div class="flex flex-col gap-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div
+                class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
+              >
+                <a
+                  href="https://github.com/martinryberglaude"
+                  class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
+                >
+                  <GithubLogo class="w-4" />
+                  Github
+                </a>
+              </div>
+              <div
+                class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
+              >
+                <a
+                  href="https://www.linkedin.com/in/martinryberglaude/"
+                  class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
+                >
+                  <LinkedinLogo class="w-5" />
+                  LinkedIn
+                </a>
+              </div>
+
+              <div
+                class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
+              >
+                <a
+                  href="https://x.com/mrlaudeirl"
+                  class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
+                >
+                  <XLogo class="w-4" />
+                </a>
+              </div>
+              <div
+                class="relative h-10 rounded border border-black bg-[url('/src/assets/images/texture.png')] bg-cover"
+              >
+                <a
+                  href="https://bsky.app/profile/mrlaude.com"
+                  class="absolute inset-0 inline-flex h-full w-full -translate-x-[2px] -translate-y-[2px] items-center gap-2 rounded border border-black bg-[#62cfbf] px-5 text-sm font-medium text-black transition hover:translate-x-0 hover:translate-y-0 hover:border-transparent"
+                >
+                  <BlueskyLogo class="w-4" width="16" height="16" />
+                  Bluesky
+                </a>
+              </div>
+            </div>
+            <p class="font-light text-black dark:text-white">
+              Product Engineer @
+              <a class="text-teal-700" href="https://intric.ai">Intric</a>
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="flex flex-col gap-y-6">
+    <section class="flex flex-col gap-y-4">
       <h2
         class="ml-2 font-serif text-2xl font-light text-black md:ml-6 dark:text-white"
       >
@@ -106,13 +110,13 @@ const posts = (await getCollection("blog")).sort(
                 href={`/articles/${post.id}`}
                 class="group block transition hover:cursor-pointer"
               >
-                <div class="flex items-start justify-between">
-                  <h3 class="text-md mb-2 font-medium group-hover:underline dark:text-white">
-                    &gt; {post.data.title}
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 class="font-sans text-base group-hover:underline dark:text-white">
+                    {post.data.title}
                   </h3>
                   <FormattedDate date={post.data.pubDate} />
                 </div>
-                <p class="text-sm font-light text-black dark:text-white">
+                <p class="text-base text-stone-400 dark:text-stone-400">
                   {post.data.description}
                 </p>
               </a>
@@ -131,7 +135,7 @@ const posts = (await getCollection("blog")).sort(
         </a>
       </div>
     </section>
-    <section class="flex flex-col gap-y-6">
+    <section class="flex flex-col gap-y-4">
       <h2
         class="ml-2 font-serif text-2xl font-light text-black md:ml-6 dark:text-white"
       >
@@ -141,11 +145,11 @@ const posts = (await getCollection("blog")).sort(
         <li>
           <a href="https://martinryberglaude.github.io/jetline/" class="group block">
             <h3
-              class="text-md font-medium group-hover:underline dark:text-white"
+              class="font-sans text-base group-hover:underline dark:text-white"
             >
-              &gt; Jetline
+              Jetline
             </h3>
-            <p class="text-sm font-light text-black dark:text-white">
+            <p class="text-base text-stone-400 dark:text-stone-400">
               Run parallel coding agents in git worktrees on macOS.
             </p>
           </a>
@@ -153,11 +157,11 @@ const posts = (await getCollection("blog")).sort(
         <li>
           <a href={`/solsken`} class="group block">
             <h3
-              class="text-md font-medium group-hover:underline dark:text-white"
+              class="font-sans text-base group-hover:underline dark:text-white"
             >
-              &gt; Solsken
+              Solsken
             </h3>
-            <p class="text-sm font-light text-black dark:text-white">
+            <p class="text-base text-stone-400 dark:text-stone-400">
               Accessible and detailed weather tailored for the Nordics.
             </p>
           </a>
@@ -165,11 +169,11 @@ const posts = (await getCollection("blog")).sort(
         <li>
           <a href={`/startrack`} class="group block">
             <h3
-              class="text-md font-medium group-hover:underline dark:text-white"
+              class="font-sans text-base group-hover:underline dark:text-white"
             >
-              &gt; Startrack
+              Startrack
             </h3>
-            <p class="text-sm font-light text-black dark:text-white">
+            <p class="text-base text-stone-400 dark:text-stone-400">
               Favorite songs in Apple Music from your menu bar.
             </p>
           </a>
@@ -177,11 +181,11 @@ const posts = (await getCollection("blog")).sort(
         <li>
           <a href={`/ultrawider`} class="group block">
             <h3
-              class="text-md font-medium group-hover:underline dark:text-white"
+              class="font-sans text-base group-hover:underline dark:text-white"
             >
-              &gt; Ultrawider
+              Ultrawider
             </h3>
-            <p class="text-sm font-light text-black dark:text-white">
+            <p class="text-base text-stone-400 dark:text-stone-400">
               Get rid of the black bars.
             </p>
           </a>
@@ -189,11 +193,11 @@ const posts = (await getCollection("blog")).sort(
         <li>
           <a href={`/gamesquad`} class="group block">
             <h3
-              class="text-md font-medium group-hover:underline dark:text-white"
+              class="font-sans text-base group-hover:underline dark:text-white"
             >
-              &gt; Gamesquad
+              Gamesquad
             </h3>
-            <p class="text-sm font-light text-black dark:text-white">
+            <p class="text-base text-stone-400 dark:text-stone-400">
               Squad up and vote for what games to play.
             </p>
           </a>
