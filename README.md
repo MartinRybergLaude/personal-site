@@ -39,7 +39,7 @@ The website includes:
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18 or later recommended)
-- [Bun](https://bun.sh/) (for package management)
+- [pnpm](https://pnpm.io/) (for package management)
 
 ### Getting Started
 
@@ -53,13 +53,13 @@ The website includes:
 2. Install dependencies
 
    ```bash
-   bun install
+   pnpm install
    ```
 
 3. Start the development server
 
    ```bash
-   bun run dev
+   pnpm dev
    ```
 
 4. Open your browser and visit `http://localhost:4321`
@@ -69,13 +69,13 @@ The website includes:
 To create a production build:
 
 ```bash
-bun run build
+pnpm build
 ```
 
 Preview the production build:
 
 ```bash
-bun run preview
+pnpm preview
 ```
 
 ## 🌐 Deployment
@@ -105,7 +105,7 @@ behind Cloudflare Access. Nothing private is committed to this repository.
 
 ### One-time setup
 
-1. **R2 bucket**: `bunx wrangler r2 bucket create personal-site-photos`
+1. **R2 bucket**: `pnpm exec wrangler r2 bucket create personal-site-photos`
    (the binding is declared in `wrangler.toml`).
 2. **Cloudflare Access**: in Zero Trust → Access → Applications, add a
    self-hosted application for `mrlaude.com` with path `photos`, a policy that
@@ -132,7 +132,7 @@ Put the photographs in a folder together with a `collection.json`:
 }
 ```
 
-Then run `bun run photos:publish ~/photos/iceland-2025`. The script resizes
+Then run `pnpm photos:publish ~/photos/iceland-2025`. The script resizes
 every image to 480/960/1600/2400px WebP (EXIF stripped), writes a manifest,
 uploads everything and updates the collection index. Add `--originals` to also
 upload the untouched files. Re-running replaces the collection.
@@ -154,6 +154,6 @@ Photos without their own location fall back to the collection's location.
 
 ```bash
 cp .dev.vars.example .dev.vars          # enables the auth bypass for local dev only
-bun run photos:publish <folder> --local # pushes into wrangler's local bucket
-bun run photos:preview                  # http://127.0.0.1:8788/photos/
+pnpm photos:publish <folder> --local # pushes into wrangler's local bucket
+pnpm photos:preview                  # http://127.0.0.1:8788/photos/
 ```

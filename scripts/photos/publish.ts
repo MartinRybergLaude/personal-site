@@ -1,7 +1,7 @@
 /**
  * Process a folder of photographs into a private collection and upload it to R2.
  *
- *   bun run photos:publish <folder> [--local] [--originals] [--skip-upload] [--geocode]
+ *   pnpm photos:publish <folder> [--local] [--originals] [--skip-upload] [--geocode]
  *   (runs under Node, which is required for sharp)
  *
  * <folder> must contain a collection.json:
@@ -29,7 +29,7 @@
  *
  * Remote upload needs an R2 API token with object read/write:
  *   R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY (and optionally R2_BUCKET)
- * --local instead pushes into the wrangler local bucket for `bun run photos:preview`.
+ * --local instead pushes into the wrangler local bucket for `pnpm photos:preview`.
  */
 import {
   readdir,
@@ -93,7 +93,7 @@ const flags = new Set(args.filter((a) => a.startsWith("--")));
 const folder = args.find((a) => !a.startsWith("--"));
 if (!folder) {
   console.error(
-    "usage: bun run photos:publish <folder> [--local] [--originals] [--skip-upload]",
+    "usage: pnpm photos:publish <folder> [--local] [--originals] [--skip-upload]",
   );
   process.exit(1);
 }
@@ -153,7 +153,7 @@ function wranglerLocalStore(): Store {
   // The local bucket is a single sqlite database, so writes must be sequential.
   async function run(cmd: string[]): Promise<boolean> {
     try {
-      await execFileAsync("bunx", ["wrangler", ...cmd, "--local"], {
+      await execFileAsync("pnpm", ["exec", "wrangler", ...cmd, "--local"], {
         maxBuffer: 1 << 24,
       });
       return true;

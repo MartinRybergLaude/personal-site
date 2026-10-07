@@ -4,7 +4,7 @@ name = "personal-site"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-06-01"
 
-# Private photo storage. Create with: bunx wrangler r2 bucket create personal-site-photos
+# Private photo storage. Create with: pnpm exec wrangler r2 bucket create personal-site-photos
 [[r2_buckets]]
 binding = "PHOTOS"
 bucket_name = "personal-site-photos"
