@@ -93,20 +93,25 @@
   color: #000000;
 }
 
+/* Jetbrains has a taller x-height (0.55 vs 0.50) and heavier strokes than
+   the light Timeless Serif body, so shrink it and match the body's weight to
+   keep code from towering over the text around it. */
+.prose pre,
+.prose :not(pre) > code {
+  font-size: 0.875em;
+  font-weight: 300;
+}
+
 .prose pre {
   line-height: 1.2;
 }
 
 .prose pre code {
-  font-size: 15px;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
-/* Jetbrains has a taller x-height (0.55 vs 0.50) and heavier strokes than
-   the light Timeless Serif body, so shrink it and match the body's weight to
-   keep inline code from towering over the text around it. */
 .prose :not(pre) > code {
-  font-size: 0.875em;
-  font-weight: 300;
   background-color: var(--color-stone-200);
   border-radius: 4px;
   padding: 0.1em 0.3em;
