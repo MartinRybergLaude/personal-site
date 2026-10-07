@@ -1,0 +1,17 @@
+# Cloudflare Pages configuration. With this file present, bindings are managed
+# here instead of in the dashboard (secrets still live in the dashboard).
+name = "personal-site"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-06-01"
+
+# Private photo storage. Create with: bunx wrangler r2 bucket create personal-site-photos
+[[r2_buckets]]
+binding = "PHOTOS"
+bucket_name = "personal-site-photos"
+
+# Cloudflare Access (Zero Trust) application protecting mrlaude.com/photos*.
+# Both values are shown on the application in the Zero Trust dashboard.
+# Until they are filled in every /photos/* request is refused.
+[vars]
+ACCESS_TEAM_DOMAIN = "mrlaude.cloudflareaccess.com"
+ACCESS_AUD = "0807ca2393c75f11bdbb036f2df65d2ccd9eda8cdf94acbbb0591c0883797cd8"

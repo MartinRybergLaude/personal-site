@@ -1,0 +1,2 @@
+# Copy to .dev.vars for `bun run photos:preview`. Never set this in production.
+PHOTOS_DEV_BYPASS=true

@@ -29,10 +29,10 @@ const { Content } = await render(post);
       )
     }
     <article
-      class="prose md:prose-lg prose-stone dark:prose-invert prose-headings:font-sans prose-headings:font-normal prose-code:font-jetbrains prose-p:font-sans prose-li:font-sans mark !max-w-none pt-12"
+      class="font-text prose prose-stone dark:prose-invert prose-headings:font-thin prose-code:font-jetbrains mark !max-w-none pt-12 font-light"
     >
       <div class="flex flex-col items-start gap-2">
-        <h1 class="!font-serif !text-3xl !font-medium">
+        <h1 class="font-serif! text-3xl! font-thin!">
           {post.data.title}
         </h1>
         <FormattedDate date={post.data.pubDate} />
